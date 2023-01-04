@@ -36,6 +36,7 @@ const Text =styled.div`
 const Padding=styled.div`
     height:507px;
     width:375px;
+    overflow: hidden;
 `
 
 const MainBox= styled.div`

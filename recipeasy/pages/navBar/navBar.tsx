@@ -28,9 +28,9 @@ return(
                     <Link href={menu.path} passHref>
                         <LinkText href={menu.path} pathName={router.pathname} imgName={menu.name}>
                         { router.pathname.includes(menu.discernName) ?
-                        <Img  src={`/assets/${menu.name}_orange.png`} alt={"no image"}/>
+                        <Img  src={`/assets/${menu.name}_orange.svg`} alt={"no image"}/>
                         :
-                        <Img src={`/assets/${menu.name}_grey.png`} alt={"no image"} />
+                        <Img src={`/assets/${menu.name}_grey.svg`} alt={"no image"} />
             }
                         </LinkText>
                     </Link>
