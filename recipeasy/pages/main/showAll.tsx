@@ -121,8 +121,9 @@ const Padding=styled.div`
   */
 `
 const MainBox= styled.div`
-    width:375px;
-    height:729px;
+    width:100%;
+    max-width:375px;
+    height:100%;
     background-color: white;
     padding-left:24px;
     padding-right:24px;
