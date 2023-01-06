@@ -4,11 +4,8 @@ import styled from '@emotion/styled';
 const Login = () => {
   const router = useRouter();
 
-  const KAKAO_CLIENT_ID = '51739e59f5bee1dba4de8edbf5088aaf';
-  const KAKAO_REDIRECT_URI = 'http://localhost:3000/login/callback';
-
   const handleClickLogin = (e: any) => {
-    router.push(`https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code
+    router.push(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code
     `);
   };
 
