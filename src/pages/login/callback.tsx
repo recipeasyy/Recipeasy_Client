@@ -55,6 +55,7 @@ const LoginCallback = () => {
   const loginHandler = useCallback(
     async (code: string | string[]) => {
       const response = await api.get(`/auth/kakao?code=${code} `);
+      console.log(response);
 
       if (response) {
         console.log(response.data);
