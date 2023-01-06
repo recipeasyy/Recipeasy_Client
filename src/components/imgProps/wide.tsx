@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import FONT from '../../constants/fonts';
 
 export default function Wide() {
   return (
@@ -12,6 +13,7 @@ export default function Wide() {
           <Icon>+</Icon>
         </Detail>
       </ImgBox>
+      <a css={FONT.HEADING}>haha</a>
     </>
   );
 }
