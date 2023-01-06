@@ -4,19 +4,15 @@ import styled from '@emotion/styled';
 import GNB from '../../components/global/GNB';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { accessApi } from '../../api/api';
 
 interface IThemes {
-  id: string;
+  message: string;
 }
 
 export default function showTheme() {
   const getThemes = async () => {
-    const res = await axios.get(`https://recipeasy.link/theme/`, {
-      headers: {
-        'Content-type': `application/json`,
-        Authorization: `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyODMyNTAyLCJpYXQiOjE2NzI4MzIyMDIsImp0aSI6ImQzZjhhMDk0ZTgxNjRmYzc4NWE4OTNjMDFiZWZkNjhjIiwidXNlcl9pZCI6NH0.KyCtpCyXgpzwAUSI-u9iv8KqZ-BgmjFCEK5-amus__I'}`,
-      },
-    });
+    const res = await accessApi.get(`/recipes/list/`);
     console.log(res);
     return res.data;
   };
@@ -37,7 +33,7 @@ export default function showTheme() {
           추천테마는?
         </Text>
         <Padding>
-          <div>{data?.Themes.id}</div>
+          <div>{data?.message}</div>
         </Padding>
       </Container>
       <GNB></GNB>
