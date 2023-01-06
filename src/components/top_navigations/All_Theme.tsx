@@ -45,7 +45,7 @@ const LinkText = styled.div<Container>`
   text-underline-offset: ${(props) => (props.href === props.pathName ? '12px' : 'none')};
 `;
 const Top_Navigation = styled.div`
-  width: 375px;
+  width: 100%;
   height: 100px;
   margin-bottom: 36px;
 `;

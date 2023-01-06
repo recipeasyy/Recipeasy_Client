@@ -9,21 +9,11 @@ const LoginCallback = () => {
   console.log(code);
   const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
 
-  //   const onSilentRefresh = () => {
-  //     async (refresh: any) => {
-  //       try {
-  //         const response = await api.post('/token/refresh', { refresh: refresh });
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-  //   };
-
   const onLoginSuccess = (response: any) => {
-    const accessToken = response.data.access_token;
+    const accessToken = response.data.access;
 
     // accessToken 설정
-    setCookie('accessToken', `${accessToken}`);
+    setCookie('accessToken', `${accessToken}`, { path: '/' });
 
     // accessToken 만료하기 1분 전에 로그인 연장
     // setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);

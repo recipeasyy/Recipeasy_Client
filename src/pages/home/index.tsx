@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import React from 'react';
 import GNB from '../../components/global/GNB';
 import Wide from '../../components/imgProps/wide';
 import All_Theme from '../../components/top_navigations/All_Theme';
+
+const testCase = [1, 2, 3, 4, 5];
 
 const Home = () => {
   return (
@@ -15,7 +18,19 @@ const Home = () => {
           추천테마는?
         </Text>
         <Wide></Wide>
+        <div>
+          {' '}
+          {testCase.map((menu) => {
+            console.log(menu);
+            return (
+              <Link href={`/theme/${menu}`} key={menu}>
+                {menu}
+              </Link>
+            );
+          })}
+        </div>
       </Container>
+
       <GNB />
     </>
   );
