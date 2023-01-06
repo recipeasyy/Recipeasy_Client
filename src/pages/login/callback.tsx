@@ -1,18 +1,18 @@
 import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api } from '../../api/api';
-import { setCookie } from '../../util/cookie';
+import { getCookie, setCookie } from '../../util/cookie';
 
 const LoginCallback = () => {
   const router = useRouter();
   const { code: code, error: error } = router.query;
   console.log(code);
-  const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
+  const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간
 
-  const onSilentRefresh = () => {
-    async (refresh: any) => {
+  const onLoginRefresh = () => {
+    async () => {
       try {
-        const response = await api.post('/token/refresh', { refresh: refresh });
+        const response = await api.post('/token/refresh', { refresh: getCookie('refreshToken') });
         console.log(response);
       } catch (err) {
         console.log(err);
@@ -22,12 +22,16 @@ const LoginCallback = () => {
 
   const onLoginSuccess = (response: any) => {
     const accessToken = response.data.access_token;
+    const refreshToken = response.data.refresh_token;
 
     // accessToken 설정
     setCookie('accessToken', `${accessToken}`);
 
+    // refreshToken 설정
+    setCookie('refreshToken', `${refreshToken}`);
+
     // accessToken 만료하기 1분 전에 로그인 연장
-    setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
+    setTimeout(onLoginRefresh, JWT_EXPIRY_TIME - 60000);
   };
 
   const loginHandler = useCallback(
