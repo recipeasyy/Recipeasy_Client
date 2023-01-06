@@ -1,6 +1,7 @@
 import GNB from '../components/global/GNB';
 import { accessApi } from '../api/api';
 import { useEffect, useState } from 'react';
+import { getCookie } from '../util/cookie';
 
 export default function Home() {
   const [user, setUser] = useState();
