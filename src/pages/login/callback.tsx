@@ -7,6 +7,7 @@ const LoginCallback = () => {
   const router = useRouter();
   const { code: code, error: error } = router.query;
   console.log(code);
+
   const JWT_EXPIRY_TIME = 300 * 1000; // 만료 시간
 
   const onLoginSuccess = (response: any) => {
@@ -20,6 +21,7 @@ const LoginCallback = () => {
       // HttpOnly: true,
       // secure: true,
     });
+
 
     // refreshToken 설정
     setCookie('refreshToken', `${refreshToken}`, {
