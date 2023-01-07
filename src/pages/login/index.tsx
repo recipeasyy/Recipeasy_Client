@@ -20,15 +20,14 @@ const Login = () => {
 };
 
 const Container = styled.div`
-  height: 100%;
   width: 100%;
+  height: 100%;
   max-width: 450px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${COLOR.BACKGROUND};
 `;
 
 const SubTitle = styled.div`
