@@ -2,8 +2,19 @@ import styled from '@emotion/styled';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
-const InputName = () => {
-  return <Input placeholder="닉네임을 입력해주세요!" css={FONT.BODY_2_3}></Input>;
+interface propsType {
+  value: string;
+  onChange: any;
+}
+
+const InputName = (props: propsType) => {
+  return (
+    <Input
+      placeholder="닉네임을 입력해주세요!"
+      css={FONT.BODY_2_3}
+      value={props.value}
+      onChange={props.onChange}></Input>
+  );
 };
 
 const Input = styled.input`

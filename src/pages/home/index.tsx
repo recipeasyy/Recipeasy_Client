@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import GNB from '../../components/global/GNB';
 import Wide from '../../components/imgProps/wide';
-import All_Theme from '../../components/top_navigations/All_Theme';
+import All_Theme from '../../components/navigations/All_Theme';
 import FONT from '../../constants/fonts';
 
 const testCase = [1, 2, 3, 4, 5];
