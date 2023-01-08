@@ -3,8 +3,7 @@ import styled from '@emotion/styled';
 import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';
 
-import { GoBackIcon } from '../icons/GoBackIcon';
-import DelIcon from '../icons/DelIcon';
+import { GoBackIcon, DelIcon } from '../icons/BtnIcons';
 
 interface propsType {
   value: string;
