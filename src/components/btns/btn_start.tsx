@@ -2,15 +2,20 @@ import styled from '@emotion/styled';
 import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';
 
-const BtnStart = ({ onClick }: any) => {
+interface propsType {
+  onClick: any;
+  focused: boolean;
+}
+
+const BtnStart = (props: propsType) => {
   return (
-    <Btn css={FONT.BUTTON} onClick={onClick}>
+    <Btn css={FONT.BUTTON} onClick={props.onClick} focused={props.focused}>
       시작하기
     </Btn>
   );
 };
 
-const Btn = styled.div`
+const Btn = styled.div<{ focused: boolean }>`
   width: 100%;
   height: 52px;
 
@@ -22,8 +27,8 @@ const Btn = styled.div`
   text-align: center;
 
   border-radius: 8px;
-  background: ${COLOR.GRAY};
-  color: ${COLOR.GRAY0};
+  background: ${(props) => (props.focused ? `${COLOR.MAIN}` : `${COLOR.GRAY}`)};
+  color: ${(props) => (props.focused ? `${COLOR.WHITE}` : `${COLOR.GRAY0}`)};
 
   cursor: pointer;
 `;

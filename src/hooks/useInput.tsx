@@ -1,20 +1,18 @@
 import { useState } from 'react';
 
 export const useInput = (initialState: string, validator?: (value: string) => boolean) => {
-  const [value, setValue] = useState(initialState);
-  const onChange = (event: any) => {
-    const {
-      target: { value },
-    } = event;
+  const [value, setValue] = useState('');
 
-    if (validator === undefined) {
-      setValue(value);
+  const reset = () => {
+    setValue('');
+  };
+
+  const handleChangeInput = (event: any) => {
+    if (!event.target.value) {
+      reset();
     } else {
-      const data = validator(value);
-      if (data) {
-        setValue(value);
-      }
+      setValue(event.target.value);
     }
   };
-  return { value, onChange };
+  return { value, handleChangeInput, reset };
 };
