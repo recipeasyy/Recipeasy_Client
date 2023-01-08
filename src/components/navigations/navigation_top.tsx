@@ -9,6 +9,7 @@ const TopNav = styled.div`
   position: fixed;
 
   width: 100%;
+  max-width: 450px;
   height: 6.25rem;
   padding: 3rem 1.5rem 0;
 

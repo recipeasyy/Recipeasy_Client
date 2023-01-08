@@ -9,11 +9,12 @@ export default function GoBack() {
   return (
     <>
       <TopNavBar>
-        <IconWrapper
-          onClick={() => {
-            router.back();
-          }}>
-          <GoBackIcon />
+        <IconWrapper>
+          <GoBackIcon
+            onClick={() => {
+              router.back();
+            }}
+          />
         </IconWrapper>
       </TopNavBar>
     </>
