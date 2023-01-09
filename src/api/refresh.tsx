@@ -4,7 +4,7 @@ import { accessApi } from './api';
 
 const onLoginRefresh = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
   const refresh = getCookie('refreshToken');
-
+  console.log(refresh);
   // 토큰이 만료되었고, refreshToken 이 저장되어 있을 때
   if (refresh) {
     // 토큰 갱신 서버통신

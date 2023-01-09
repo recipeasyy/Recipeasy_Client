@@ -1,27 +1,41 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import FONT from '../../constants/fonts';
+import { SmallSaveIcon } from '../icons/SmallSave';
 
 export default function Wide() {
+  const [isSelect, setSelect] = useState(false);
   return (
     <>
       <ImgBox>
-        <HeadText>Themes.title</HeadText>
+        <HeadText css={FONT.HEADING}>
+          <Head>계란으로 3일 버티기</Head>
+        </HeadText>
         <Detail>
           <SmallText>
             {'Themes.duration'}일식단{'Themes.recipe_count'}개의레시피
           </SmallText>
-          <Icon>+</Icon>
+          <Icon
+            onClick={() => {
+              setSelect((prev) => !prev);
+            }}>
+            <SmallSaveIcon selected={isSelect} />
+          </Icon>
         </Detail>
       </ImgBox>
-      <a css={FONT.HEADING}>haha</a>
     </>
   );
 }
-
+const Head = styled.a`
+  text-align: left;
+  //bottom: 0px; 물어보기
+  vertical-align: bottom;
+  position: relative;
+`;
 const ImgBox = styled.div`
   border: 1px solid black;
   border-radius: 20px;
-  width: 327px;
+  width: 100%;
   height: 230px;
   margin-bottom: 14px;
   background-color: black;
@@ -32,19 +46,26 @@ const HeadText = styled.div`
   padding-left: 22px;
   width: 216px;
   height: 54px;
-  padding-top: 150px;
+  padding-top: 130px;
+  color: white;
+  text-align: left;
+  bottom: 0px;
+  position: relative;
+  //vertical-align: bottom; 1.
 `;
 const Detail = styled.div`
   padding-left: 22px;
   display: flex;
   flex-direction: row;
   font-size: 8px;
-  padding-top: 22px;
+  //padding-top: 22px;
   color: white;
+  justify-content: space-between;
 `;
 const SmallText = styled.div`
-  margin-right: 150px;
+  //margin-right: 150px;
   padding-bottom: 22px;
+  width: 100%;
 `;
 const Icon = styled.div`
   padding-right: 22px;

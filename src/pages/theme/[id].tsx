@@ -7,6 +7,7 @@ import { ifError } from 'assert';
 import styled from '@emotion/styled';
 import GoBack from '../../components/top_navigations/goBack';
 import Thin from '../../components/imgProps/thin';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 export default function allTheme() {
   /*
@@ -29,6 +30,35 @@ export default function allTheme() {
   if (isLoading) return <div>Loading....</div>;
   console.log(data);
   */
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [scrolly, setscrollY] = useState(0);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [navColor, setnavColor] = useState(true);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    const listenScrollEvent = (e: any) => {
+      console.log(e.srcElement.scrollTop);
+      console.log('e');
+
+      console.log(document.documentElement.scrollTop);
+      e.srcElement.scrollTop > 10 ? setnavColor(false) : setnavColor(true);
+      console.log(window.pageYOffset);
+      console.log(document.body.scrollTop);
+    };
+
+    console.log(document.body);
+
+    document.body.addEventListener('scroll', listenScrollEvent, { capture: true });
+    return () => {
+      if (typeof window !== 'undefined') {
+        document.body.removeEventListener('scroll', listenScrollEvent);
+        console.log('a');
+      }
+    };
+  }, []);
+
   return (
     <>
       <Container>
@@ -39,20 +69,29 @@ export default function allTheme() {
         <AllRecipes>
           <Thin></Thin>
         </AllRecipes>
+        <EasyTips navColor={navColor}></EasyTips>
       </Container>
     </>
   );
 }
-
+const EasyTips = styled.div<{ navColor: boolean }>`
+  width: 100%;
+  height: 800px;
+  background-color: ${(props) => (props.navColor === false ? 'green' : 'red')};
+`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
   padding-left: 24px;
   padding-right: 24px;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    //display: none;
+  }
 `;
 
 const AllRecipes = styled.div`
-  overflow-y: hidden;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }

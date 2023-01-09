@@ -9,10 +9,10 @@ const LoginCallback = () => {
   console.log(code);
   const JWT_EXPIRY_TIME = 300 * 1000; // 만료 시간
 
-  const onLoginSuccess = (response: any) => {
+  const onLoginSuccess = async (response: any) => {
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
-
+    console.log(accessToken);
     // accessToken 설정
     setCookie('accessToken', `${accessToken}`, {
       path: '/',
@@ -31,6 +31,11 @@ const LoginCallback = () => {
 
     // accessToken 만료하기 1분 전에 로그인 연장)
     setTimeout(onLoginRefresh, JWT_EXPIRY_TIME - 60000);
+    const cookie = getCookie('accessToken');
+    console.log(cookie);
+    if (cookie !== undefined) {
+      router.push('/').then(() => router.reload());
+    }
   };
 
   const onLoginRefresh = async () => {
@@ -57,12 +62,12 @@ const LoginCallback = () => {
       const response = await api.get(`/auth/kakao?code=${code} `);
       console.log(response);
 
-      if (response) {
-        console.log(response.data);
+      if (response !== undefined) {
         if (response) {
+          console.log(response.data);
+
           onLoginSuccess(response);
         }
-        router.push('/');
       } else {
         // router.push('/login/error');
       }
