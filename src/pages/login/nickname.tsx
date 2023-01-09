@@ -8,7 +8,6 @@ import InputName from '../../components/inputs/input_name';
 
 export default function LoginNickName() {
   const { value, handleChangeInput, reset } = useInput('');
-
   const handleClickName = async () => {
     try {
       const response = await accessApi.post('/user/nickname', { nickname: `${value}` });
