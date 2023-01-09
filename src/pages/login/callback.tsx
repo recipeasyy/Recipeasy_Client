@@ -5,11 +5,13 @@ import { getCookie, setCookie, removeCookie } from '../../util/cookie';
 
 const LoginCallback = () => {
   const router = useRouter();
-  const { code: code, error: error } = router.query;
-  console.log(code);
+  const { code, error } = router.query;
+
   const JWT_EXPIRY_TIME = 300 * 1000; // 만료 시간
 
-  const onLoginSuccess = async (response: any) => {
+  const onLoginSuccess = (response: any) => {
+    console.log(response.data);
+
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
     console.log(accessToken);
@@ -17,7 +19,7 @@ const LoginCallback = () => {
     setCookie('accessToken', `${accessToken}`, {
       path: '/',
       sameSite: true,
-      // HttpOnly: true,
+      // httpOnly: true,
       // secure: true,
     });
 
@@ -25,17 +27,14 @@ const LoginCallback = () => {
     setCookie('refreshToken', `${refreshToken}`, {
       path: '/',
       sameSite: true,
-      // HttpOnly: true,
+      // httpOnly: true,
       // secure: true,
     });
 
     // accessToken 만료하기 1분 전에 로그인 연장)
     setTimeout(onLoginRefresh, JWT_EXPIRY_TIME - 60000);
-    const cookie = getCookie('accessToken');
-    console.log(cookie);
-    if (cookie !== undefined) {
-      router.push('/').then(() => router.reload());
-    }
+
+    return accessToken;
   };
 
   const onLoginRefresh = async () => {
@@ -47,7 +46,6 @@ const LoginCallback = () => {
       // 토큰 갱신 서버통신
       try {
         const response = await api.post('/token/refresh/', { refresh: refresh });
-        console.log(response);
         if (response) {
           onLoginSuccess(response);
         }
@@ -60,16 +58,11 @@ const LoginCallback = () => {
   const loginHandler = useCallback(
     async (code: string | string[]) => {
       const response = await api.get(`/auth/kakao?code=${code} `);
-      console.log(response);
-
-      if (response !== undefined) {
-        if (response) {
-          console.log(response.data);
-
-          onLoginSuccess(response);
-        }
+      if (response) {
+        onLoginSuccess(response);
+        router.push('/login/nickname').then(() => router.reload());
       } else {
-        // router.push('/login/error');
+        router.push('/login');
       }
     },
     [router],

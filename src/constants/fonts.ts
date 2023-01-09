@@ -15,7 +15,7 @@ const FONT = {
   `,
   TITLE_2: css`
     font-size: 1.25rem;
-    font-weight: semibold;
+    font-weight: 600;
     line-height: 150%;
     letter-spacing: -0.4px;
   `,
@@ -34,13 +34,13 @@ const FONT = {
   `,
   SUBTITLE_2: css`
     font-size: 1.125rem;
-    font-weight: semibold;
+    font-weight: 600;
     line-height: 160%;
     letter-spacing: -0.4px;
   `,
   BUTTON: css`
     font-size: 1rem;
-    font-weight: semibold;
+    font-weight: 600;
     line-height: 160%;
     letter-spacing: -0.4px;
   `,
@@ -58,7 +58,7 @@ const FONT = {
   `,
   BODY_2_2: css`
     font-size: 0.875rem;
-    font-weight: semibold;
+    font-weight: 600;
     line-height: 160%;
     letter-spacing: -0.4px;
   `,

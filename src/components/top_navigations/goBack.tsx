@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PATH from '../../constants/path';
-import { GoBackIcon } from '../icons/GoBackIcon';
+import { GoBackIcon } from '../icons/BtnIcons';
 
 export default function GoBack() {
   const { push } = useRouter();
@@ -10,12 +10,11 @@ export default function GoBack() {
   return (
     <>
       <Top_Navigation>
-        <Column
+        <GoBackIcon
           onClick={() => {
             push(PATH.HOME);
-          }}>
-          <GoBackIcon />
-        </Column>
+          }}
+        />
       </Top_Navigation>
     </>
   );
@@ -30,12 +29,4 @@ const Top_Navigation = styled.div`
   display: flex;
   //display: flex;
   background-color: white;
-`;
-
-const Column = styled.div`
-  display: flex;
-  padding-bottom: 21px;
-  padding-top: 55px;
-  flex-direction: row;
-  justify-content: space-between;
 `;

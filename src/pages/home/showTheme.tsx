@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import AllTheme from '../../components/top_navigations/All_Theme';
+import AllTheme from '../../components/navigations/All_Theme';
 import styled from '@emotion/styled';
 import GNB from '../../components/global/GNB';
 import axios from 'axios';

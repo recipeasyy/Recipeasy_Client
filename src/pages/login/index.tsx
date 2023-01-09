@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import COLOR from '../../constants/theme';
 
 const Login = () => {
   const router = useRouter();
@@ -15,25 +16,48 @@ const Login = () => {
 
   return (
     <Container>
+      <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
+      <MainTitle>Recipeasy!</MainTitle>
       <Btn onClick={handleClickLogin}>카카오로 로그인하기</Btn>
     </Container>
   );
 };
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 450px;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+`;
+
+const SubTitle = styled.div`
+  font-family: 'IBM Plex Sans KR';
+  font-weight: bold;
+  line-height: 145%;
+
+  text-align: center;
+  letter-spacing: -0.4px;
+
+  color: ${COLOR.MAIN};
+`;
+const MainTitle = styled.div`
+  font-family: 'Paytone One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 150%;
+  letter-spacing: -0.022em;
+
+  color: ${COLOR.MAIN};
 `;
 
 const Btn = styled.div`
-  padding: 1rem 8rem 1rem;
-  color: black;
-  font-size: 0.75rem;
-  font-weight: bold;
+  background: #fee500;
 
-  border-radius: 0.5rem;
-  background: yellow;
   cursor: pointer;
 `;
 
