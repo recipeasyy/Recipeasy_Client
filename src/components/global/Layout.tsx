@@ -1,30 +1,21 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import COLOR from '../../constants/theme';
-
-import { useRouter } from 'next/router';
-
-const HIDDEN_LAYOUT = ['/', '/login'];
+import React from "react";
+import styled from "@emotion/styled";
+import COLOR from "../../constants/theme";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const isHiddenLayout = HIDDEN_LAYOUT.includes(router.asPath);
-
-  return <>{!isHiddenLayout ? <Container>{children}</Container> : <>{children}</>}</>;
+  return <Container>{children}</Container>;
 };
 
 const Container = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  padding: 0 24px;
-
+  margin: auto;
   max-width: 450px;
   background: ${COLOR.WHITE};
-
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 export default Layout;

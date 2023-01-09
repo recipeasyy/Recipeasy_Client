@@ -1,8 +1,7 @@
 const PATH = {
-  HOME: '/home',
-  SEARCH: '/search',
-  MYPAGE: '/mypage',
-  THEME: '/home/showTheme',
+  HOME: "/home",
+  SEARCH: "/search",
+  MYPAGE: "/mypage",
 };
 
 export default PATH;
