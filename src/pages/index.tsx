@@ -7,11 +7,7 @@ import router from 'next/router';
 export default function Home() {
   const [user, setUser] = useState();
 
-  const ReloadFunc = () => {
-    //router.reload();
-  };
   const fetchUserInfo = async () => {
-    ReloadFunc();
     try {
       const cookie = getCookie('accessToken');
       console.log(cookie);
