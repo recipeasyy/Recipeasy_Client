@@ -2,12 +2,10 @@ import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api, accessApi } from '../../api/api';
 import { getCookie, setCookie, removeCookie } from '../../util/cookie';
-import axios from 'axios';
 
 const LoginCallback = () => {
   const router = useRouter();
-  const { code: code, error: error } = router.query;
-  console.log(code);
+  const { code, error } = router.query;
 
   const JWT_EXPIRY_TIME = 300 * 1000; // 만료 시간
 
@@ -48,7 +46,6 @@ const LoginCallback = () => {
       // 토큰 갱신 서버통신
       try {
         const response = await api.post('/token/refresh/', { refresh: refresh });
-
         if (response) {
           onLoginSuccess(response);
         }
@@ -63,7 +60,7 @@ const LoginCallback = () => {
       const response = await api.get(`/auth/kakao?code=${code} `);
       if (response) {
         onLoginSuccess(response);
-        router.push('/login/nickname');
+        router.push('/login/nickname').then(() => router.reload());
       } else {
         router.push('/login');
       }

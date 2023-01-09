@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
+import { useRouter } from 'next/router';
+
 import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';
 
-import { GoBackIcon } from '../icons/GoBackIcon';
-import DelIcon from '../icons/DelIcon';
+import { GoBackIcon, DelIcon } from '../icons/BtnIcons';
 
 interface propsType {
   value: string;
@@ -14,9 +15,10 @@ interface propsType {
 }
 
 const InputSearch = (props: propsType) => {
+  const router = useRouter();
   return props.typed ? (
     <>
-      <GoBackIcon />
+      <GoBackIcon onClick={() => router.back()} />
       <Input
         id="search"
         placeholder="검색어 입력"

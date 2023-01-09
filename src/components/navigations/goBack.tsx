@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-import PATH from '../../constants/path';
-import { GoBackIcon } from '../icons/GoBackIcon';
+import { GoBackIcon } from '../icons/BtnIcons';
 import TopNavBar from './navigation_top';
 
 export default function GoBack() {
@@ -10,11 +9,12 @@ export default function GoBack() {
   return (
     <>
       <TopNavBar>
-        <IconWrapper
-          onClick={() => {
-            router.back();
-          }}>
-          <GoBackIcon />
+        <IconWrapper>
+          <GoBackIcon
+            onClick={() => {
+              router.back();
+            }}
+          />
         </IconWrapper>
       </TopNavBar>
     </>
