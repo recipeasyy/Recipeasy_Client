@@ -1,14 +1,20 @@
-import styled from '@emotion/styled';
-import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
+import COLOR from '../../constants/theme';
 
-const LandingPage = () => {
+const Login = () => {
   const router = useRouter();
-  setTimeout(() => router.push('/login'), 2000);
+
+  const handleClickLogin = (e: any) => {
+    router.push(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code
+    `);
+  };
+
   return (
     <Container>
       <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
       <MainTitle>Recipeasy!</MainTitle>
+      <Btn onClick={handleClickLogin}>카카오로 로그인하기</Btn>
     </Container>
   );
 };
@@ -22,7 +28,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${COLOR.MAIN};
 `;
 
 const SubTitle = styled.div`
@@ -33,7 +38,7 @@ const SubTitle = styled.div`
   text-align: center;
   letter-spacing: -0.4px;
 
-  color: ${COLOR.WHITE};
+  color: ${COLOR.MAIN};
 `;
 const MainTitle = styled.div`
   font-family: 'Paytone One';
@@ -43,7 +48,13 @@ const MainTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.022em;
 
-  color: ${COLOR.WHITE};
+  color: ${COLOR.MAIN};
 `;
 
-export default LandingPage;
+const Btn = styled.div`
+  background: #fee500;
+
+  cursor: pointer;
+`;
+
+export default Login;
