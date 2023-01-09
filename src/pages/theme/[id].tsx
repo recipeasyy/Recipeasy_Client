@@ -5,7 +5,7 @@ import { accessApi } from '../../api/api';
 import { useRouter } from 'next/router';
 import { ifError } from 'assert';
 import styled from '@emotion/styled';
-import GoBack from '../../components/top_navigations/goBack';
+import GoBack from '../../components/navigations/goBack';
 import Thin from '../../components/imgProps/thin';
 
 export default function allTheme() {

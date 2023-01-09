@@ -1,32 +1,26 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+
 import PATH from '../../constants/path';
 import { GoBackIcon } from '../icons/GoBackIcon';
+import TopNavBar from './navigation_top';
 
 export default function GoBack() {
-  const { push } = useRouter();
+  const router = useRouter();
   return (
     <>
-      <Top_Navigation>
-        <Column
+      <TopNavBar>
+        <IconWrapper
           onClick={() => {
-            push(PATH.HOME);
+            router.back();
           }}>
           <GoBackIcon />
-        </Column>
-      </Top_Navigation>
+        </IconWrapper>
+      </TopNavBar>
     </>
   );
 }
 
-const Top_Navigation = styled.div`
+const IconWrapper = styled.div`
   width: 100%;
-  height: 100px;
-`;
-
-const Column = styled.div`
-  display: flex;
-  padding-bottom: 21px;
-  padding-top: 55px;
-  flex-direction: row;
 `;

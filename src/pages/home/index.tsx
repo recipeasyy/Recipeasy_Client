@@ -1,25 +1,24 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import React from 'react';
+
 import GNB from '../../components/global/GNB';
 import Wide from '../../components/imgProps/wide';
-import All_Theme from '../../components/top_navigations/All_Theme';
+import All_Theme from '../../components/navigations/All_Theme';
+import FONT from '../../constants/fonts';
 
 const testCase = [1, 2, 3, 4, 5];
 
 const Home = () => {
   return (
     <>
-      <Container>
+      <>
         <All_Theme />
-        <Text>
+        <Text css={FONT.HEADING}>
           오늘의 레시피지
-          <div></div>
-          추천테마는?
+          <br /> 추천 테마는?
         </Text>
         <Wide></Wide>
-        <div>
-          {' '}
+        <ThemeWrapper>
           {testCase.map((menu) => {
             console.log(menu);
             return (
@@ -28,28 +27,20 @@ const Home = () => {
               </Link>
             );
           })}
-        </div>
-      </Container>
+        </ThemeWrapper>
+      </>
 
       <GNB />
     </>
   );
 };
 
-const Container = styled.div`
+const Text = styled.div`
   width: 100%;
-  height: 100%;
-  padding-left: 24px;
-  padding-right: 24px;
 `;
 
-const Text = styled.div`
-  color: black;
-  font-size: 24px;
-  white-space: pre;
-  height: 70px;
-  font-weight: bold;
-  margin-bottom: 16px;
+const ThemeWrapper = styled.div`
+  padding: 1rem 0;
 `;
 
 export default Home;

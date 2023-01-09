@@ -5,9 +5,9 @@ export const GoBackIcon = () => {
         <path
           d="M14.5 5L7 12.5L14.5 20"
           stroke="#242424"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </>
