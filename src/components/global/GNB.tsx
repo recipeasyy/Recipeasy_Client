@@ -41,7 +41,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   border-radius: 1.5rem 1.5rem 0 0;
-  background-color: ${COLOR.GRAY1};
+  background-color: ${COLOR.BG_GRAY1};
 `;
 
 const Column = styled.div``;
