@@ -37,6 +37,11 @@ const MyPage = () => {
       </TopNavBar>
       <Content>
         <Title css={FONT.HEADING}>{user.nickname}님</Title>
+        <SortNavBar>
+          <SortTitle css={FONT.SUBTITLE_2}>개별레시피</SortTitle>
+          <SortTitle css={FONT.SUBTITLE_2}>테마레시피</SortTitle>
+        </SortNavBar>
+        <TagIcon>2개의 테마레시피</TagIcon>
       </Content>
       <GNB />
     </>
@@ -60,6 +65,20 @@ const Content = styled.div`
 
 const Title = styled.div`
   color: ${COLOR.BLACK};
+`;
+
+const SortNavBar = styled.div`
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+`;
+
+const SortTitle = styled.div``;
+
+const TagIcon = styled.div`
+  background: ${COLOR.MAIN};
 `;
 
 export default MyPage;
