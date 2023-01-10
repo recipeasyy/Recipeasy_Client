@@ -5,6 +5,7 @@ import GNB from '../../components/global/GNB';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
+import FONT from '../../constants/fonts';
 
 interface IThemes {
   message: string;
@@ -25,17 +26,16 @@ export default function showTheme() {
 
   return (
     <>
-      <Container>
-        <AllTheme></AllTheme>
-        <Text>
-          오늘의 레시피지
-          <div></div>
-          추천테마는?
-        </Text>
-        <Padding>
-          <div>{data?.message}</div>
-        </Padding>
-      </Container>
+      <AllTheme />
+      <Text css={FONT.HEADING}>
+        오늘의 레시피지
+        <div></div>
+        추천테마는?
+      </Text>
+      <ThemeWrapper>
+        <div>{data?.message}</div>
+      </ThemeWrapper>
+
       <GNB></GNB>
     </>
   );
@@ -47,14 +47,12 @@ const Container = styled.div`
   padding-left: 24px;
   padding-right: 24px;
 `;
+const ThemeWrapper = styled.div`
+  padding: 1rem 0;
+`;
 
 const Text = styled.div`
-  color: black;
-  font-size: 24px;
-  white-space: pre;
-  height: 70px;
-  font-weight: bold;
-  margin-bottom: 16px;
+  width: 100%;
 `;
 
 const Padding = styled.div`

@@ -10,11 +10,13 @@ export default function GoBack() {
   return (
     <>
       <Top_Navigation>
-        <GoBackIcon
-          onClick={() => {
-            push(PATH.HOME);
-          }}
-        />
+        <Column>
+          <GoBackIcon
+            onClick={() => {
+              push(PATH.HOME);
+            }}
+          />
+        </Column>
       </Top_Navigation>
     </>
   );
@@ -29,4 +31,13 @@ const Top_Navigation = styled.div`
   display: flex;
   //display: flex;
   background-color: white;
+  z-index: 1;
+`;
+
+const Column = styled.div`
+  display: flex;
+  padding-bottom: 21px;
+  padding-top: 55px;
+  flex-direction: row;
+  justify-content: space-between;
 `;

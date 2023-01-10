@@ -28,7 +28,7 @@ export default function Wide() {
 }
 const Head = styled.a`
   text-align: left;
-  //bottom: 0px; 물어보기
+  bottom: 0px;
   vertical-align: bottom;
   position: relative;
 `;
@@ -46,21 +46,22 @@ const HeadText = styled.div`
   padding-left: 22px;
   width: 216px;
   height: 54px;
-  padding-top: 130px;
+  margin-top: 130px;
   color: white;
   text-align: left;
   bottom: 0px;
   position: relative;
-  //vertical-align: bottom; 1.
+  vertical-align: bottom;
 `;
 const Detail = styled.div`
   padding-left: 22px;
   display: flex;
   flex-direction: row;
   font-size: 8px;
-  //padding-top: 22px;
+  padding-top: 15px;
   color: white;
   justify-content: space-between;
+  vertical-align: bottom;
 `;
 const SmallText = styled.div`
   //margin-right: 150px;

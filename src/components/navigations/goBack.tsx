@@ -23,4 +23,6 @@ export default function GoBack() {
 
 const IconWrapper = styled.div`
   width: 100%;
+  position: sticky;
+  z-index: 1;
 `;

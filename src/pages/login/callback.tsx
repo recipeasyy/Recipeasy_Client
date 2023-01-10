@@ -32,7 +32,9 @@ const LoginCallback = () => {
     });
 
     // accessToken 만료하기 1분 전에 로그인 연장)
+
     setTimeout(onLoginRefresh, JWT_EXPIRY_TIME - 60000);
+    //router.push('/login/nickname');
 
     return accessToken;
   };
