@@ -15,7 +15,13 @@ interface propsType {
 
 export const InputSearch = (props: { onClick: any }) => {
   return (
-    <Input placeholder="재료 검색어를 입력해 주세요" css={FONT.BODY_2_3} onClick={props.onClick} isSearching={false} />
+    <Input
+      placeholder="재료 검색어를 입력해 주세요"
+      css={FONT.BODY_2_3}
+      onClick={props.onClick}
+      isSearching={false}
+      readOnly
+    />
   );
 };
 
@@ -31,6 +37,7 @@ export const InputSearchItem = (props: propsType) => {
         value={props.value}
         onChange={props.onChange}
         isSearching={true}
+        autoFocus
       />
       <IconWrapper onClick={props.reset}>
         <DelIcon />
