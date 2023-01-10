@@ -38,7 +38,7 @@ const SubTitle = styled.div`
   text-align: center;
   letter-spacing: -0.4px;
 
-  color: ${COLOR.MAIN};
+  color: ${COLOR.PRIMARY_ORANGE};
 `;
 const MainTitle = styled.div`
   font-family: 'Paytone One';
@@ -48,7 +48,7 @@ const MainTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.022em;
 
-  color: ${COLOR.MAIN};
+  color: ${COLOR.PRIMARY_ORANGE};
 `;
 
 const Btn = styled.div`

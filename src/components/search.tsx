@@ -5,6 +5,7 @@ import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 
 import { api, accessApi } from '../api/api';
+import { PotatoIcon, EggIcon } from './icons/FoodIcons';
 
 export const SearchNone = () => {
   return (
@@ -12,8 +13,12 @@ export const SearchNone = () => {
       <TagBox>
         <Title css={FONT.BODY_2}>재료 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
-          <Tag>계란 🥚</Tag>
-          <Tag>감자 🥚</Tag>
+          <Tag>
+            계란 <EggIcon />
+          </Tag>
+          <Tag>
+            감자 <PotatoIcon />
+          </Tag>
         </Tags>
       </TagBox>
       <TagBox>
@@ -70,6 +75,11 @@ const Tags = styled.div`
 const Tag = styled.div`
   padding: 6px 12px;
 
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
+
   border-radius: 0.5rem;
-  background: ${COLOR.GRAY1};
+  background: ${COLOR.BG_GRAY1};
 `;

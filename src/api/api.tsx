@@ -29,6 +29,11 @@ accessApi.interceptors.response.use(
     if (status === 401) {
       const originalRequest = config;
       const refresh = getCookie('refreshToken');
+
+      // 두번 이상 요청하면 다시 헤더 넣기
+      // const access = getCookie('accessToken');
+      // accessApi.defaults.headers.Authorization = `Bearer ${access}`;
+
       // token refresh 요청
       const response = await accessApi.post('/token/refresh/', { refresh: `${refresh}` });
       // 새로운 토큰 저장
