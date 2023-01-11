@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 
-import { api } from '../api/api';
+import { api, accessApi } from '../api/api';
 
 export const SearchNone = () => {
   return (
@@ -28,11 +28,9 @@ export const SearchNone = () => {
 };
 
 export const SearchItem = (props: { value: string }) => {
-  console.log(props.value);
-
   const fetchSearch = useCallback(async () => {
     try {
-      const response = await api.get(`/recipes/search/?q=${props.value}`);
+      const response = await accessApi.get(`/recipes/search/?q=${props.value}/`);
       console.log(response.data);
     } catch (err) {
       console.log(err);

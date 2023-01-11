@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { api, accessApi } from '../../api/api';
 import { getCookie, setCookie, removeCookie } from '../../util/cookie';
+import axios from 'axios';
 
 const LoginCallback = () => {
   const router = useRouter();
@@ -30,6 +31,8 @@ const LoginCallback = () => {
       // httpOnly: true,
       // secure: true,
     });
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     // accessToken 만료하기 1분 전에 로그인 연장)
 
