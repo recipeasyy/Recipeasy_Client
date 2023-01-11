@@ -13,30 +13,45 @@ const Home = () => {
     <>
       <>
         <All_Theme />
-        <Text css={FONT.HEADING}>
-          오늘의 레시피지
-          <br /> 추천 테마는?
-        </Text>
-        <Wide></Wide>
-        <ThemeWrapper>
-          {testCase.map((menu) => {
-            console.log(menu);
-            return (
-              <Link href={`/theme/${menu}`} key={menu}>
-                {menu}
-              </Link>
-            );
-          })}
-        </ThemeWrapper>
+        <Box>
+          <Text css={FONT.HEADING}>
+            오늘의 레시피지
+            <br /> 추천 테마는?
+          </Text>
+          <Wide></Wide>
+          <Wide></Wide>
+          <Wide></Wide>
+          <ThemeWrapper>
+            {testCase.map((menu) => {
+              console.log(menu);
+              return (
+                <Link href={`/theme/${menu}`} key={menu}>
+                  {menu}
+                </Link>
+              );
+            })}
+          </ThemeWrapper>
+        </Box>
       </>
 
       <GNB />
     </>
   );
 };
+const Box = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 0 0 6.75rem 0;
+  display: flex;
+  flex-direction: column;
+  //gap: 1.75rem;
+
+  overflow: auto;
+`;
 
 const Text = styled.div`
   width: 100%;
+  padding-bottom: 16px;
 `;
 
 const ThemeWrapper = styled.div`

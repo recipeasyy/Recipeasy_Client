@@ -24,11 +24,10 @@ export default function Thin() {
   );
 }
 const Icon = styled.div`
-  padding-top: 170px;
+  padding-top: 218px;
   padding-bottom: 12px;
   padding-right: 12px;
   display: flex;
-  position: relative;
   float: right;
 `;
 

@@ -22,7 +22,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${COLOR.MAIN};
+  background: ${COLOR.PRIMARY_ORANGE};
 `;
 
 const SubTitle = styled.div`
@@ -33,7 +33,7 @@ const SubTitle = styled.div`
   text-align: center;
   letter-spacing: -0.4px;
 
-  color: ${COLOR.WHITE};
+  color: ${COLOR.PRIMARY_ORANGE};
 `;
 const MainTitle = styled.div`
   font-family: 'Paytone One';
@@ -43,7 +43,7 @@ const MainTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.022em;
 
-  color: ${COLOR.WHITE};
+  color: ${COLOR.PRIMARY_ORANGE};
 `;
 
 export default LandingPage;

@@ -31,7 +31,7 @@ const Top_Navigation = styled.div`
   top: 0px;
   display: flex;
   //display: flex;
-  background: ${COLOR.WHITE85};
+  background: ${COLOR.PRIMARY_WHITE_85};
   z-index: 1;
 `;
 

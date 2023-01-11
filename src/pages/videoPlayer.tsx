@@ -60,7 +60,7 @@ const Text = styled.div`
   justify-content: center;
   width: 100%;
   position: absolute;
-  color: white;
+  color: black;
   bottom: 0;
   margin-bottom: 50px;
 `;
