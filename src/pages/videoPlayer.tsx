@@ -4,13 +4,14 @@ import GoBack from '../components/navigations/goBack';
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
 import Head from 'next/head';
-import { GoBackIconWhite } from '../components/icons/BtnIcons';
+import { GoBackIconWhite, RoundSave, ShowMore } from '../components/icons/BtnIcons';
 import PATH from '../constants/path';
 import { useRouter } from 'next/router';
 
 export default function VideoPlayer() {
   const [hasWindow, setHasWindow] = useState(false);
   const { push } = useRouter();
+  const [isSelect, setSelect] = useState(false);
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -37,10 +38,32 @@ export default function VideoPlayer() {
             height="620px"></iframe>
         )}
       </Wrapper>
-      <Text>하이</Text>
+      <Icons>
+        <Text
+          onClick={() => {
+            push(PATH.HOME);
+          }}>
+          <ShowMore></ShowMore>
+        </Text>
+        <Text
+          onClick={() => {
+            setSelect((prev) => !prev);
+          }}>
+          <RoundSave selected={isSelect} />
+        </Text>
+      </Icons>
     </>
   );
 }
+const Icons = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  background-color: black;
+`;
 const Column = styled.div`
   display: flex;
   padding-bottom: 21px;
@@ -56,13 +79,14 @@ const All = styled.div`
   //position: fixed;
 `;
 const Text = styled.div`
-  text-align: center;
+  //text-align: center;
   justify-content: center;
-  width: 100%;
-  position: absolute;
-  color: black;
+  //width: 100%;
+  //position: fixed;
   bottom: 0;
-  margin-bottom: 50px;
+  margin-bottom: 33px;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 const Wrapper = styled.div`
   position: absolute;
