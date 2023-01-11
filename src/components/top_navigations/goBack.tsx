@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PATH from '../../constants/path';
+import COLOR from '../../constants/theme';
 import { GoBackIcon } from '../icons/BtnIcons';
 
 export default function GoBack() {
@@ -23,14 +24,14 @@ export default function GoBack() {
 }
 
 const Top_Navigation = styled.div`
-  width: 100%;
+  width: auto;
   height: 100px;
   transition: 'all 1s';
   position: sticky;
   top: 0px;
   display: flex;
   //display: flex;
-  background-color: white;
+  background: ${COLOR.WHITE85};
   z-index: 1;
 `;
 
@@ -40,4 +41,6 @@ const Column = styled.div`
   padding-top: 55px;
   flex-direction: row;
   justify-content: space-between;
+  position: fixed;
+  //left: 0;
 `;

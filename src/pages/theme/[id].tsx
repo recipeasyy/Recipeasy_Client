@@ -82,11 +82,9 @@ const EasyTips = styled.div<{ navColor: boolean }>`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 24px;
-  padding-right: 24px;
   overflow-x: scroll;
   &::-webkit-scrollbar {
-    //display: none;
+    display: none;
   }
 `;
 
