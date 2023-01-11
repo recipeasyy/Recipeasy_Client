@@ -20,7 +20,7 @@ const Container = styled.div`
   padding: 0 24px;
 
   max-width: 450px;
-  background: ${COLOR.WHITE};
+  background: ${COLOR.PRIMARY_WHITE};
 
   display: flex;
   flex-direction: column;

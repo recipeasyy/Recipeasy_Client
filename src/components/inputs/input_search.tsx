@@ -11,12 +11,23 @@ interface propsType {
   value: string;
   onChange: any;
   reset: any;
-  typed: boolean;
 }
 
-const InputSearch = (props: propsType) => {
+export const InputSearch = (props: { onClick: any }) => {
+  return (
+    <Input
+      placeholder="재료 검색어를 입력해 주세요"
+      css={FONT.BODY_2_3}
+      onClick={props.onClick}
+      isSearching={false}
+      readOnly
+    />
+  );
+};
+
+export const InputSearchItem = (props: propsType) => {
   const router = useRouter();
-  return props.typed ? (
+  return (
     <>
       <GoBackIcon onClick={() => router.back()} />
       <Input
@@ -25,28 +36,21 @@ const InputSearch = (props: propsType) => {
         css={FONT.BODY_2_3}
         value={props.value}
         onChange={props.onChange}
-        typed={props.typed}
+        isSearching={true}
+        autoFocus
       />
       <IconWrapper onClick={props.reset}>
         <DelIcon />
       </IconWrapper>
     </>
-  ) : (
-    <Input
-      placeholder="재료 검색어를 입력해 주세요"
-      css={FONT.BODY_2_3}
-      value={props.value}
-      onChange={props.onChange}
-      typed={props.typed}
-    />
   );
 };
 
-const Input = styled.input<{ typed: boolean }>`
+const Input = styled.input<{ isSearching: boolean }>`
   width: 100%;
   height: 42px;
   padding: 10px 10px 10px 16px;
-  margin-left: ${(props) => props.typed && '0.75rem'};
+  margin-left: ${(props) => props.isSearching && '0.75rem'};
 
   border-radius: 8px;
   background: ${COLOR.GRAY2};
@@ -59,5 +63,3 @@ const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-export default InputSearch;

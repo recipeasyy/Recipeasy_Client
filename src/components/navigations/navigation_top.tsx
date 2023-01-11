@@ -17,7 +17,7 @@ const TopNav = styled.div`
   justify-content: center;
   align-items: center;
 
-  background: ${COLOR.WHITE85};
+  background: ${COLOR.PRIMARY_WHITE_85};
 `;
 
 export default TopNavBar;

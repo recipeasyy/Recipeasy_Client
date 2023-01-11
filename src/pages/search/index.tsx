@@ -1,19 +1,18 @@
-import { useInput } from '../../hooks/useInput';
+import { useRouter } from 'next/router';
 
 import GNB from '../../components/global/GNB';
-import InputSearch from '../../components/inputs/input_search';
+import { InputSearch } from '../../components/inputs/input_search';
 import TopNavBar from '../../components/navigations/navigation_top';
-import { SearchNone, SearchItem } from '../../components/search';
+import { SearchNone } from '../../components/search';
 
 const Search = () => {
-  const { value, handleChangeInput, reset } = useInput('');
-
+  const router = useRouter();
   return (
     <>
       <TopNavBar>
-        <InputSearch value={value} onChange={handleChangeInput} reset={reset} typed={value === '' ? false : true} />
+        <InputSearch onClick={() => router.push('/search/search')} />
       </TopNavBar>
-      {value === '' ? <SearchNone /> : <SearchItem value={value} />}
+      <SearchNone />
       <GNB />
     </>
   );
