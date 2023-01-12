@@ -3,7 +3,15 @@ import { useState } from 'react';
 import FONT from '../../constants/fonts';
 import { SmallSaveIcon } from '../icons/SmallSave';
 
-export default function Thin() {
+interface Recipes {
+  video: string;
+  title: string;
+  time_taken: string;
+  save_count: number;
+  required_ingredients: [];
+  theme: number;
+}
+export default function Thin({ props }: { props: Recipes }) {
   const [isSelect, setSelect] = useState(false);
   return (
     <>
@@ -16,9 +24,9 @@ export default function Thin() {
             <SmallSaveIcon selected={isSelect} />
           </Icon>
         </ImgBox>
-        <RecipeTitle>Middle</RecipeTitle>
-        <Time>small</Time>
-        <Ingredients>small</Ingredients>
+        <RecipeTitle>{props.title}</RecipeTitle>
+        <Time>{props.time_taken}</Time>
+        <Ingredients>{props.required_ingredients}</Ingredients>
       </Recipes>
     </>
   );

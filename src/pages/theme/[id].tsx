@@ -10,7 +10,6 @@ import Thin from '../../components/imgProps/thin';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 export default function allTheme() {
-  /*
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {
     query: { id },
@@ -29,7 +28,6 @@ export default function allTheme() {
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
   console.log(data);
-  */
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [scrolly, setscrollY] = useState(0);
@@ -58,17 +56,40 @@ export default function allTheme() {
       }
     };
   }, []);
+  interface Themes {
+    id: number;
+    title: string;
+    description: string;
+    recipe_count: number;
+    duration: number;
+    tips: string;
+    theme_type: number;
+    recipes: [];
+  }
 
   return (
     <>
       <Container>
         <GoBack></GoBack>
-        <Heading>theme.Title</Heading>
-        <Description>theme.description</Description>
-        <Emoticon>theme</Emoticon>
-        <AllRecipes>
-          <Thin></Thin>
-        </AllRecipes>
+        {data &&
+          data.theme.map((theme: Themes) => {
+            return (
+              <>
+                <Heading>{theme.title}</Heading>
+                <Description>{theme.description}</Description>
+                <Emoticon>{theme.recipe_count}</Emoticon>
+                <AllRecipes>
+                  {theme.recipes.map((recipes) => {
+                    return (
+                      <>
+                        <Thin props={recipes}></Thin>
+                      </>
+                    );
+                  })}
+                </AllRecipes>
+              </>
+            );
+          })}
         <EasyTips navColor={navColor}></EasyTips>
       </Container>
     </>
