@@ -58,12 +58,25 @@ const LoginCallback = () => {
     }
   };
 
+  const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
+
+  const fetchUser = useCallback(async () => {
+    try {
+      const response = await accessApi.get('/user');
+      console.log(response.data.data[0]);
+      setUser(response.data.data[0]);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   const loginHandler = useCallback(
     async (code: string | string[]) => {
       const response = await api.get(`/auth/kakao?code=${code} `);
       if (response) {
         onLoginSuccess(response);
-        router.push('/login/nickname').then(() => router.reload());
+        fetchUser();
+        user.nickname ? router.push('/login/nickname').then(() => router.reload()) : router.push('/home');
       } else {
         router.push('/login');
       }
