@@ -3,16 +3,27 @@ import { useState } from 'react';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { SmallSaveIcon } from '../icons/SmallSave';
+interface Themes {
+  id: number;
+  title: string;
+  description: string;
+  recipe_count: number;
+  duration: number;
+  tips: string;
+  theme_type: number;
+  recipes: [];
+}
 
-export default function Wide() {
+export default function Wide({ props }: { props: Themes }) {
   const [isSelect, setSelect] = useState(false);
+  const handleClick = () => {};
   return (
     <>
       <Container>
         <Content>
-          <Title css={FONT.FOODTITLE}>{'title'}</Title>
+          <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
-            {0}일 식단 ∙ {0}개의 레시피
+            {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
             <Icon
               onClick={() => {
                 setSelect((prev) => !prev);
