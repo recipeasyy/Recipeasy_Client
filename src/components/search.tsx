@@ -6,10 +6,11 @@ import COLOR from '../constants/theme';
 
 import { api, accessApi } from '../api/api';
 import { PotatoIcon, EggIcon } from './icons/FoodIcons';
+import { ImgCardMedium, ImgCardSmall } from './imgProps/imgcard';
 
 export const SearchNone = () => {
   return (
-    <Content>
+    <Content type={''}>
       <TagBox>
         <Title css={FONT.BODY_2}>재료 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
@@ -32,11 +33,14 @@ export const SearchNone = () => {
   );
 };
 
-export const SearchItem = (props: { value: string }) => {
+export const SearchItem = (props: { value: string; nav: string }) => {
   const [recipes, setRecipes] = useState<any>([]);
   const fetchSearch = useCallback(async () => {
     try {
-      const response = await accessApi.get(`/recipes/search/?q=${props.value}`);
+      const response =
+        props.nav == '개별'
+          ? await accessApi.get(`/recipes/search/?q=${props.value}`)
+          : await accessApi.get(`/recipes/search/?q=${props.value}`);
       console.log(response.data);
       setRecipes(response.data);
     } catch (err) {
@@ -48,17 +52,34 @@ export const SearchItem = (props: { value: string }) => {
     fetchSearch();
   }, [fetchSearch]);
 
-  return recipes ? <>{recipes.map((recipe: any) => recipe.title)}</> : <></>;
+  return recipes ? (
+    <Content type={props.nav}>
+      {recipes.map((recipe: any) =>
+        props.nav == '개별' ? (
+          <ImgCardSmall key={recipe.id} {...recipe} />
+        ) : (
+          <ImgCardMedium key={recipe.id} {...recipe} />
+        ),
+      )}
+    </Content>
+  ) : (
+    <></>
+  );
 };
 
-const Content = styled.div`
+const Content = styled.div<{ type: string }>`
   width: 100%;
   height: 100%;
-  padding-top: 6.75rem;
 
-  display: flex;
+  ${(props) =>
+    props.type == '개별'
+      ? `display: grid; 
+      grid-template-columns: 1fr 1fr;
+      row-gap: 1.75rem;
+      column-gap: 0.75rem;`
+      : `  display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1rem;`};
 `;
 
 const TagBox = styled.div`

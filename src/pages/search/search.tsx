@@ -37,7 +37,7 @@ const Search = () => {
             테마레시피
           </SortTitle>
         </SortNavBar>
-        <SearchItem value={value} />
+        <SearchItem nav={nav} value={value} />
       </Content>
       <GNB />
     </>
@@ -47,11 +47,13 @@ const Search = () => {
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 6.75rem;
+  padding-top: calc(6.75rem + 0.5rem);
 
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+
+  overflow: auto;
 `;
 
 const SortNavBar = styled.div`
