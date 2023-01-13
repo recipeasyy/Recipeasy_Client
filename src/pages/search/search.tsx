@@ -46,14 +46,17 @@ const Search = () => {
 
 const Content = styled.div`
   width: 100%;
-  height: 100%;
-  padding-top: calc(6.75rem + 0.5rem);
+  height: auto;
+  padding: 6.75rem 0;
 
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
 
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SortNavBar = styled.div`

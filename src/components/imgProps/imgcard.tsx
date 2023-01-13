@@ -3,6 +3,7 @@ import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
 import { SaveIcon } from '../icons/GNBIcons';
+import { ClockIcon } from '../icons/BasicIcons';
 
 interface midImgCardProps {
   title: string;
@@ -50,7 +51,10 @@ export const ImgCardSmall = (props: smImgCardProps) => {
       </SmallContainer>
       <Description>
         <Title css={FONT.BODY_2}>{props.title}</Title>
-        <Text css={FONT.DETAIL_2}>{props.time_taken}</Text>
+        <Text css={FONT.DETAIL_2}>
+          <ClockIcon />
+          {props.time_taken}
+        </Text>
       </Description>
     </div>
   );
@@ -100,11 +104,15 @@ const IconWrapper = styled.div``;
 
 const Description = styled.div`
   width: 100%;
-  padding-top: 0.25rem;
+  padding-top: 0.5rem;
 
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+`;

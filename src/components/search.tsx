@@ -61,6 +61,14 @@ export const SearchItem = (props: { value: string; nav: string }) => {
           <ImgCardMedium key={recipe.id} {...recipe} />
         ),
       )}
+      {/* <ImgCardSmall
+        key={10}
+        title={'냠냠'}
+        time_taken={10}
+        required_ingredients={1}
+        onClick={() => {}}
+        selected={false}
+      /> */}
     </Content>
   ) : (
     <></>
@@ -69,7 +77,6 @@ export const SearchItem = (props: { value: string; nav: string }) => {
 
 const Content = styled.div<{ type: string }>`
   width: 100%;
-  height: 100%;
 
   ${(props) =>
     props.type == '개별'
@@ -80,6 +87,8 @@ const Content = styled.div<{ type: string }>`
       : `  display: flex;
   flex-direction: column;
   gap: 1rem;`};
+
+  overscroll: auto;
 `;
 
 const TagBox = styled.div`
