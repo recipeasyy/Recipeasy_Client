@@ -31,8 +31,6 @@ accessApi.interceptors.response.use(
       const refresh = getCookie('refreshToken');
 
       // 두번 이상 요청하면 다시 헤더 넣기
-      // const access = getCookie('accessToken');
-      // accessApi.defaults.headers.Authorization = `Bearer ${access}`;
 
       // token refresh 요청
       const response = await accessApi.post('/token/refresh/', { refresh: `${refresh}` });
@@ -42,7 +40,7 @@ accessApi.interceptors.response.use(
       setCookie('accessToken', `${accessToken}`);
       setCookie('refreshToken', `${refreshToken}`);
 
-      accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
+      // accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
@@ -33,10 +33,12 @@ export const SearchNone = () => {
 };
 
 export const SearchItem = (props: { value: string }) => {
+  const [recipes, setRecipes] = useState<any>([]);
   const fetchSearch = useCallback(async () => {
     try {
-      const response = await accessApi.get(`/recipes/search/?q=${props.value}/`);
+      const response = await accessApi.get(`/recipes/search/?q=${props.value}`);
       console.log(response.data);
+      setRecipes(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +48,7 @@ export const SearchItem = (props: { value: string }) => {
     fetchSearch();
   }, [fetchSearch]);
 
-  return <Content></Content>;
+  return recipes ? <>{recipes.map((recipe: any) => recipe.title)}</> : <></>;
 };
 
 const Content = styled.div`
