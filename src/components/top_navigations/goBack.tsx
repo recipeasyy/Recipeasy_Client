@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import PATH from '../../constants/path';
 import COLOR from '../../constants/theme';
 import { GoBackIcon } from '../icons/BtnIcons';

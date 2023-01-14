@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { SmallSaveIcon } from '../icons/SmallSave';
@@ -16,7 +17,11 @@ interface Themes {
 
 export default function Wide({ props }: { props: Themes }) {
   const [isSelect, setSelect] = useState(false);
-  const handleClick = () => {};
+  const HandleClick = async () => {
+    const res = await accessApi.post(`/theme/${props.title}`);
+    setSelect((prev) => !prev);
+  };
+  //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??
   return (
     <>
       <Container>
@@ -26,7 +31,7 @@ export default function Wide({ props }: { props: Themes }) {
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
             <Icon
               onClick={() => {
-                setSelect((prev) => !prev);
+                HandleClick();
               }}>
               <SmallSaveIcon selected={isSelect} />
             </Icon>

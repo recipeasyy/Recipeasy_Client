@@ -14,6 +14,16 @@ import { css } from '@emotion/react';
 interface IThemes {
   message: string;
 }
+interface Themes {
+  id: number;
+  title: string;
+  description: string;
+  recipe_count: number;
+  duration: number;
+  tips: string;
+  theme_type: number;
+  recipes: [];
+}
 
 const themeData = [
   { id: '1', name: '자취생 초간단' },
@@ -22,7 +32,7 @@ const themeData = [
 
 export default function showTheme(current: string) {
   const getThemes = async () => {
-    const res = await accessApi.get(`/recipes/list/`);
+    const res = await accessApi.get(`/theme/`);
     console.log(res);
     return res.data;
   };
@@ -41,6 +51,8 @@ export default function showTheme(current: string) {
     console.log(e.target.value);
     console.log(curState);
   };
+
+  const curThemes = data.Theme_Types.filter((themes: Themes) => themes.title === curState);
   return (
     <>
       <AllTheme />
@@ -59,8 +71,10 @@ export default function showTheme(current: string) {
             );
           })}
         </ThemeWrapper>
-        <Big></Big>
-        <Big></Big>
+        {data &&
+          curThemes.map((themeTypes: Themes) => {
+            return <Big key={themeTypes.id} props={themeTypes}></Big>;
+          })}
       </Box>
       <GNB></GNB>
     </>

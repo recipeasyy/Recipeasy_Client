@@ -32,8 +32,8 @@ export default function VideoPlayer() {
           <iframe
             src="https://geo.dailymotion.com/player/xbi7j.html?video=x8gsm33"
             allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-            frameborder="0"
+            allowFullScreen
+            //frameborder="0"
             width="360px"
             height="620px"></iframe>
         )}

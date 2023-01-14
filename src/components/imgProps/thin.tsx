@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+import axios from 'axios';
 import { useState } from 'react';
+import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
 import { SmallSaveIcon } from '../icons/SmallSave';
 
@@ -11,15 +13,21 @@ interface Recipes {
   required_ingredients: [];
   theme: number;
 }
+//Recipes누르면 해당 Recipes/id로 가는걸로 id필요할 것 같다!
 export default function Thin({ props }: { props: Recipes }) {
   const [isSelect, setSelect] = useState(false);
+  const HandleClick = async () => {
+    const res = await accessApi.post(`/theme/${props.title}`);
+    setSelect((prev) => !prev);
+  };
+
   return (
     <>
       <Recipes>
         <ImgBox>
           <Icon
             onClick={() => {
-              setSelect((prev) => !prev);
+              HandleClick();
             }}>
             <SmallSaveIcon selected={isSelect} />
           </Icon>

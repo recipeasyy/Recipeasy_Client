@@ -1,31 +1,40 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
 import { SaveIcon } from '../icons/GNBIcons';
 import { SmallSaveIcon } from '../icons/SmallSave';
 
-interface imgCardProps {
+interface Themes {
+  id: number;
   title: string;
-  duration_num: number;
-  recipe_num: number;
-  onClick: any;
-  selected: boolean;
+  description: string;
+  recipe_count: number;
+  duration: number;
+  tips: string;
+  theme_type: number;
+  recipes: [];
 }
 
-export default function Big() {
+export default function Big({ props }: { props: Themes }) {
   const [isSelect, setSelect] = useState(false);
+  const HandleClick = async () => {
+    const res = await accessApi.post(`/theme/${props.title}`);
+    setSelect((prev) => !prev);
+  };
+
   return (
     <div>
       <Container>
         <Content>
-          <Title css={FONT.FOODTITLE}>{'테마 이름'}</Title>
+          <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
-            {0}일 식단 ∙ {0}개의 레시피
+            {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
             <Icon
               onClick={() => {
-                setSelect((prev) => !prev);
+                HandleClick();
               }}>
               <SmallSaveIcon selected={isSelect} />
             </Icon>
