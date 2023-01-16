@@ -6,6 +6,7 @@ import FONT from '../../constants/fonts';
 import { SmallSaveIcon } from '../icons/SmallSave';
 
 interface Recipes {
+  id: number;
   video: string;
   title: string;
   time_taken: string;
@@ -14,10 +15,12 @@ interface Recipes {
   theme: number;
 }
 //Recipes누르면 해당 Recipes/id로 가는걸로 id필요할 것 같다!
-export default function Thin({ props }: { props: Recipes }) {
+export default function Thin(props: Recipes) {
+  console.log(props.id);
   const [isSelect, setSelect] = useState(false);
-  const HandleClick = async () => {
-    const res = await accessApi.post(`/theme/${props.title}`);
+
+  const HandleClick = async (id: number) => {
+    const res = await accessApi.post(`/theme/${props.id}`);
     setSelect((prev) => !prev);
   };
 
@@ -27,14 +30,17 @@ export default function Thin({ props }: { props: Recipes }) {
         <ImgBox>
           <Icon
             onClick={() => {
-              HandleClick();
+              HandleClick(props.id);
             }}>
             <SmallSaveIcon selected={isSelect} />
           </Icon>
         </ImgBox>
         <RecipeTitle>{props.title}</RecipeTitle>
         <Time>{props.time_taken}</Time>
-        <Ingredients>{props.required_ingredients}</Ingredients>
+        {props.required_ingredients &&
+          props?.required_ingredients.map((ing: string, i) => {
+            return <Ingredients key={i}></Ingredients>;
+          })}
       </Recipes>
     </>
   );

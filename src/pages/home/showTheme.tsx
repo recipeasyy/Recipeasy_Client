@@ -14,6 +14,12 @@ import { css } from '@emotion/react';
 interface IThemes {
   message: string;
 }
+
+interface BigThemes {
+  id: number;
+  title: string;
+  themes: Themes;
+}
 interface Themes {
   id: number;
   title: string;
@@ -52,7 +58,9 @@ export default function showTheme(current: string) {
     console.log(curState);
   };
 
-  const curThemes = data.Theme_Types.filter((themes: Themes) => themes.title === curState);
+  console.log(data);
+
+  const curThemes = data['Theme Types'].filter((themes: Themes) => themes.title === curState);
   return (
     <>
       <AllTheme />
@@ -72,8 +80,8 @@ export default function showTheme(current: string) {
           })}
         </ThemeWrapper>
         {data &&
-          curThemes.map((themeTypes: Themes) => {
-            return <Big key={themeTypes.id} props={themeTypes}></Big>;
+          curThemes.map((themeTypes: BigThemes) => {
+            return <Big key={themeTypes.id} props={themeTypes.themes}></Big>;
           })}
       </Box>
       <GNB></GNB>

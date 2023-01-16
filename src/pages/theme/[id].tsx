@@ -11,30 +11,6 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 export default function allTheme() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {
-    query: { id },
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = useRouter();
-
-  const getRecipes = async () => {
-    const res = await accessApi.get(`/theme/${id}`);
-    console.log(res);
-    return res.data;
-  };
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { data, error, isLoading } = useQuery('Recipes', getRecipes);
-
-  if (error) return <div>Request Failed</div>;
-  if (isLoading) return <div>Loading....</div>;
-  console.log(data);
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [scrolly, setscrollY] = useState(0);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [navColor, setnavColor] = useState(true);
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const listenScrollEvent = (e: any) => {
       console.log(e.srcElement.scrollTop);
@@ -56,6 +32,30 @@ export default function allTheme() {
       }
     };
   }, []);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router =
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useRouter();
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const getRecipes = async () => {
+    console.log(router.query.id);
+    const res = await accessApi.get(`/theme/${router.query.id}`);
+    console.log(res);
+    return res.data;
+  };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [navColor, setnavColor] = useState(true);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data, error, isLoading } = useQuery('Recipes', getRecipes);
+
+  if (error) return <div>Request Failed</div>;
+  if (isLoading) return <div>Loading....</div>;
+  console.log(data);
+
   interface Themes {
     id: number;
     title: string;
@@ -67,34 +67,38 @@ export default function allTheme() {
     recipes: [];
   }
 
+  console.log(data.theme);
+  console.log(data);
+  const curTheme = data.theme;
+  const curRecipes = curTheme.recipes;
   return (
     <>
       <Container>
         <GoBack></GoBack>
-        {data &&
-          data.theme.map((theme: Themes) => {
-            return (
-              <>
-                <Heading>{theme.title}</Heading>
-                <Description>{theme.description}</Description>
-                <Emoticon>{theme.recipe_count}</Emoticon>
-                <AllRecipes>
-                  {theme.recipes.map((recipes) => {
-                    return (
-                      <>
-                        <Thin props={recipes}></Thin>
-                      </>
-                    );
-                  })}
-                </AllRecipes>
-              </>
-            );
-          })}
+        {data && (
+          <>
+            <Heading>{curTheme.title}</Heading>
+            <Description>{curTheme.description}</Description>
+            <Emoticon>{curTheme.recipe_count}</Emoticon>
+            <AllRecipes>
+              {curRecipes.map((recipes: any) => {
+                return <Thin key={recipes.id} {...recipes}></Thin>;
+              })}
+            </AllRecipes>
+          </>
+        )}
         <EasyTips navColor={navColor}></EasyTips>
       </Container>
     </>
   );
 }
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
+
 const EasyTips = styled.div<{ navColor: boolean }>`
   width: 100%;
   height: 800px;

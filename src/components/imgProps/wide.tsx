@@ -16,9 +16,10 @@ interface Themes {
 }
 
 export default function Wide({ props }: { props: Themes }) {
+  console.log(props);
   const [isSelect, setSelect] = useState(false);
   const HandleClick = async () => {
-    const res = await accessApi.post(`/theme/${props.title}`);
+    const res = await accessApi.post(`/theme/${props.id}`);
     setSelect((prev) => !prev);
   };
   //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??

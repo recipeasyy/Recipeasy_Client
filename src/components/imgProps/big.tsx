@@ -24,6 +24,7 @@ export default function Big({ props }: { props: Themes }) {
     const res = await accessApi.post(`/theme/${props.title}`);
     setSelect((prev) => !prev);
   };
+  console.log(props);
 
   return (
     <div>
