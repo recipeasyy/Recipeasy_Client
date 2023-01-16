@@ -36,8 +36,8 @@ const MyPage = () => {
     console.log('save recipe');
   };
 
-  const handleClickDetail = (e: any) => {
-    console.log('go to detail');
+  const handleClickDetail = (id: number) => {
+    router.push(`/recipe/${id}`);
   };
 
   return (
@@ -76,6 +76,7 @@ const MyPage = () => {
           {nav === '개별'
             ? user.saved_recipes.map((recipe) => (
                 <ImgCardMedium
+                  id={0}
                   key={1}
                   title="레시피 이름"
                   duration_num={0}
@@ -87,6 +88,7 @@ const MyPage = () => {
               ))
             : user.saved_themes.map((theme) => (
                 <ImgCardMedium
+                  id={0}
                   key={2}
                   title="테마 이름"
                   duration_num={0}
@@ -98,43 +100,48 @@ const MyPage = () => {
               ))}
 
           <ImgCardMedium
+            id={1}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
             handleToggleSave={handleToggleSave}
-            handleClickDetail={handleClickDetail}
+            handleClickDetail={() => handleClickDetail(1)}
             selected={true}
           />
           <ImgCardMedium
+            id={2}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
             handleToggleSave={handleToggleSave}
-            handleClickDetail={handleClickDetail}
+            handleClickDetail={() => handleClickDetail(2)}
             selected={true}
           />
           <ImgCardMedium
+            id={3}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
             handleToggleSave={handleToggleSave}
-            handleClickDetail={handleClickDetail}
+            handleClickDetail={() => handleClickDetail(3)}
             selected={true}
           />
           <ImgCardMedium
+            id={4}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
             handleToggleSave={handleToggleSave}
-            handleClickDetail={handleClickDetail}
+            handleClickDetail={() => handleClickDetail(4)}
             selected={true}
           />
           <ImgCardMedium
+            id={5}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
             handleToggleSave={handleToggleSave}
-            handleClickDetail={handleClickDetail}
+            handleClickDetail={() => handleClickDetail(5)}
             selected={true}
           />
         </CardWrapper>

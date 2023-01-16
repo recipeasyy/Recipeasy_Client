@@ -5,6 +5,7 @@ import COLOR from '../../constants/theme';
 import { SaveIcon } from '../icons/GNBIcons';
 
 interface imgCardProps {
+  id: number;
   title: string;
   duration_num: number;
   recipe_num: number;
