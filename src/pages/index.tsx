@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
+import { getCookie } from '../util/cookie';
 
 const LandingPage = () => {
   const router = useRouter();
-  setTimeout(() => router.push('/login'), 2000);
+  const isUser = Boolean(getCookie('accessToken'));
+
+  setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 2000);
   return (
     <Container>
       <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>

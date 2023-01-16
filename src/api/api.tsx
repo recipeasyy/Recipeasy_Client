@@ -50,7 +50,9 @@ accessApi.interceptors.response.use(
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
-      return axios(originalRequest);
+      const originalResponse = await axios.request(originalRequest);
+
+      return originalResponse;
     }
     return Promise.reject(error);
   },
