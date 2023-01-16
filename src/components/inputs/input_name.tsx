@@ -23,7 +23,7 @@ const Input = styled.input`
   padding: 10px 10px 10px 16px;
 
   border-radius: 8px;
-  background: ${COLOR.GRAY2};
+  background: ${COLOR.PRIMARY_GRAY2};
 `;
 
 export default InputName;
