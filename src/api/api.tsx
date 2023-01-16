@@ -14,6 +14,8 @@ const accessApi = axios.create({
   headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
 });
 
+let retries = 0;
+
 accessApi.interceptors.response.use(
   (response) => {
     if (!(response.status === 200 || response.status === 201 || response.status === 204)) throw new Error();
@@ -25,8 +27,6 @@ accessApi.interceptors.response.use(
       config,
       response: { status },
     } = error;
-
-    let retries = 0;
 
     if (status === 401) {
       retries = retries + 1;
