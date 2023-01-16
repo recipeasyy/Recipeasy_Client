@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useInput } from '../../hooks/useInput';
 
 import GNB from '../../components/global/GNB';
@@ -10,8 +11,12 @@ import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
 const Search = () => {
-  const { value, handleChangeInput, reset } = useInput('');
-  const [nav, setNav] = useState('개별');
+  const router = useRouter();
+  const initialText = typeof router.query.text === 'string' ? router.query.text : '';
+  const initialNav = typeof router.query.type === 'string' ? router.query.type : '개별';
+
+  const { value, handleChangeInput, reset } = useInput(initialText);
+  const [nav, setNav] = useState(initialNav);
 
   return (
     <>

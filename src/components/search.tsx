@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
@@ -9,15 +10,26 @@ import { PotatoIcon, EggIcon } from './icons/FoodIcons';
 import { ImgCardMedium, ImgCardSmall } from './imgProps/imgcard';
 
 export const SearchNone = () => {
+  const router = useRouter();
+
+  const handleClickSaveText = (e: any, type: string) => {
+    const searchText = e.currentTarget.innerText;
+    console.log(searchText);
+    router.push({
+      pathname: '/search/search',
+      query: { text: searchText, type: type },
+    });
+  };
+
   return (
     <Content type={''}>
       <TagBox>
         <Title css={FONT.BODY_2}>재료 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
-          <Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, '개별')}>
             계란 <EggIcon />
           </Tag>
-          <Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, '개별')}>
             감자 <PotatoIcon />
           </Tag>
         </Tags>
@@ -25,8 +37,8 @@ export const SearchNone = () => {
       <TagBox>
         <Title css={FONT.BODY_2}>테마 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
-          <Tag>자취생 식단</Tag>
-          <Tag>같은 재료</Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, '테마')}>자취생 식단</Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, '테마')}>같은 재료</Tag>
         </Tags>
       </TagBox>
     </Content>
@@ -114,4 +126,6 @@ const Tag = styled.div`
 
   border-radius: 0.5rem;
   background: ${COLOR.BG_GRAY1};
+
+  cursor: pointer;
 `;
