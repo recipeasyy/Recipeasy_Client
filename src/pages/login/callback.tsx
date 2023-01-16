@@ -76,7 +76,9 @@ const LoginCallback = () => {
       if (response) {
         onLoginSuccess(response);
         fetchUser();
-        user.nickname ? router.push('/login/nickname').then(() => router.reload()) : router.push('/home');
+        user.nickname
+          ? router.push('/home').then(() => router.reload())
+          : router.push('/login/nickname').then(() => router.reload());
       } else {
         router.push('/login');
       }
