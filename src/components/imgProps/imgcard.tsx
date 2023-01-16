@@ -8,19 +8,20 @@ interface imgCardProps {
   title: string;
   duration_num: number;
   recipe_num: number;
-  onClick: any;
+  handleToggleSave: any;
+  handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardMedium = (props: imgCardProps) => {
   return (
     <div>
-      <Container>
+      <Container onClick={props.handleClickDetail}>
         <Content>
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration_num}일 식단 ∙ {props.recipe_num}개의 레시피
-            <IconWrapper onClick={props.onClick}>
+            <IconWrapper onClick={props.handleToggleSave}>
               <SaveIcon selected={props.selected} />
             </IconWrapper>
           </SubTitle>
@@ -37,6 +38,8 @@ const Container = styled.div`
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
   background: ${COLOR.PRIMARY_BLACK};
+
+  cursor: pointer;
 `;
 
 const Content = styled.div`
@@ -60,4 +63,6 @@ const SubTitle = styled.div`
   justify-content: space-between;
 `;
 
-const IconWrapper = styled.div``;
+const IconWrapper = styled.div`
+  z-index: 1;
+`;
