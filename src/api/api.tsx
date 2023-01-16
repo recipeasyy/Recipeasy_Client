@@ -26,7 +26,15 @@ accessApi.interceptors.response.use(
       response: { status },
     } = error;
 
+    let retries = 0;
+
     if (status === 401) {
+      retries = retries + 1;
+      // retries 가 2 이상이면 Promise reject을 해준다.
+      if (retries >= 2) {
+        retries = 0;
+        return Promise.reject(error);
+      }
       const originalRequest = config;
       const refresh = getCookie('refreshToken');
       // token refresh 요청
