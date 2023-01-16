@@ -31,9 +31,14 @@ const MyPage = () => {
 
   const [nav, setNav] = useState('개별');
 
-  const handleToggleSave = (e: any) => {
+  const handleToggleSave = async (e: any, id: number) => {
     e.stopPropagation();
-    console.log('save recipe');
+    try {
+      const response = await accessApi.post(`/mypages/recipe/${id}`, {});
+      console.log(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleClickDetail = (id: number) => {
@@ -101,10 +106,11 @@ const MyPage = () => {
 
           <ImgCardMedium
             id={1}
+            key={1}
             title="테마 이름"
             duration_num={0}
             recipe_num={0}
-            handleToggleSave={handleToggleSave}
+            handleToggleSave={(e: any) => handleToggleSave(e, 1)}
             handleClickDetail={() => handleClickDetail(1)}
             selected={true}
           />

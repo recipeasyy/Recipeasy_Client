@@ -65,19 +65,19 @@ const Recipe = () => {
     ],
   });
 
-  // const fetchRecipe = useCallback(async () => {
-  //   try {
-  //     const response = await accessApi.get(`/recipes/${router.query.id}/`);
-  //     console.log(response.data.data);
-  //     setRecipe(response.data.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, []);
+  const fetchRecipe = useCallback(async () => {
+    try {
+      const response = await accessApi.get(`/recipes/${router.query.id}/`);
+      console.log(response.data.data);
+      setRecipe(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   fetchRecipe();
-  // }, [fetchRecipe]);
+  useEffect(() => {
+    fetchRecipe();
+  }, [fetchRecipe]);
 
   return (
     <Container>
