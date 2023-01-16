@@ -14,6 +14,8 @@ const accessApi = axios.create({
   headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
 });
 
+let retries = 0;
+
 accessApi.interceptors.response.use(
   (response) => {
     if (!(response.status === 200 || response.status === 201 || response.status === 204)) throw new Error();
@@ -27,6 +29,12 @@ accessApi.interceptors.response.use(
     } = error;
 
     if (status === 401) {
+      retries = retries + 1;
+      // retries 가 2 이상이면 Promise reject을 해준다.
+      if (retries >= 2) {
+        retries = 0;
+        return Promise.reject(error);
+      }
       const originalRequest = config;
       const refresh = getCookie('refreshToken');
       // token refresh 요청
@@ -41,7 +49,9 @@ accessApi.interceptors.response.use(
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
-      return axios(originalRequest);
+      const originalResponse = await axios.request(originalRequest);
+
+      return originalResponse;
     }
     return Promise.reject(error);
   },

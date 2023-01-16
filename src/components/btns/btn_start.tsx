@@ -28,7 +28,7 @@ const Btn = styled.div<{ focused: boolean }>`
 
   border-radius: 8px;
   background: ${(props) => (props.focused ? `${COLOR.PRIMARY_ORANGE}` : `${COLOR.PRIMARY_GRAY1}`)};
-  color: ${(props) => (props.focused ? `${COLOR.PRIMARY_WHITE}` : `${COLOR.PRIMARY_GRAY2}`)};
+  color: ${(props) => (props.focused ? `${COLOR.TYPEFACE_WHITE}` : `${COLOR.TYPEFACE_GRAY1}`)};
 
   cursor: pointer;
 `;

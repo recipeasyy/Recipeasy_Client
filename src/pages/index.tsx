@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
+import { getCookie } from '../util/cookie';
 
 const LandingPage = () => {
   const router = useRouter();
-  setTimeout(() => router.push('/login'), 2000);
+  const isUser = Boolean(getCookie('accessToken'));
+
+  setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 2000);
   return (
     <Container>
       <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
@@ -33,7 +36,7 @@ const SubTitle = styled.div`
   text-align: center;
   letter-spacing: -0.4px;
 
-  color: ${COLOR.PRIMARY_ORANGE};
+  color: ${COLOR.TYPEFACE_WHITE};
 `;
 const MainTitle = styled.div`
   font-family: 'Paytone One';
@@ -43,7 +46,7 @@ const MainTitle = styled.div`
   line-height: 150%;
   letter-spacing: -0.022em;
 
-  color: ${COLOR.PRIMARY_ORANGE};
+  color: ${COLOR.TYPEFACE_WHITE};
 `;
 
 export default LandingPage;

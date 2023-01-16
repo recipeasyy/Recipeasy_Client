@@ -1,5 +1,6 @@
 import { accessApi } from '../../api/api';
 import { useInput } from '../../hooks/useInput';
+import { useRouter } from 'next/router';
 
 import styled from '@emotion/styled';
 import FONT from '../../constants/fonts';
@@ -7,12 +8,14 @@ import BtnStart from '../../components/btns/btn_start';
 import InputName from '../../components/inputs/input_name';
 
 export default function LoginNickName() {
+  const router = useRouter();
   const { value, handleChangeInput, reset } = useInput('');
   const handleClickName = async () => {
     try {
       console.log(value);
       const response = await accessApi.post('/user/nickname', { nickname: `${value}` });
       console.log(response.data);
+      router.push('/home');
     } catch (err) {
       console.log(err);
     }
