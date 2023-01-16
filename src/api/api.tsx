@@ -38,7 +38,7 @@ accessApi.interceptors.response.use(
       const originalRequest = config;
       const refresh = getCookie('refreshToken');
       // token refresh 요청
-      const response = await accessApi.post('/token/refresh/', { refresh: `${refresh}` });
+      const response = await api.post('/token/refresh/', { refresh: `${refresh}` });
       // 새로운 토큰 저장
       const accessToken = response.data.access;
       const refreshToken = response.data.refresh;
