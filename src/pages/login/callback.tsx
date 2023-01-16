@@ -34,28 +34,7 @@ const LoginCallback = () => {
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
-    // accessToken 만료하기 1분 전에 로그인 연장)
-    setTimeout(onLoginRefresh, JWT_EXPIRY_TIME - 60000);
-
     return accessToken;
-  };
-
-  const onLoginRefresh = async () => {
-    const refresh = getCookie('refreshToken');
-    console.log('refresh', `${refresh}`);
-
-    // 토큰이 만료되었고, refreshToken 이 저장되어 있을 때
-    if (refresh) {
-      // 토큰 갱신 서버통신
-      try {
-        const response = await api.post('/token/refresh/', { refresh: refresh });
-        if (response) {
-          onLoginSuccess(response);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
   };
 
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
