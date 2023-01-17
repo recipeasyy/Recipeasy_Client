@@ -34,7 +34,7 @@ const MyPage = () => {
   const handleToggleSave = async (e: any, id: number) => {
     e.stopPropagation();
     try {
-      const response = await accessApi.post(`/mypages/recipe/${id}`, {});
+      const response = await accessApi.post(`/mypages/recipes/${id}/`);
       console.log(response.data.data);
     } catch (err) {
       console.log(err);
@@ -78,14 +78,11 @@ const MyPage = () => {
           <TagIcon css={FONT.BODY_2_2}>
             {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
           </TagIcon>
-          {nav === '개별'
+          {/* {nav === '개별'
             ? user.saved_recipes.map((recipe) => (
                 <ImgCardMedium
-                  id={0}
-                  key={1}
-                  title="레시피 이름"
-                  duration_num={0}
-                  recipe_num={0}
+                  key={recipe.id}
+                  {...recipe}
                   handleToggleSave={handleToggleSave}
                   handleClickDetail={handleClickDetail}
                   selected={true}
@@ -93,16 +90,13 @@ const MyPage = () => {
               ))
             : user.saved_themes.map((theme) => (
                 <ImgCardMedium
-                  id={0}
-                  key={2}
-                  title="테마 이름"
-                  duration_num={0}
-                  recipe_num={0}
+                  key={theme.id}
+                  {...theme}
                   handleToggleSave={handleToggleSave}
                   handleClickDetail={handleClickDetail}
                   selected={true}
                 />
-              ))}
+              ))} */}
 
           <ImgCardMedium
             id={1}
