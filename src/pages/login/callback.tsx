@@ -16,6 +16,7 @@ const LoginCallback = () => {
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
     console.log(accessToken);
+    console.log(refreshToken);
     // accessToken 설정
     setCookie('accessToken', `${accessToken}`, {
       path: '/',

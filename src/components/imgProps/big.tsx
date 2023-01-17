@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/dist/client/router';
 import { useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
@@ -16,21 +17,27 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  save_count: number;
 }
 
-export default function Big({ props }: { props: Themes }) {
+export default function Big(props: Themes) {
   const [isSelect, setSelect] = useState(false);
   const HandleClick = async () => {
-    const res = await accessApi.post(`/theme/${props.title}`);
+    const res = await accessApi.post(`/theme/${props.id}`);
     setSelect((prev) => !prev);
   };
-  console.log(props);
-
+  const router = useRouter();
   return (
     <div>
       <Container>
         <Content>
-          <Title css={FONT.FOODTITLE}>{props.title}</Title>
+          <Title
+            css={FONT.FOODTITLE}
+            onClick={() => {
+              router.push(`/theme/${props.id}`);
+            }}>
+            {props.title}
+          </Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
             <Icon

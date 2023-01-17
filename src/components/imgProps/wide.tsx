@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Router, useRouter } from 'next/router';
 import { useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
@@ -22,12 +23,19 @@ export default function Wide({ props }: { props: Themes }) {
     const res = await accessApi.post(`/theme/${props.id}`);
     setSelect((prev) => !prev);
   };
+  const router = useRouter();
   //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??
   return (
     <>
       <Container>
         <Content>
-          <Title css={FONT.FOODTITLE}>{props.title}</Title>
+          <Title
+            css={FONT.FOODTITLE}
+            onClick={() => {
+              router.push(`theme/${props.id}`);
+            }}>
+            {props.title}
+          </Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
             <Icon

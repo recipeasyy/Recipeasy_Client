@@ -43,16 +43,6 @@ const Home = () => {
               console.log(themeTypes);
               return <Wide key={themeTypes.id} props={themeTypes}></Wide>;
             })}
-          <ThemeWrapper>
-            {testCase.map((menu) => {
-              console.log(menu);
-              return (
-                <Link href={`/theme/${menu}`} key={menu}>
-                  {menu}
-                </Link>
-              );
-            })}
-          </ThemeWrapper>
         </Box>
       </>
 
@@ -67,7 +57,9 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   //gap: 1.75rem;
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
   overflow: auto;
 `;
 

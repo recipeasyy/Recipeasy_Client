@@ -35,11 +35,11 @@ export default function Thin(props: Recipes) {
             <SmallSaveIcon selected={isSelect} />
           </Icon>
         </ImgBox>
-        <RecipeTitle>{props.title}</RecipeTitle>
-        <Time>{props.time_taken}</Time>
+        <RecipeTitle css={FONT.BODY_2}>{props.title}</RecipeTitle>
+        <Time css={FONT.DETAIL_2}>{props.time_taken}</Time>
         {props.required_ingredients &&
           props?.required_ingredients.map((ing: string, i) => {
-            return <Ingredients key={i}></Ingredients>;
+            return <Ingredients key={i} css={FONT.DETAIL_2}></Ingredients>;
           })}
       </Recipes>
     </>

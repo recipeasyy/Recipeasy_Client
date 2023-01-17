@@ -18,7 +18,7 @@ interface IThemes {
 interface BigThemes {
   id: number;
   title: string;
-  themes: Themes;
+  themes: [];
 }
 interface Themes {
   id: number;
@@ -29,11 +29,12 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  save_count: number;
 }
 
 const themeData = [
-  { id: '1', name: '자취생 초간단' },
-  { id: '2', name: '같은 재료' },
+  { id: '5', name: '초간단 식단' },
+  { id: '4', name: '같은 재료' },
 ];
 
 export default function showTheme(current: string) {
@@ -44,7 +45,7 @@ export default function showTheme(current: string) {
   };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [curState, setCur] = useState('자취생 초간단');
+  const [curState, setCur] = useState('초간단 식단');
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Themes', getThemes);
@@ -61,10 +62,12 @@ export default function showTheme(current: string) {
   console.log(data);
 
   const curThemes = data['Theme Types'].filter((themes: Themes) => themes.title === curState);
+  console.log(curThemes);
   return (
     <>
       <AllTheme />
-      <Box>
+
+      <Container>
         <Text css={FONT.HEADING}>
           오늘의 레시피지
           <div></div>
@@ -81,9 +84,17 @@ export default function showTheme(current: string) {
         </ThemeWrapper>
         {data &&
           curThemes.map((themeTypes: BigThemes) => {
-            return <Big key={themeTypes.id} props={themeTypes.themes}></Big>;
+            return (
+              <>
+                {themeTypes.themes.map((theme: Themes) => {
+                  console.log(theme);
+                  console.log(theme.id);
+                  return <Big key={theme.id} {...theme}></Big>;
+                })}
+              </>
+            );
           })}
-      </Box>
+      </Container>
       <GNB></GNB>
     </>
   );
@@ -109,21 +120,14 @@ const Category = styled.button<{ current: string }>`
   margin-right: 16px;
 `;
 
-const Box = styled.div`
-  width: 100%;
-  height: auto;
-  padding: 0 0 6.75rem 0;
-  display: flex;
-  flex-direction: column;
-  //gap: 1.75rem;
-
-  overflow: auto;
-`;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-bottom: 6.75rem;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const ThemeWrapper = styled.div`
   padding-top: 16px;
@@ -134,18 +138,4 @@ const ThemeWrapper = styled.div`
 
 const Text = styled.div`
   width: 100%;
-`;
-
-const Padding = styled.div`
-  height: 507px;
-  width: 375px;
-  overflow: hidden;
-`;
-
-const MainBox = styled.div`
-  width: 375px;
-  height: 729px;
-  background-color: white;
-  padding-left: 24px;
-  padding-right: 24px;
 `;
