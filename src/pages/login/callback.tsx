@@ -36,7 +36,9 @@ const LoginCallback = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     console.log(response.data.has_nickname);
-    response.data.has_nickname ? router.push('/home') : router.push('/login/nickname').then(() => router.reload());
+    response.data.has_nickname
+      ? router.push('/home').then(() => router.reload())
+      : router.push('/login/nickname').then(() => router.reload());
     return accessToken;
   };
 
