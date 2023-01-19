@@ -1,13 +1,9 @@
-import Link from 'next/link';
-import styed from '@emotion/styled';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import { useRouter } from 'next/router';
-import { ifError } from 'assert';
 import styled from '@emotion/styled';
-import GoBack from '../../components/top_navigations/goBack';
 import Thin from '../../components/imgProps/thin';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
@@ -144,21 +140,13 @@ const Save = styled.div`
   flex-direction: column;
   width: 24;
   height: 43;
-  position: fixed;
-  right: 0;
   justify-content: center;
   align-items: center;
-  padding-right: 24px;
 `;
 const Num = styled.div``;
 const HeadText = styled.div`
-  //align-items: center;
-  //align-content: center;
-  //justify-content: center;
-  margin-left: 58px;
+  padding-left: 58px;
   margin-top: 2px;
-  //position: fixed;
-  //bottom: 0;
   color: ${COLOR.TYPEFACE_BLACK};
 `;
 
@@ -169,7 +157,6 @@ const Top_Navigation = styled.div`
   position: sticky;
   top: 0px;
   display: flex;
-  //display: flex;
   background: ${COLOR.PRIMARY_WHITE_85};
   z-index: 1;
   justify-content: space-between;
@@ -183,10 +170,9 @@ const Column = styled.div`
   padding-top: 55px;
   padding-right: 24px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-content: center;
   position: fixed;
-  //left: 0;
 `;
 
 const Text1 = styled.div`
@@ -215,7 +201,6 @@ const AllRecipes = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  //overflow-y:scroll;
   display: flex;
   flex-direction: row;
   padding-bottom: 54px;
@@ -223,12 +208,10 @@ const AllRecipes = styled.div`
 
 const Heading = styled.div`
   margin-bottom: 8px;
-  // border: 1px solid black;
   color: ${COLOR.TYPEFACE_BLACK};
 `;
 const Description = styled.div`
   margin-bottom: 40px;
-  // border: 1px solid black;
   color: ${COLOR.TYPEFACE_GRAY1};
 `;
 const Emoticon = styled.div`

@@ -38,7 +38,7 @@ const getRefreshToken = mem(
       removeCookie('refreshToken');
     }
   },
-  { maxAge: 1000 },
+  { maxAge: 31536000 },
 );
 
 accessApi.interceptors.response.use(

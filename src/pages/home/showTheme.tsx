@@ -11,10 +11,6 @@ import COLOR from '../../constants/theme';
 import { useState } from 'react';
 import { css } from '@emotion/react';
 
-interface IThemes {
-  message: string;
-}
-
 interface BigThemes {
   id: number;
   title: string;
