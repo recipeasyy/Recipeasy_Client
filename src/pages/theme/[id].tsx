@@ -89,7 +89,7 @@ export default function allTheme(props: string) {
                 push(PATH.HOME);
               }}
             />
-            <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>
+            {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
             <Save>
               <ShowCount></ShowCount>
               <Num>{curTheme.recipe_count}</Num>
@@ -101,7 +101,7 @@ export default function allTheme(props: string) {
           <>
             <Heading>
               <Text1 css={FONT.DETAIL_2}>
-                {data.title}
+                {data.theme_type_name}
                 <br />
               </Text1>
               <Text css={FONT.HEADING}>{curTheme.title}</Text>
@@ -131,6 +131,7 @@ export async function getServerSideProps(context: any) {
     props: {}, // will be passed to the page component as props
   };
 }
+
 const Small = styled.div`
   padding-left: 8px;
   padding-right: 12px;
@@ -138,20 +139,24 @@ const Small = styled.div`
 const Save = styled.div`
   display: flex;
   flex-direction: column;
-  width: 24;
+  //width: 100%;
   height: 43;
   justify-content: center;
   align-items: center;
+  //width: 100%;
+  text-align: right;
+  //padding-right: 24px;
 `;
 const Num = styled.div``;
 const HeadText = styled.div`
-  padding-left: 58px;
+  //width: 100%;
+  padding-left: 20px;
   margin-top: 2px;
   color: ${COLOR.TYPEFACE_BLACK};
 `;
 
 const Top_Navigation = styled.div`
-  width: auto;
+  width: 100%;
   height: 100px;
   transition: 'all 1s';
   position: sticky;
@@ -161,18 +166,20 @@ const Top_Navigation = styled.div`
   z-index: 1;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
+  flex-direction: row;
 `;
 
 const Column = styled.div`
-  width: auto;
+  width: 100%;
   display: flex;
   padding-bottom: 21px;
   padding-top: 55px;
-  padding-right: 24px;
+  //padding-right: 24px;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-content: center;
-  position: fixed;
+  //position: fixed;
 `;
 
 const Text1 = styled.div`
