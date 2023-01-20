@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
 
-import TopNavBar from '../../components/navigations/navigation_top';
 import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
+import { FilledStarIcon, EmptyStarIcon } from '../../components/icons/BasicIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
@@ -79,6 +79,15 @@ const Recipe = () => {
     fetchRecipe();
   }, [fetchRecipe]);
 
+  const stars = () => {
+    let arr = [];
+    for (let i = 0; i < recipe.difficulty; i++) {
+      arr.push(i);
+    }
+    console.log(arr);
+    return arr;
+  };
+
   return (
     <Container>
       <TopBar>
@@ -91,7 +100,16 @@ const Recipe = () => {
         <Cards>
           <Card>
             <Text css={FONT.DETAIL_2}>난이도</Text>
-            🌟🌟🌟🌟🌟
+            <Stars>
+              {stars().map((idx) => (
+                <FilledStarIcon key={idx} />
+              ))}
+              {[0, 1, 2, 3, 4]
+                .filter((idx) => !stars().includes(idx))
+                .map((idx) => (
+                  <EmptyStarIcon key={idx} />
+                ))}
+            </Stars>
           </Card>
           <Card>
             <Text css={FONT.DETAIL_2}>소요시간</Text>
@@ -228,6 +246,11 @@ const Card = styled.div`
   gap: 0.5rem;
 
   background: ${COLOR.PRIMARY_WHITE};
+`;
+
+const Stars = styled.div`
+  display: flex;
+  gap: 6px;
 `;
 
 const Text = styled.div``;
