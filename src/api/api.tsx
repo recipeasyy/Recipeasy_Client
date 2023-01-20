@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { getCookie, setCookie } from '../util/cookie';
+import { useRouter } from 'next/router';
+import { getCookie, setCookie, removeCookie } from '../util/cookie';
 
 axios.defaults.withCredentials = true;
 
@@ -32,7 +33,15 @@ accessApi.interceptors.response.use(
       retries = retries + 1;
       // retries 가 2 이상이면 Promise reject을 해준다.
       if (retries >= 2) {
+        const router = useRouter();
+
         retries = 0;
+
+        removeCookie('accessToken');
+        removeCookie('refreshToken');
+
+        router.push('/login');
+
         return Promise.reject(error);
       }
 
@@ -40,7 +49,7 @@ accessApi.interceptors.response.use(
       const refresh = getCookie('refreshToken');
 
       // token refresh 요청
-      const response = await accessApi.post('/token/refresh/', { refresh: `${refresh}` });
+      const response = await api.post('/token/refresh/', { refresh: `${refresh}` });
       // 새로운 토큰 저장
       const accessToken = response.data.access;
       const refreshToken = response.data.refresh;
@@ -48,6 +57,7 @@ accessApi.interceptors.response.use(
       setCookie('refreshToken', `${refreshToken}`);
 
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
       return axios(originalRequest);
