@@ -77,7 +77,7 @@ export default function allTheme(props: string) {
   console.log(data.theme);
   const curTheme = data.theme;
   const curRecipes = curTheme.recipes;
-  console.log(curTheme.title);
+  console.log(curRecipes);
 
   return (
     <>
@@ -92,7 +92,7 @@ export default function allTheme(props: string) {
             {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
             <Save>
               <ShowCount></ShowCount>
-              <Num>{curTheme.recipe_count}</Num>
+              <Num>{curTheme.save_count}</Num>
             </Save>
           </Column>
         </Top_Navigation>
@@ -150,7 +150,7 @@ const Save = styled.div`
 const Num = styled.div``;
 const HeadText = styled.div`
   //width: 100%;
-  padding-left: 20px;
+  //padding-left: 10px;
   margin-top: 2px;
   color: ${COLOR.TYPEFACE_BLACK};
 `;

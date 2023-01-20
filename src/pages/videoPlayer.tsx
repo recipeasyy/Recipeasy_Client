@@ -42,29 +42,29 @@ export default function VideoPlayer() {
         <Vid>
           {hasWindow && (
             <iframe
-              src="https://geo.dailymotion.com/player/xbi7j.html?video=x8gsm33"
+              src="https://geo.dailymotion.com/player/xbi7j.html?video=x8hfepq"
               allow="autoplay; fullscreen; picture-in-picture"
               //allowfullscreen
               //frameborder="0"
-              width="800vw"
-              height="1400vh"></iframe>
+              width="390"
+              height="700"></iframe>
           )}
         </Vid>
-        <Icons>
-          <Text
-            onClick={() => {
-              push(PATH.HOME);
-            }}>
-            <ShowMore></ShowMore>
-          </Text>
-          <Text
-            onClick={() => {
-              setSelect((prev) => !prev);
-            }}>
-            <RoundSave selected={isSelect} />
-          </Text>
-        </Icons>
       </Wrapper>
+      <Icons>
+        <Text
+          onClick={() => {
+            push(PATH.HOME);
+          }}>
+          <ShowMore></ShowMore>
+        </Text>
+        <Text
+          onClick={() => {
+            setSelect((prev) => !prev);
+          }}>
+          <RoundSave selected={isSelect} />
+        </Text>
+      </Icons>
     </>
   );
 }
@@ -94,6 +94,9 @@ const Title = styled.div`
   color: ${COLOR.TYPEFACE_WHITE};
 `;
 const Vid = styled.div`
+  margin-top: 50px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
@@ -104,18 +107,21 @@ const Icons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
   position: fixed;
   bottom: 0;
-  margin-left: 210px;
+  //margin-left: 90px;
+  background-color: black;
 `;
 const Column = styled.div`
   display: flex;
   padding-bottom: 21px;
   padding-top: 55px;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: left;
   position: fixed;
-  left: 0;
+  //left: 0;
   padding-left: 22px;
   display: flex;
   flex-direction: column;
@@ -137,8 +143,9 @@ const Text = styled.div`
 `;
 const Wrapper = styled.div`
   position: absolute;
-  width: auto;
+  width: 100%;
   height: auto;
+  background-color: black;
   //overflow: none;
   //margin-top: 10px;
 `;

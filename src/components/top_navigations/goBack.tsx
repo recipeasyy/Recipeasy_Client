@@ -38,8 +38,9 @@ const Column = styled.div`
   display: flex;
   padding-bottom: 21px;
   padding-top: 55px;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
+  //flex-direction: row;
+  //justify-content: flex-start;
+  //position: fixed;
   //left: 0;
+  //padding-left: 24px;
 `;

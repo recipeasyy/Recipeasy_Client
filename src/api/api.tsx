@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getCookie, removeCookie, setCookie } from '../util/cookie';
 import mem from 'mem';
+import { Router, useRouter } from 'next/router';
 
 axios.defaults.withCredentials = true;
 
@@ -34,6 +35,7 @@ const getRefreshToken = mem(
 
       return accessToken;
     } catch (e) {
+      console.log(e);
       removeCookie('accessToken');
       removeCookie('refreshToken');
     }
