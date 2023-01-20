@@ -7,6 +7,7 @@ import { accessApi } from '../../api/api';
 import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
 import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
+import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
@@ -128,7 +129,12 @@ const Recipe = () => {
             </Title>
             {recipe.required_ingredients.map((ingredient, i) => (
               <Ingredient key={i}>
-                <Text css={FONT.BUTTON}>{ingredient.name}</Text>
+                <FoodName>
+                  <FoodIconWrapper>
+                    <FoodIcon name={ingredient.name} />
+                  </FoodIconWrapper>
+                  <Text css={FONT.BUTTON}>{ingredient.name}</Text>
+                </FoodName>
                 <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
               </Ingredient>
             ))}
@@ -144,35 +150,38 @@ const Recipe = () => {
           </Ingredients>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
-            {recipe.equipment.map((ingredient, i) => (
-              <Ingredient key={i}>
-                <Text css={FONT.BUTTON}>{ingredient.name}</Text>
-              </Ingredient>
-            ))}
+            <Equipments>
+              {recipe.equipment.map((ingredient, i) => (
+                <Tag key={i} css={FONT.BODY_2_3}>
+                  {ingredient.name}
+                </Tag>
+              ))}
+            </Equipments>
           </Ingredients>
         </Content>
         <Content>
-          <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
-          <Ingredients>
+          <Sequences>
+            <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
             {recipe.recipe_sequence.map((sequence) => (
               <Sequence key={sequence.order}>
                 <NumberIcon num={sequence.order} />
                 <Text css={FONT.BODY_1}>{sequence.short_desc}</Text>
               </Sequence>
             ))}
-          </Ingredients>
-          <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
-          <Ingredients>
+          </Sequences>
+          <Sequences>
+            <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
             {recipe.recipe_sequence.map((sequence) => (
-              <>
-                <Sequence key={sequence.order}>
-                  <Text css={FONT.BUTTON}>{sequence.order}</Text>
+              <SequenceWrapper key={sequence.order}>
+                <Sequence>
+                  <NumberIcon num={sequence.order} />
                   <Text css={FONT.BODY_1}>{sequence.short_desc}</Text>
                 </Sequence>
-                <Text>{sequence.long_desc}</Text>
-              </>
+                {/* <Img src={sequence.image} /> */}
+                <Text css={FONT.BODY_1}>{sequence.long_desc}</Text>
+              </SequenceWrapper>
             ))}
-          </Ingredients>
+          </Sequences>
         </Content>
       </Contents>
     </Container>
@@ -248,6 +257,20 @@ const Card = styled.div`
   background: ${COLOR.PRIMARY_WHITE};
 `;
 
+const FoodName = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const FoodIconWrapper = styled.div`
+  padding: 5px;
+
+  background: ${COLOR.BG_GRAY1};
+
+  border-radius: 0.5rem;
+`;
+
 const Icons = styled.div`
   display: flex;
   align-items: center;
@@ -275,6 +298,32 @@ const TagIcon = styled.div`
   border-radius: 8px;
 `;
 
+const Equipments = styled.div`
+  display: flex;
+  gap: 6px;
+`;
+
+const Tag = styled.div`
+  padding: 4px 12px;
+  color: ${COLOR.TYPEFACE_BLACK};
+  background: ${COLOR.BG_GRAY1};
+  border-radius: 8px;
+`;
+
+const Sequences = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const SequenceWrapper = styled.div`
+  padding-bottom: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 const Sequence = styled.div`
   padding: 14px 13px;
 
@@ -286,6 +335,8 @@ const Sequence = styled.div`
 
   background: ${COLOR.BG_GRAY1_85};
 `;
+
+const Img = styled.img``;
 
 const Ingredients = styled.div`
   display: flex;
