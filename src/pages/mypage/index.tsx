@@ -8,7 +8,7 @@ import TopNavBar from '../../components/navigations/navigation_top';
 import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
-import { ImgCardMedium } from '../../components/imgProps/imgcard';
+import { ImgCardMedium, ImgCardSmall } from '../../components/imgProps/imgcard';
 
 const MyPage = () => {
   const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
@@ -21,6 +21,7 @@ const MyPage = () => {
       setUser(response.data.data[0]);
       setRecipes(response.data.data[0].saved_recipes);
       setThemes(response.data.data[0].saved_themes);
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
@@ -77,13 +78,13 @@ const MyPage = () => {
             </SortTitle>
           </SortNavBar>
         </TopInfo>
-        <CardWrapper>
-          <TagIcon css={FONT.BODY_2_2}>
-            {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
-          </TagIcon>
+        <TagIcon css={FONT.BODY_2_2}>
+          {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
+        </TagIcon>
+        <CardWrapper nav={'개별'}>
           {nav === '개별'
             ? recipes.map((recipe: any) => (
-                <ImgCardMedium
+                <ImgCardSmall
                   key={recipe.id}
                   {...recipe}
                   handleToggleSave={(e: any) => handleToggleSave(e, recipe.id)}
@@ -159,10 +160,17 @@ const TagIcon = styled.div`
   border-radius: 8px;
 `;
 
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+const CardWrapper = styled.div<{ nav: string }>`
+  ${(props) =>
+    props.nav == '개별'
+      ? `display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 24px;
+      column-gap: 12px;
+      `
+      : `display: flex;
+      flex-direction: column;
+      gap: 1rem;`}
 `;
 
 export default MyPage;

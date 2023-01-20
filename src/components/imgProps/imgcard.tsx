@@ -36,16 +36,17 @@ interface smImgCardProps {
   title: string;
   time_taken: number;
   required_ingredients: number;
-  onClick: any;
+  handleToggleSave: any;
+  handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardSmall = (props: smImgCardProps) => {
   return (
     <div>
-      <SmallContainer>
+      <SmallContainer onClick={props.handleClickDetail}>
         <Content>
-          <IconWrapper onClick={props.onClick}>
+          <IconWrapper onClick={props.handleToggleSave}>
             <SaveIcon selected={props.selected} />
           </IconWrapper>
         </Content>

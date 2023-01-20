@@ -6,7 +6,7 @@ import { accessApi } from '../../api/api';
 
 import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
-import { FilledStarIcon, EmptyStarIcon } from '../../components/icons/BasicIcons';
+import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
@@ -99,7 +99,7 @@ const Recipe = () => {
         <Cards>
           <Card>
             <Text css={FONT.DETAIL_2}>난이도</Text>
-            <Stars>
+            <Icons>
               {stars().map((idx) => (
                 <FilledStarIcon key={idx} />
               ))}
@@ -108,11 +108,14 @@ const Recipe = () => {
                 .map((idx) => (
                   <EmptyStarIcon key={idx} />
                 ))}
-            </Stars>
+            </Icons>
           </Card>
           <Card>
             <Text css={FONT.DETAIL_2}>소요시간</Text>
-            {recipe.time_taken}
+            <Icons>
+              <ClockIcon />
+              {recipe.time_taken}
+            </Icons>
           </Card>
         </Cards>
       </TopBar>
@@ -130,7 +133,6 @@ const Recipe = () => {
               </Ingredient>
             ))}
           </Ingredients>
-          <br />
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>추가 재료</Title>
             {recipe.additional_ingredients.map((ingredient, i) => (
@@ -140,7 +142,6 @@ const Recipe = () => {
               </Ingredient>
             ))}
           </Ingredients>
-          <br />
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
             {recipe.equipment.map((ingredient, i) => (
@@ -155,7 +156,7 @@ const Recipe = () => {
           <Ingredients>
             {recipe.recipe_sequence.map((sequence) => (
               <Sequence key={sequence.order}>
-                <Text css={FONT.BUTTON}>{sequence.order}</Text>
+                <NumberIcon num={sequence.order} />
                 <Text css={FONT.BODY_1}>{sequence.short_desc}</Text>
               </Sequence>
             ))}
@@ -247,8 +248,9 @@ const Card = styled.div`
   background: ${COLOR.PRIMARY_WHITE};
 `;
 
-const Stars = styled.div`
+const Icons = styled.div`
   display: flex;
+  align-items: center;
   gap: 6px;
 `;
 
@@ -260,6 +262,7 @@ const Content = styled.div`
 
   display: flex;
   flex-direction: column;
+  gap: 2rem;
   background: ${COLOR.PRIMARY_WHITE};
 `;
 
