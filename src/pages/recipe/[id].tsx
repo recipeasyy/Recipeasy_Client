@@ -84,7 +84,6 @@ const Recipe = () => {
     for (let i = 0; i < recipe.difficulty; i++) {
       arr.push(i);
     }
-    console.log(arr);
     return arr;
   };
 
