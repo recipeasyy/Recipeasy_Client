@@ -180,7 +180,7 @@ const Recipe = () => {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   max-width: 450px;
   height: 100vh;
   display: flex;

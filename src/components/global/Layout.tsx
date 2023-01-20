@@ -4,8 +4,7 @@ import COLOR from '../../constants/theme';
 
 import { useRouter } from 'next/router';
 
-const num = /[0-9]/;
-const HIDDEN_LAYOUT = ['/', '/login', `/recipe/${num}`];
+const HIDDEN_LAYOUT = ['/', '/login'];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
