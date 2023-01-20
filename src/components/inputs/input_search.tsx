@@ -53,7 +53,7 @@ const Input = styled.input<{ isSearching: boolean }>`
   margin-left: ${(props) => props.isSearching && '0.75rem'};
 
   border-radius: 8px;
-  background: ${COLOR.GRAY2};
+  background: ${COLOR.PRIMARY_GRAY2};
 `;
 
 const IconWrapper = styled.div`

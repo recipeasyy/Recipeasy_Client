@@ -11,12 +11,11 @@ import COLOR from '../../constants/theme';
 import { ImgCardMedium } from '../../components/imgProps/imgcard';
 
 const MyPage = () => {
-  const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
+  const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
 
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-      console.log(response.data.data[0]);
       setUser(response.data.data[0]);
     } catch (err) {
       console.log(err);
@@ -54,7 +53,7 @@ const MyPage = () => {
       </TopNavBar>
       <Content>
         <TopInfo>
-          <Title css={FONT.HEADING}>{user.nickname}님</Title>
+          <Title css={FONT.HEADING}>{user.nickname ? user.nickname : '레시피지'}님</Title>
           <SortNavBar>
             <SortTitle
               css={FONT.SUBTITLE_2}
@@ -171,6 +170,8 @@ const Content = styled.div`
 const TopInfo = styled.div`
   display: flex;
   flex-direction: column;
+
+  gap: 0.75rem;
 `;
 
 const Title = styled.div`

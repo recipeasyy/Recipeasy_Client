@@ -35,8 +35,10 @@ accessApi.interceptors.response.use(
         retries = 0;
         return Promise.reject(error);
       }
+
       const originalRequest = config;
       const refresh = getCookie('refreshToken');
+
       // token refresh 요청
       const response = await accessApi.post('/token/refresh/', { refresh: `${refresh}` });
       // 새로운 토큰 저장
@@ -45,7 +47,6 @@ accessApi.interceptors.response.use(
       setCookie('accessToken', `${accessToken}`);
       setCookie('refreshToken', `${refreshToken}`);
 
-      accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
