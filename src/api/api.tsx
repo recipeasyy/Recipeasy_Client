@@ -3,7 +3,6 @@ import { getCookie, removeCookie, setCookie } from '../util/cookie';
 import mem from 'mem';
 import { Router, useRouter } from 'next/router';
 
-
 axios.defaults.withCredentials = true;
 
 //axios인스턴스

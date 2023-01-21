@@ -15,6 +15,8 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  landscape_image: string;
+  portrait_image: string;
   save_count: number;
 }
 
@@ -53,7 +55,7 @@ export default function Big(props: Themes) {
   const router = useRouter();
   return (
     <div>
-      <Container>
+      <Container imgProps={props.portrait_image}>
         <Content>
           <Title
             css={FONT.FOODTITLE}
@@ -81,14 +83,16 @@ const Icon = styled.div`
   float: right;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ imgProps: string }>`
   width: 100%;
   aspect-ratio: 327 / 424;
   height: 424px;
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
-  background: ${COLOR.PRIMARY_BLACK};
   margin-bottom: 14px;
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
+    url(${(props) => props.imgProps});
+  background-size: cover;
 `;
 
 const Content = styled.div`

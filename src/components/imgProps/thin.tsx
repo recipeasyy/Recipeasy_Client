@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
+import { SaladIcon } from '../icons/FoodIcons';
 import { SmallSaveIcon } from '../icons/SmallSave';
-
+import { Time as Timeicon } from '../icons/ThemeIcons';
 interface Recipes {
   id: number;
   video: string;
@@ -68,11 +69,17 @@ export default function Thin(props: Recipes) {
           </Icon>
         </ImgBox>
         <RecipeTitle css={FONT.BODY_2}>{props.title}</RecipeTitle>
-        <Time css={FONT.DETAIL_2}>{props.time_taken}</Time>
-        {props.required_ingredients &&
-          props?.required_ingredients.map((ing: string, i) => {
-            return <Ingredients key={i} css={FONT.DETAIL_2}></Ingredients>;
-          })}
+        <Time css={FONT.DETAIL_2}>
+          <Timeicon />
+          {props.time_taken}
+        </Time>
+        <Ingredients>
+          <SaladIcon />
+          {props.required_ingredients &&
+            props?.required_ingredients.map((ing: string, i) => {
+              return <Ingredients key={i} css={FONT.DETAIL_2}></Ingredients>;
+            })}
+        </Ingredients>
       </Recipes>
     </>
   );
@@ -105,8 +112,14 @@ const RecipeTitle = styled.div`
 const Time = styled.div`
   margin-bottom: 4px;
   font-size: 10px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
 `;
 
 const Ingredients = styled.div`
   font-size: 10px;
+  display: flex;
+  flex-direction: row;
 `;

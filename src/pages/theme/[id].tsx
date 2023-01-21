@@ -19,7 +19,6 @@ export default function allTheme(props: string) {
       console.log('e');
 
       console.log(document.documentElement.scrollTop);
-      e.srcElement.scrollTop > 10 ? setnavColor(false) : setnavColor(true);
       e.srcElement.scrollTop > 10 ? setHead(true) : setHead(false);
       console.log(window.pageYOffset);
       console.log(document.body.scrollTop);
@@ -54,7 +53,6 @@ export default function allTheme(props: string) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { push } = useRouter();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [navColor, setnavColor] = useState(true);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Recipes', getRecipes);
@@ -78,6 +76,7 @@ export default function allTheme(props: string) {
   const curTheme = data.theme;
   const curRecipes = curTheme.recipes;
   console.log(curRecipes);
+  console.log(curTheme.tips);
 
   return (
     <>
@@ -120,7 +119,7 @@ export default function allTheme(props: string) {
             </AllRecipes>
           </>
         )}
-        <EasyTips navColor={navColor}></EasyTips>
+        <EasyTips easy={curTheme.tips}></EasyTips>
       </Container>
     </>
   );
@@ -189,10 +188,11 @@ const Text1 = styled.div`
 const Text = styled.div`
   color: ${COLOR.TYPEFACE_BLACK};
 `;
-const EasyTips = styled.div<{ navColor: boolean }>`
+const EasyTips = styled.div<{ easy: string }>`
   width: 100%;
   height: 800px;
-  background-color: ${(props) => (props.navColor === false ? 'green' : 'black')};
+  background-image: url(${(props) => props.easy});
+  background-size: cover;
 `;
 const Container = styled.div`
   width: 100%;

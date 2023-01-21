@@ -32,13 +32,11 @@ const LoginCallback = () => {
 
     accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
-
     console.log(response.data.has_nickname);
     response.data.has_nickname
       ? router.push('/home').then(() => router.reload())
       : router.push('/login/nickname').then(() => router.reload());
     return accessToken;
-
   };
 
   const loginHandler = useCallback(
