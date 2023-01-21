@@ -81,13 +81,13 @@ export default function showTheme(current: string) {
         {data &&
           curThemes.map((themeTypes: BigThemes) => {
             return (
-              <>
+              <div key={themeTypes.id}>
                 {themeTypes.themes.map((theme: Themes) => {
                   console.log(theme);
                   console.log(theme.id);
                   return <Big key={theme.id} {...theme}></Big>;
                 })}
-              </>
+              </div>
             );
           })}
       </Container>

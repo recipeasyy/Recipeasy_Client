@@ -26,7 +26,7 @@ const Home = () => {
     return res.data;
   };
 
-  const { data } = useQuery('Themes', getThemes);
+  const { isLoading, data } = useQuery('Themes', getThemes);
 
   return (
     <>

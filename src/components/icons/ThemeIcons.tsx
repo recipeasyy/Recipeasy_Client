@@ -103,7 +103,7 @@ export const Time = () => {
 export const Rice = () => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_479_17654)">
+      <g clipPath="url(#clip0_479_17654)">
         <path
           d="M11.6646 19.5831H8.3417C3.98857 19.5831 0.460449 16.0539 0.460449 11.7018V8.28516H19.5469V11.7018C19.5469 16.0539 16.0177 19.5831 11.6646 19.5831Z"
           fill="#FF4A3D"

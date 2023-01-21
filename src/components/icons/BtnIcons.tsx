@@ -60,13 +60,7 @@ export const GoBackIconWhite = (props: { onClick: any }) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M14.5 4L7 11.5L14.5 19"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+      <path d="M14.5 4L7 11.5L14.5 19" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
@@ -76,14 +70,14 @@ export const RoundSave = ({ selected }: { selected: boolean }) => {
     <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="26" cy="26" r="26" fill="white" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M35 20.1834C35 17.1971 32.8214 16 29.6848 16H22.3187C19.2785 16 17 17.1155 17 19.9842V35.9679C17 36.7558 17.9046 37.252 18.6374 36.8668L26.0302 32.9805L33.3591 36.8602C34.093 37.2477 35 36.7514 35 35.9624V20.1834Z"
         fill={selected ? COLOR.PRIMARY_ORANGE : COLOR.PRIMARY_GRAY1}
         stroke={selected ? COLOR.PRIMARY_ORANGE : COLOR.PRIMARY_GRAY1}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -128,8 +122,8 @@ export const Up = () => {
   return (
     <>
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_756_76602)">
-          <path d="M1 8L6 3L11 8" stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <g clipPath="url(#clip0_756_76602)">
+          <path d="M1 8L6 3L11 8" stroke="#B3B3B3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </g>
         <defs>
           <clipPath id="clip0_756_76602">
