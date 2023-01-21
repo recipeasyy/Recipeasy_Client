@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
@@ -51,10 +52,14 @@ export default function Thin(props: Recipes) {
     setSelect((prev) => !prev);
   };
   console.log(props);
+  const router = useRouter();
   return (
     <>
       <Recipes>
-        <ImgBox>
+        <ImgBox
+          onClick={() => {
+            router.push(`/recipe/${props.id}`);
+          }}>
           <Icon
             onClick={() => {
               HandleClick();
