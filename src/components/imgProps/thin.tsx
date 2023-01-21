@@ -15,6 +15,9 @@ interface Recipes {
   required_ingredients: [];
   theme: number;
 }
+interface Ingredients {
+  name: string;
+}
 //Recipes누르면 해당 Recipes/id로 가는걸로 id필요할 것 같다!
 export default function Thin(props: Recipes) {
   console.log(props.id);
@@ -54,6 +57,7 @@ export default function Thin(props: Recipes) {
   };
   console.log(props);
   const router = useRouter();
+  const len = props.required_ingredients.length;
   return (
     <>
       <Recipes>
@@ -70,20 +74,44 @@ export default function Thin(props: Recipes) {
         </ImgBox>
         <RecipeTitle css={FONT.BODY_2}>{props.title}</RecipeTitle>
         <Time css={FONT.DETAIL_2}>
-          <Timeicon />
+          <Small>
+            <Timeicon />
+          </Small>
           {props.time_taken}
         </Time>
         <Ingredients>
-          <SaladIcon />
+          <Small>
+            <SaladIcon />
+          </Small>
           {props.required_ingredients &&
-            props?.required_ingredients.map((ing: string, i) => {
-              return <Ingredients key={i} css={FONT.DETAIL_2}></Ingredients>;
+            props?.required_ingredients.map((ing: Ingredients, i: number) => {
+              if (i !== len - 1) {
+                return (
+                  <Ing key={i} css={FONT.DETAIL_2}>
+                    {ing.name}/
+                  </Ing>
+                );
+              } else {
+                return (
+                  <Ing key={i} css={FONT.DETAIL_2}>
+                    {ing.name}
+                  </Ing>
+                );
+              }
             })}
         </Ingredients>
       </Recipes>
     </>
   );
 }
+const Ing = styled.a`
+  vertical-align: top;
+`;
+const Small = styled.div`
+  padding-right: 4px;
+  display: inline;
+`;
+
 const Icon = styled.div`
   padding-top: 218px;
   padding-bottom: 12px;
@@ -119,7 +147,8 @@ const Time = styled.div`
 `;
 
 const Ingredients = styled.div`
-  font-size: 10px;
-  display: flex;
-  flex-direction: row;
+  width: 100%;
+  display: inline;
+  justify-content: center;
+  align-content: center;
 `;
