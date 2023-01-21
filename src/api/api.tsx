@@ -31,13 +31,16 @@ const getRefreshToken = mem(
 
       if (refreshToken !== null) {
         setCookie('refreshToken', refreshToken);
+        console.log('a');
       }
 
       return accessToken;
     } catch (e) {
+      const router = useRouter();
       console.log(e);
       removeCookie('accessToken');
       removeCookie('refreshToken');
+      router.reload();
     }
   },
   { maxAge: 31536000 },
@@ -52,11 +55,12 @@ accessApi.interceptors.response.use(
     } = err;
 
     if (status !== 401 || config.sent) {
+      console.log('b1');
       return Promise.reject(err);
     }
-
     config.sent = true;
     const accessToken = await getRefreshToken();
+    console.log('b2');
 
     if (accessToken) {
       accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
@@ -64,10 +68,10 @@ accessApi.interceptors.response.use(
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
       const originalResponse = await axios.request(config);
-
+      console.log('b0');
       return originalResponse;
     }
-
+    console.log('b3');
     return Promise.reject(err);
   },
 );

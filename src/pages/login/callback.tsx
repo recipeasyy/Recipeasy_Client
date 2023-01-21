@@ -36,7 +36,7 @@ const LoginCallback = () => {
     response.data.has_nickname
       ? router.push('/home').then(() => router.reload())
       : router.push('/login/nickname').then(() => router.reload());
-    return accessToken;
+    //return accessToken;
   };
 
   const loginHandler = useCallback(

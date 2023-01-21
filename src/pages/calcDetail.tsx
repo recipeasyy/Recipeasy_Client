@@ -38,11 +38,7 @@ export default function calcDetail() {
         </SubTitle>
         {data &&
           data.map((measure: Measure) => {
-            return (
-              <>
-                <Accordion key={measure.id} {...measure}></Accordion>
-              </>
-            );
+            return <Accordion key={measure.id} {...measure}></Accordion>;
           })}
       </Container>
     </>
