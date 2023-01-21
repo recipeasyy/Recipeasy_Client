@@ -125,7 +125,10 @@ const Recipe = () => {
         <Content>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>
-              필수 재료 <TagIcon css={FONT.DETAIL_2}>계량하는 법 보기</TagIcon>
+              필수 재료{' '}
+              <TagIcon css={FONT.DETAIL_2} onClick={() => router.push(`/calcDetail`)}>
+                계량하는 법 보기
+              </TagIcon>
             </Title>
             {recipe.required_ingredients.map((ingredient, i) => (
               <Ingredient key={i}>
