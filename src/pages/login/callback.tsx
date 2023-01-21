@@ -12,7 +12,8 @@ const LoginCallback = () => {
 
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
-
+    console.log(accessToken);
+    console.log(refreshToken);
     // accessToken 설정
     setCookie('accessToken', `${accessToken}`, {
       path: '/',
@@ -31,7 +32,13 @@ const LoginCallback = () => {
 
     accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
-    response.data.has_nickname ? router.push('/home') : router.push('/login/nickname');
+
+    console.log(response.data.has_nickname);
+    response.data.has_nickname
+      ? router.push('/home').then(() => router.reload())
+      : router.push('/login/nickname').then(() => router.reload());
+    return accessToken;
+
   };
 
   const loginHandler = useCallback(

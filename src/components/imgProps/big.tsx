@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/dist/client/router';
 import { useCallback, useEffect, useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { SmallSaveIcon } from '../icons/SmallSave';
+
 interface Themes {
   id: number;
   title: string;
@@ -14,10 +15,10 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  save_count: number;
 }
 
-export default function Wide({ props }: { props: Themes }) {
-  console.log(props);
+export default function Big(props: Themes) {
   const [isSelect, setSelect] = useState(false);
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
 
@@ -50,15 +51,14 @@ export default function Wide({ props }: { props: Themes }) {
     setSelect((prev) => !prev);
   };
   const router = useRouter();
-  //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??
   return (
-    <>
+    <div>
       <Container>
         <Content>
           <Title
             css={FONT.FOODTITLE}
             onClick={() => {
-              router.push(`theme/${props.id}`);
+              router.push(`/theme/${props.id}`);
             }}>
             {props.title}
           </Title>
@@ -73,14 +73,22 @@ export default function Wide({ props }: { props: Themes }) {
           </SubTitle>
         </Content>
       </Container>
-    </>
+    </div>
   );
 }
+const Icon = styled.div`
+  display: flex;
+  float: right;
+`;
+
 const Container = styled.div`
-  margin-bottom: 14px;
+  width: 100%;
+  aspect-ratio: 327 / 424;
+  height: 424px;
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
   background: ${COLOR.PRIMARY_BLACK};
+  margin-bottom: 14px;
 `;
 
 const Content = styled.div`
@@ -102,8 +110,4 @@ const SubTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-const Icon = styled.div`
-  padding-right: 22px;
 `;
