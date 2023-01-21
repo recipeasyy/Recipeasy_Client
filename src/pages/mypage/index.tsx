@@ -8,15 +8,20 @@ import TopNavBar from '../../components/navigations/navigation_top';
 import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
-import { ImgCardMedium } from '../../components/imgProps/imgcard';
+import { ImgCardMedium, ImgCardSmall } from '../../components/imgProps/imgcard';
 
 const MyPage = () => {
   const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
+  const [recipes, setRecipes] = useState([]);
+  const [themes, setThemes] = useState([]);
 
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
       setUser(response.data.data[0]);
+      setRecipes(response.data.data[0].saved_recipes);
+      setThemes(response.data.data[0].saved_themes);
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +35,19 @@ const MyPage = () => {
 
   const [nav, setNav] = useState('개별');
 
-  const handleToggleSave = (e: any) => {};
+  const handleToggleSave = async (e: any, id: number) => {
+    e.stopPropagation();
+    try {
+      const response = await accessApi.post(`/mypages/recipes/${id}/`);
+      console.log(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleClickDetail = (id: number) => {
+    router.push(`/recipe/${id}`);
+  };
 
   return (
     <>
@@ -61,37 +78,29 @@ const MyPage = () => {
             </SortTitle>
           </SortNavBar>
         </TopInfo>
-        <CardWrapper>
-          <TagIcon css={FONT.BODY_2_2}>
-            {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
-          </TagIcon>
+        <TagIcon css={FONT.BODY_2_2}>
+          {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
+        </TagIcon>
+        <CardWrapper nav={'개별'}>
           {nav === '개별'
-            ? user.saved_recipes.map((recipe) => (
-                <ImgCardMedium
-                  key={1}
-                  title="레시피 이름"
-                  duration_num={0}
-                  recipe_num={0}
-                  onClick={handleToggleSave}
+            ? recipes.map((recipe: any) => (
+                <ImgCardSmall
+                  key={recipe.id}
+                  {...recipe}
+                  handleToggleSave={(e: any) => handleToggleSave(e, recipe.id)}
+                  handleClickDetail={() => handleClickDetail(recipe.id)}
                   selected={true}
                 />
               ))
-            : user.saved_themes.map((theme) => (
+            : themes.map((theme: any) => (
                 <ImgCardMedium
-                  key={2}
-                  title="테마 이름"
-                  duration_num={0}
-                  recipe_num={0}
-                  onClick={handleToggleSave}
+                  key={theme.id}
+                  {...theme}
+                  handleToggleSave={(e: any) => handleToggleSave(e, theme.id)}
+                  handleClickDetail={() => handleClickDetail(theme.id)}
                   selected={true}
                 />
               ))}
-
-          <ImgCardMedium title="테마 이름" duration_num={0} recipe_num={0} onClick={handleToggleSave} selected={true} />
-          <ImgCardMedium title="테마 이름" duration_num={0} recipe_num={0} onClick={handleToggleSave} selected={true} />
-          <ImgCardMedium title="테마 이름" duration_num={0} recipe_num={0} onClick={handleToggleSave} selected={true} />
-          <ImgCardMedium title="테마 이름" duration_num={0} recipe_num={0} onClick={handleToggleSave} selected={true} />
-          <ImgCardMedium title="테마 이름" duration_num={0} recipe_num={0} onClick={handleToggleSave} selected={true} />
         </CardWrapper>
       </Content>
       <GNB />
@@ -151,10 +160,17 @@ const TagIcon = styled.div`
   border-radius: 8px;
 `;
 
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+const CardWrapper = styled.div<{ nav: string }>`
+  ${(props) =>
+    props.nav == '개별'
+      ? `display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 24px;
+      column-gap: 12px;
+      `
+      : `display: flex;
+      flex-direction: column;
+      gap: 1rem;`}
 `;
 
 export default MyPage;

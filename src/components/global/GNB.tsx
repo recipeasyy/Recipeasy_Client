@@ -42,6 +42,8 @@ const Container = styled.div`
   justify-content: space-around;
   border-radius: 1.5rem 1.5rem 0 0;
   background-color: ${COLOR.BG_GRAY1};
+
+  z-index: 2;
 `;
 
 const Column = styled.div``;
