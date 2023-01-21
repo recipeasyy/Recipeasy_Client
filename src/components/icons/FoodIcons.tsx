@@ -766,7 +766,8 @@ export const FoodIcon = ({ name }: { name: string }) => {
       return <RiceIcon />;
     case '간장':
       return <SauceBrownIcon />;
-    case '참기름' || '식용유':
+    case '참기름':
+    case '식용유':
       return <SauceYellowIcon />;
     case '케첩':
       return <SauceRedIcon />;
@@ -780,9 +781,11 @@ export const FoodIcon = ({ name }: { name: string }) => {
       return <CanGreenIcon />;
     case '스팸':
       return <CanOrangeIcon />;
-    case '고추장' || '된장':
+    case '고추장':
+    case '된장':
       return <PasteIcon />;
-    case '설탕' || '소금':
+    case '설탕':
+    case '소금':
       return <PowderWhiteIcon />;
     case '황설탕':
       return <PowderBrownIcon />;
