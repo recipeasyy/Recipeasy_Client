@@ -81,7 +81,7 @@ const MyPage = () => {
         <TagIcon css={FONT.BODY_2_2}>
           {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
         </TagIcon>
-        <CardWrapper nav={'개별'}>
+        <CardWrapper nav={nav}>
           {nav === '개별'
             ? recipes.map((recipe: any) => (
                 <ImgCardSmall
