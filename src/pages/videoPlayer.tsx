@@ -1,10 +1,7 @@
-import ReactPlayer from 'react-player/dailymotion';
 import styled from '@emotion/styled';
-import GoBack from '../components/navigations/goBack';
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
-import Head from 'next/head';
-import { GoBackIconWhite, RoundSave, ShowMore, SmallTextBack } from '../components/icons/BtnIcons';
+import { RoundSave, ShowMore } from '../components/icons/BtnIcons';
+import GoBack from '../components/navigations/goBack';
 import PATH from '../constants/path';
 import { useRouter } from 'next/router';
 import COLOR from '../constants/theme';
@@ -22,6 +19,10 @@ export default function VideoPlayer() {
   }, []);
   return (
     <Container>
+      <TopInfo>
+        <GoBack color={COLOR.PRIMARY_WHITE} />
+      </TopInfo>
+
       <Vid>
         {hasWindow && (
           <iframe
@@ -63,9 +64,13 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
+const TopInfo = styled.div`
+  width: 100%;
+`;
+
 const Vid = styled.div`
   position: absolute;
-  bottom: 10vh;
+  bottom: 12vh;
   width: 100%;
   height: 720px;
 
@@ -88,7 +93,7 @@ const Icons = styled.div`
 
   flex-wrap: wrap;
   position: fixed;
-  bottom: 2%;
+  bottom: 4vh;
 `;
 
 const Text = styled.div``;

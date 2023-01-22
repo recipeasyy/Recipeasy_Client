@@ -23,7 +23,7 @@ export const SettingIcon = (props: { onClick: any }) => {
   );
 };
 
-export const GoBackIcon = (props: { onClick: any }) => {
+export const GoBackIcon = (props: { onClick: any; color: string }) => {
   return (
     <svg
       onClick={props.onClick}
@@ -34,7 +34,7 @@ export const GoBackIcon = (props: { onClick: any }) => {
       xmlns="http://www.w3.org/2000/svg">
       <path
         d="M14.5 5L7 12.5L14.5 20"
-        stroke="#242424"
+        stroke={props.color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
