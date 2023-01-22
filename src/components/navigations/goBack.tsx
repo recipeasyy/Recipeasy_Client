@@ -33,7 +33,7 @@ const TopNav = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 1;
+  z-index: 2;
 `;
 
 const IconWrapper = styled.div<{ color: string }>`

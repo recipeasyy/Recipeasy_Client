@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import { RoundSave, ShowMore } from '../components/icons/BtnIcons';
+import { useRouter } from 'next/router';
+import { RoundSave, ShowMore, GoForward } from '../components/icons/BtnIcons';
 import GoBack from '../components/navigations/goBack';
 import PATH from '../constants/path';
-import { useRouter } from 'next/router';
 import COLOR from '../constants/theme';
 import FONT from '../constants/fonts';
 
@@ -19,8 +19,17 @@ export default function VideoPlayer() {
   }, []);
   return (
     <Container>
+      <GoBack color={COLOR.PRIMARY_WHITE} />
       <TopInfo>
-        <GoBack color={COLOR.PRIMARY_WHITE} />
+        <Title css={FONT.FOODTITLE}>오야꼬동</Title>
+        <ThemeBtn
+          css={FONT.BODY_2_3}
+          onClick={() => {
+            push(PATH.HOME);
+          }}>
+          계란으로 5일 버티기
+          <GoForward />
+        </ThemeBtn>
       </TopInfo>
 
       <Vid>
@@ -65,7 +74,38 @@ const Container = styled.div`
 `;
 
 const TopInfo = styled.div`
-  width: 100%;
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  max-width: 450px;
+
+  padding: 100px 24px 48px 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  color: ${COLOR.TYPEFACE_WHITE};
+  background: linear-gradient(180deg, #161616 0%, rgba(18, 18, 18, 0) 100%);
+
+  z-index: 1;
+`;
+
+const Title = styled.div``;
+
+const ThemeBtn = styled.div`
+  width: fit-content;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  color: ${COLOR.TYPEFACE_BLACK};
+  background: ${COLOR.PRIMARY_WHITE};
 `;
 
 const Vid = styled.div`
