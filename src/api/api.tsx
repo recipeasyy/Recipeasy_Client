@@ -2,6 +2,8 @@ import axios from 'axios';
 import { getCookie, removeCookie, setCookie } from '../util/cookie';
 import mem from 'mem';
 import { Router, useRouter } from 'next/router';
+import { access } from 'fs/promises';
+import { useEffect } from 'react';
 
 axios.defaults.withCredentials = true;
 
@@ -21,33 +23,46 @@ let retries = 0;
 const getRefreshToken = mem(
   async (): Promise<string | void> => {
     try {
+      console.log('2');
       const refresh = getCookie('refreshToken');
       const response = await api.post('/token/refresh/', { refresh: `${refresh}` });
+      console.log('2');
       // 새로운 토큰 저장
       const accessToken = response.data.access;
       const refreshToken = response.data.refresh;
-
-      setCookie('accessToken', accessToken);
+      setCookie('accessToken', `${accessToken}`, {
+        path: '/',
+        sameSite: true,
+        // httpOnly: true,
+        // secure: true,
+      });
 
       if (refreshToken !== null) {
-        setCookie('refreshToken', refreshToken);
-        console.log('a');
+        setCookie('refreshToken', `${refreshToken}`, {
+          path: '/',
+          sameSite: true,
+          // httpOnly: true,
+          // secure: true,
+        });
       }
+      console.log(accessToken);
 
       return accessToken;
     } catch (e) {
-      const router = useRouter();
       console.log(e);
       removeCookie('accessToken');
       removeCookie('refreshToken');
-      router.reload();
     }
   },
   { maxAge: 31536000 },
 );
 
 accessApi.interceptors.response.use(
-  (res) => res,
+  (response) => {
+    if (!(response.status === 200 || response.status === 201 || response.status === 204)) throw new Error();
+    if (response.data.errors) throw new Error(response.data.errors);
+    return response;
+  },
   async (err) => {
     const {
       config,
@@ -55,23 +70,28 @@ accessApi.interceptors.response.use(
     } = err;
 
     if (status !== 401 || config.sent) {
-      console.log('b1');
       return Promise.reject(err);
     }
-    config.sent = true;
+
+    //config.sent = true;
     const accessToken = await getRefreshToken();
-    console.log('b2');
+
+    const old = getCookie('accessToken');
+    if (accessToken == old) {
+      window.location.reload();
+    }
 
     if (accessToken) {
+      console.log(accessToken);
       accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
       config.headers.Authorization = `Bearer ${accessToken}`;
 
       // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
       const originalResponse = await axios.request(config);
-      console.log('b0');
+      console.log(originalResponse);
       return originalResponse;
     }
-    console.log('b3');
+
     return Promise.reject(err);
   },
 );
