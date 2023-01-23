@@ -9,19 +9,20 @@ interface midImgCardProps {
   title: string;
   duration: number;
   recipe_count: number;
-  onClick: any;
+  handleToggleSave: any;
+  handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardMedium = (props: midImgCardProps) => {
   return (
     <div>
-      <MediumContainer>
+      <MediumContainer onClick={props.handleClickDetail}>
         <Content>
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
-            <IconWrapper onClick={props.onClick}>
+            <IconWrapper onClick={props.handleToggleSave}>
               <SaveIcon selected={props.selected} />
             </IconWrapper>
           </SubTitle>
@@ -35,16 +36,17 @@ interface smImgCardProps {
   title: string;
   time_taken: number;
   required_ingredients: number;
-  onClick: any;
+  handleToggleSave: any;
+  handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardSmall = (props: smImgCardProps) => {
   return (
     <div>
-      <SmallContainer>
+      <SmallContainer onClick={props.handleClickDetail}>
         <Content>
-          <IconWrapper onClick={props.onClick}>
+          <IconWrapper onClick={props.handleToggleSave}>
             <SaveIcon selected={props.selected} />
           </IconWrapper>
         </Content>
@@ -76,6 +78,8 @@ const MediumContainer = styled.div`
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
   background: ${COLOR.PRIMARY_BLACK};
+
+  cursor: pointer;
 `;
 
 const Content = styled.div`
@@ -100,7 +104,9 @@ const SubTitle = styled.div`
   justify-content: space-between;
 `;
 
-const IconWrapper = styled.div``;
+const IconWrapper = styled.div`
+  z-index: 1;
+`;
 
 const Description = styled.div`
   width: 100%;
