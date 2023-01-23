@@ -8,6 +8,7 @@ import COLOR from '../constants/theme';
 import { api, accessApi } from '../api/api';
 import { PotatoIcon, EggIcon } from './icons/FoodIcons';
 import { ImgCardMedium, ImgCardSmall } from './imgProps/imgcard';
+import Wide from './imgProps/wide';
 
 export const SearchNone = () => {
   const router = useRouter();
@@ -46,19 +47,19 @@ export const SearchNone = () => {
 };
 
 export const SearchItem = (props: { value: string; nav: string }) => {
+  console.log(props.nav);
   const [recipes, setRecipes] = useState<any>([]);
   const fetchSearch = useCallback(async () => {
     try {
       const response =
         props.nav == '개별'
           ? await accessApi.get(`/recipes/search/?q=${props.value}`)
-          : await accessApi.get(`/recipes/search/?q=${props.value}`);
-      console.log(response.data);
+          : await accessApi.get(`/theme/search/?q=${props.value}`);
       setRecipes(response.data);
     } catch (err) {
       console.log(err);
     }
-  }, [props.value]);
+  }, [props.nav, props.value]);
 
   useEffect(() => {
     fetchSearch();
@@ -73,14 +74,6 @@ export const SearchItem = (props: { value: string; nav: string }) => {
           <ImgCardMedium key={recipe.id} {...recipe} />
         ),
       )}
-      {/* <ImgCardSmall
-        key={10}
-        title={'냠냠'}
-        time_taken={10}
-        required_ingredients={1}
-        onClick={() => {}}
-        selected={false}
-      /> */}
     </Content>
   ) : (
     <></>
