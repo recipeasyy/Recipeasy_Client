@@ -1,12 +1,9 @@
-import ReactPlayer from 'react-player/dailymotion';
 import styled from '@emotion/styled';
-import GoBack from '../components/navigations/goBack';
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
-import Head from 'next/head';
-import { GoBackIconWhite, RoundSave, ShowMore, SmallTextBack } from '../components/icons/BtnIcons';
-import PATH from '../constants/path';
 import { useRouter } from 'next/router';
+import { RoundSave, ShowMore, GoForward } from '../components/icons/BtnIcons';
+import GoBack from '../components/navigations/goBack';
+import PATH from '../constants/path';
 import COLOR from '../constants/theme';
 import FONT from '../constants/fonts';
 
@@ -21,36 +18,31 @@ export default function VideoPlayer() {
     }
   }, []);
   return (
-    <>
-      <Wrapper>
-        <Column>
-          <Col>
-            <GoBackIconWhite
-              onClick={() => {
-                push(PATH.HOME);
-              }}
-            />
-          </Col>
-          <Title css={FONT.FOODTITLE}>{'오이꼬동'}</Title>
-          <Button>
-            <Te css={FONT.BODY_2_3}>
-              {'계란으로 3일 버티기'}
-              <SmallTextBack />
-            </Te>
-          </Button>
-        </Column>
-        <Vid>
-          {hasWindow && (
-            <iframe
-              src="https://geo.dailymotion.com/player/xbi7j.html?video=x8hfepq"
-              allow="autoplay; fullscreen; picture-in-picture"
-              //allowfullscreen
-              //frameborder="0"
-              width="390"
-              height="700"></iframe>
-          )}
-        </Vid>
-      </Wrapper>
+    <Container>
+      <GoBack color={COLOR.PRIMARY_WHITE} />
+      <TopInfo>
+        <Title css={FONT.FOODTITLE}>오야꼬동</Title>
+        <ThemeBtn
+          css={FONT.BODY_2_3}
+          onClick={() => {
+            push(PATH.HOME);
+          }}>
+          계란으로 5일 버티기
+          <GoForward />
+        </ThemeBtn>
+      </TopInfo>
+
+      <Vid>
+        {hasWindow && (
+          <iframe
+            src="https://geo.dailymotion.com/player/xbi7j.html?video=x8hfepq"
+            allow="autoplay;"
+            width="100%"
+            height="720px"
+            allowFullScreen></iframe>
+        )}
+      </Vid>
+
       <Icons>
         <Text
           onClick={() => {
@@ -65,87 +57,83 @@ export default function VideoPlayer() {
           <RoundSave selected={isSelect} />
         </Text>
       </Icons>
-    </>
+    </Container>
   );
 }
-const Col = styled.div`
-  padding-bottom: 21px;
+
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+
+  width: 100vw;
+  max-width: 450px;
+  height: 100vh;
+  background: #0b0b0b;
+
+  overflow: hidden;
 `;
-const Te = styled.div`
-  justify-content: center;
-  align-content: center;
-  margin-left: 6px;
-  margin-top: 8px;
-  margin-bottom: 12px;
-  margin-right: 4px;
-`;
-const Button = styled.div`
-  width: 150px;
-  height: 38px;
-  border-radius: 8px;
-  color: ${COLOR.TYPEFACE_BLACK};
-  background-color: ${COLOR.BG_GRAY1};
-  //align-content: center;
-  margin-top: 8px;
+
+const TopInfo = styled.div`
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  max-width: 450px;
+
+  padding: 100px 24px 48px 24px;
+
   display: flex;
-  flex-direction: row;
-`;
-const Title = styled.div`
+  flex-direction: column;
+  gap: 0.5rem;
+
   color: ${COLOR.TYPEFACE_WHITE};
+  background: linear-gradient(180deg, #161616 0%, rgba(18, 18, 18, 0) 100%);
+
+  z-index: 1;
 `;
+
+const Title = styled.div``;
+
+const ThemeBtn = styled.div`
+  width: fit-content;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  color: ${COLOR.TYPEFACE_BLACK};
+  background: ${COLOR.PRIMARY_WHITE};
+`;
+
 const Vid = styled.div`
-  margin-top: 50px;
+  position: absolute;
+  bottom: 12vh;
+  width: 100%;
+  height: 720px;
+
   border-radius: 10px;
-  margin-bottom: 10px;
+
   overflow: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
+
 const Icons = styled.div`
-  width: 100%;
+  width: 100vw;
+  max-width: 450px;
+
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  gap: 20px;
+
   flex-wrap: wrap;
   position: fixed;
-  bottom: 0;
-  //margin-left: 90px;
-  background-color: black;
+  bottom: 4vh;
 `;
-const Column = styled.div`
-  display: flex;
-  padding-bottom: 21px;
-  padding-top: 55px;
-  flex-direction: column;
-  justify-content: left;
-  position: fixed;
-  //left: 0;
-  padding-left: 22px;
-  display: flex;
-  flex-direction: column;
-`;
-const All = styled.div`
-  all: initial;
-  //background-color: white;
-  //position: fixed;
-`;
-const Text = styled.div`
-  //text-align: center;
-  justify-content: center;
-  //width: 100%;
-  //position: fixed;
-  bottom: 0;
-  margin-bottom: 33px;
-  margin-left: 10px;
-  margin-right: 10px;
-`;
-const Wrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background-color: black;
-  //overflow: none;
-  //margin-top: 10px;
-`;
+
+const Text = styled.div``;
