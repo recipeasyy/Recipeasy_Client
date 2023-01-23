@@ -13,7 +13,7 @@ import COLOR from '../../constants/theme';
 const Search = () => {
   const router = useRouter();
   const initialText = typeof router.query.text === 'string' ? router.query.text : '';
-  const initialNav = typeof router.query.type === 'string' ? router.query.type : '개별';
+  const initialNav = typeof router.query.type === 'string' ? router.query.type : 'recipe';
 
   const { value, handleChangeInput, reset } = useInput(initialText);
   const [nav, setNav] = useState(initialNav);
@@ -28,17 +28,17 @@ const Search = () => {
           <SortTitle
             css={FONT.SUBTITLE_2}
             onClick={() => {
-              setNav('개별');
+              setNav('recipe');
             }}
-            isSeleted={nav === '개별'}>
+            isSeleted={nav === 'recipe'}>
             개별레시피
           </SortTitle>
           <SortTitle
             css={FONT.SUBTITLE_2}
             onClick={() => {
-              setNav('테마');
+              setNav('theme');
             }}
-            isSeleted={nav === '테마'}>
+            isSeleted={nav === 'theme'}>
             테마레시피
           </SortTitle>
         </SortNavBar>

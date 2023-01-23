@@ -8,7 +8,6 @@ import COLOR from '../constants/theme';
 import { api, accessApi } from '../api/api';
 import { PotatoIcon, EggIcon } from './icons/FoodIcons';
 import { ImgCardMedium, ImgCardSmall } from './imgProps/imgcard';
-import Wide from './imgProps/wide';
 
 export const SearchNone = () => {
   const router = useRouter();
@@ -27,10 +26,10 @@ export const SearchNone = () => {
       <TagBox>
         <Title css={FONT.BODY_2}>재료 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
-          <Tag onClick={(e) => handleClickSaveText(e, '개별')}>
+          <Tag onClick={(e) => handleClickSaveText(e, 'recipe')}>
             계란 <EggIcon />
           </Tag>
-          <Tag onClick={(e) => handleClickSaveText(e, '개별')}>
+          <Tag onClick={(e) => handleClickSaveText(e, 'recipe')}>
             감자 <PotatoIcon />
           </Tag>
         </Tags>
@@ -47,12 +46,13 @@ export const SearchNone = () => {
 };
 
 export const SearchItem = (props: { value: string; nav: string }) => {
-  console.log(props.nav);
+  const router = useRouter();
+
   const [recipes, setRecipes] = useState<any>([]);
   const fetchSearch = useCallback(async () => {
     try {
       const response =
-        props.nav == '개별'
+        props.nav == 'recipe'
           ? await accessApi.get(`/recipes/search/?q=${props.value}`)
           : await accessApi.get(`/theme/search/?q=${props.value}`);
       setRecipes(response.data);
@@ -65,13 +65,38 @@ export const SearchItem = (props: { value: string; nav: string }) => {
     fetchSearch();
   }, [fetchSearch]);
 
+  const handleToggleSave = async (e: any, type: string, id: number) => {
+    e.stopPropagation();
+    try {
+      const response =
+        type == 'recipe' ? await accessApi.post(`/mypages/recipes/${id}/`) : await accessApi.post(`/theme/${id}/`);
+      console.log(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleClickDetail = (type: string, id: number) => {
+    router.push(`/${type}/${id}`);
+  };
+
   return recipes ? (
     <Content type={props.nav}>
       {recipes.map((recipe: any) =>
-        props.nav == '개별' ? (
-          <ImgCardSmall key={recipe.id} {...recipe} />
+        props.nav == 'recipe' ? (
+          <ImgCardSmall
+            key={recipe.id}
+            {...recipe}
+            handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
+            handleToggleSave={(e: any) => handleToggleSave(e, props.nav, recipe.id)}
+          />
         ) : (
-          <ImgCardMedium key={recipe.id} {...recipe} />
+          <ImgCardMedium
+            key={recipe.id}
+            {...recipe}
+            handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
+            handleToggleSave={(e: any) => handleToggleSave(e, props.nav, recipe.id)}
+          />
         ),
       )}
     </Content>
@@ -84,7 +109,7 @@ const Content = styled.div<{ type: string }>`
   width: 100%;
 
   ${(props) =>
-    props.type == '개별'
+    props.type == 'recipe'
       ? `display: grid; 
       grid-template-columns: 1fr 1fr;
       row-gap: 1.75rem;
