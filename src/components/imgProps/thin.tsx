@@ -63,7 +63,7 @@ export default function Thin(props: Recipes) {
       <Recipes>
         <ImgBox
           onClick={() => {
-            router.push(`/recipe/${props.id}`);
+            router.push(`/videoPlayer/${props.id}`);
           }}>
           <Icon
             onClick={() => {

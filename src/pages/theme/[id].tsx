@@ -84,6 +84,7 @@ export default function allTheme(props: string) {
         <Top_Navigation>
           <Column>
             <GoBackIcon
+              color={COLOR.TYPEFACE_BLACK}
               onClick={() => {
                 push(PATH.HOME);
               }}
