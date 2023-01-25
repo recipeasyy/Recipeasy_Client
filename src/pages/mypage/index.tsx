@@ -81,7 +81,7 @@ const MyPage = () => {
         <TagIcon css={FONT.BODY_2_2}>
           {nav === '개별' ? user.saved_recipes.length : user.saved_themes.length}개의 {nav}레시피
         </TagIcon>
-        <CardWrapper nav={'개별'}>
+        <CardWrapper nav={nav}>
           {nav === '개별'
             ? recipes.map((recipe: any) => (
                 <ImgCardSmall
@@ -123,6 +123,9 @@ const Content = styled.div`
   gap: 1.75rem;
 
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const TopInfo = styled.div`
