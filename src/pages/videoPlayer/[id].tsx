@@ -15,33 +15,36 @@ export default function VideoPlayer() {
   const [isSelect, setSelect] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
+  const { themeId } = router.query;
+  console.log(themeId);
 
+  const Themes = [
+    { id: 1, name: '계란으로 5일 버티기' },
+    { id: 2, name: '자취생 3일 아침 레시피' },
+    { id: 3, name: '감자로 3일 버티기' },
+  ];
   const getVideos = async () => {
-    const res = await accessApi.get(`/theme/${router.query.id}`);
+    const res = await accessApi.get(`/recipes/${router.query.id}`);
     console.log(router.query.id);
     console.log(res);
-    return res.data;
+    return res.data.data;
   };
+
   interface recipe {
     id: number;
     title: string;
     required_ingredients: [];
     save_count: number;
-    theme: 1;
+    theme: number;
     time_taken: string;
     image: string;
     video_id: string;
   }
   const { data } = useQuery('Videos', getVideos);
   console.log(data);
-  const theme = data && data.theme;
-  console.log(theme);
-  const recipe = theme && theme.recipes;
-  console.log(recipe);
-
-  const curRecipe = recipe && recipe.find((a: recipe) => `${a.id}` === `${router.query.id}`);
-  console.log(curRecipe && curRecipe.id);
-  console.log(router.query.id);
+  const recipeTitle = data && data.title;
+  console.log(recipeTitle);
+  const recipeId = data && data.id;
 
   const fetchUser = useCallback(async () => {
     try {
@@ -70,22 +73,25 @@ export default function VideoPlayer() {
   }, [fetchUser]);
 
   const HandleClick = async () => {
-    const res = await accessApi.post(`/mypages/recipes/${curRecipe && curRecipe.id}/`);
+    const res = await accessApi.post(`/mypages/recipes/${data && data.id}/`);
     console.log(res.data.data.is_saved);
     setSelect((prev) => !prev);
   };
+  const realThemeId = Themes.filter((a) => `${a.id}` === themeId);
+  const realTheme = realThemeId[0]?.name;
+  console.log(realTheme);
 
   return (
     <Container>
       <GoBack color={COLOR.PRIMARY_WHITE} />
       <TopInfo>
-        <Title css={FONT.FOODTITLE}>{curRecipe && curRecipe.title}</Title>
+        <Title css={FONT.FOODTITLE}>{recipeTitle}</Title>
         <ThemeBtn
           css={FONT.BODY_2_3}
           onClick={() => {
             push(PATH.HOME);
           }}>
-          {theme && theme.title}
+          {realTheme}
           <GoForward />
         </ThemeBtn>
       </TopInfo>
@@ -93,7 +99,7 @@ export default function VideoPlayer() {
       <Vid>
         {hasWindow && (
           <iframe
-            src={`https://geo.dailymotion.com/player/xbi7j.html?video=${curRecipe && curRecipe.video_id}`}
+            src={`https://geo.dailymotion.com/player/xbi7j.html?video=${data && data.video_id}`}
             allow="autoplay;"
             width="100%"
             height="720px"

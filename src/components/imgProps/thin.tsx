@@ -8,12 +8,13 @@ import { SmallSaveIcon } from '../icons/SmallSave';
 import { Time as Timeicon } from '../icons/ThemeIcons';
 interface Recipes {
   id: number;
-  video: string;
+  video_id: string;
   title: string;
   time_taken: string;
   save_count: number;
   required_ingredients: [];
   theme: number;
+  image: string;
 }
 interface Ingredients {
   name: string;
@@ -58,15 +59,30 @@ export default function Thin(props: Recipes) {
   console.log(props);
   const router = useRouter();
   const len = props.required_ingredients.length;
+
+  const onClick = (id: any, themeId: any) => {
+    router.push(
+      {
+        pathname: `/videoPlayer/${id}`,
+        query: {
+          themeId,
+        },
+      },
+      `/videoPlayer/${id}`,
+    );
+  };
+
   return (
     <>
       <Recipes>
         <ImgBox
+          imgProps={props.image}
           onClick={() => {
-            router.push(`/videoPlayer/${props.id}`);
+            onClick(props.id, props.theme);
           }}>
           <Icon
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               HandleClick();
             }}>
             <SmallSaveIcon selected={isSelect} />
@@ -88,7 +104,7 @@ export default function Thin(props: Recipes) {
               if (i !== len - 1) {
                 return (
                   <Ing key={i} css={FONT.DETAIL_2}>
-                    {ing.name}/
+                    {ing.name}·
                   </Ing>
                 );
               } else {
@@ -125,13 +141,15 @@ const Recipes = styled.div`
   flex-direction: column;
   color: black;
 `;
-const ImgBox = styled.div`
+const ImgBox = styled.div<{ imgProps: string }>`
   margin-bottom: 4px;
-  border: 1px solid black;
+
   width: 158px;
   height: 264px;
   margin-right: 12px;
-  background-color: black;
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
+    url(${(props) => props.imgProps});
+  background-size: cover;
   border-radius: 20px;
 `;
 const RecipeTitle = styled.div`

@@ -191,9 +191,9 @@ const Text = styled.div`
 `;
 const EasyTips = styled.div<{ easy: string }>`
   width: 100%;
-  height: 800px;
+  height: 400px;
   background-image: url(${(props) => props.easy});
-  background-size: cover;
+  background-size: contain;
 `;
 const Container = styled.div`
   width: 100%;
