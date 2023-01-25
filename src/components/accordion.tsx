@@ -4,15 +4,29 @@ import { useState } from 'react';
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 import { Down, Up } from './icons/BtnIcons';
+import { FoodIcon } from './icons/FoodIcons';
 
-export default function Accordion(props: any) {
+interface Content {
+  full: string;
+  full_image: string;
+  half: string;
+  half_image: string;
+  icon_type: string;
+  id: number;
+  title: string;
+}
+
+export default function Accordion(props: Content) {
   const [isOpen, setOpen] = useState(false);
-  console.log(props.title);
+  console.log(props.icon_type);
   return (
     <>
       <Header onClick={() => setOpen((prev) => !prev)}>
         <Box>
-          <div css={FONT.BODY_1}>{props.title}</div>
+          <FlexBox css={FONT.BODY_1}>
+            <FoodIcon name={props.icon_type}></FoodIcon>
+            <Text>{props.title}</Text>
+          </FlexBox>
           <IconWrapper>{isOpen ? <Up /> : <Down />}</IconWrapper>
         </Box>
       </Header>
@@ -35,9 +49,17 @@ export default function Accordion(props: any) {
     </>
   );
 }
+const Text = styled.div`
+  padding-left: 10px;
+`;
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  vertical-align: top;
+`;
 const ImgWrapper = styled.div`
   width: 157px;
-  height: 265px;
+  //height: 265px;
   display: flex;
   flex-direction: column;
   //justify-content: center;

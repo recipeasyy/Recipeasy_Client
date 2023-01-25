@@ -1,17 +1,23 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
+import { SaladIcon } from '../icons/FoodIcons';
 import { SmallSaveIcon } from '../icons/SmallSave';
-
+import { Time as Timeicon } from '../icons/ThemeIcons';
 interface Recipes {
   id: number;
-  video: string;
+  video_id: string;
   title: string;
   time_taken: string;
   save_count: number;
   required_ingredients: [];
   theme: number;
+  image: string;
+}
+interface Ingredients {
+  name: string;
 }
 //Recipes누르면 해당 Recipes/id로 가는걸로 id필요할 것 같다!
 export default function Thin(props: Recipes) {
@@ -51,27 +57,77 @@ export default function Thin(props: Recipes) {
     setSelect((prev) => !prev);
   };
   console.log(props);
+  const router = useRouter();
+  const len = props.required_ingredients.length;
+
+  const onClick = (id: any, themeId: any) => {
+    router.push(
+      {
+        pathname: `/videoPlayer/${id}`,
+        query: {
+          themeId,
+        },
+      },
+      `/videoPlayer/${id}`,
+    );
+  };
+
   return (
     <>
       <Recipes>
-        <ImgBox>
+        <ImgBox
+          imgProps={props.image}
+          onClick={() => {
+            onClick(props.id, props.theme);
+          }}>
           <Icon
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               HandleClick();
             }}>
             <SmallSaveIcon selected={isSelect} />
           </Icon>
         </ImgBox>
         <RecipeTitle css={FONT.BODY_2}>{props.title}</RecipeTitle>
-        <Time css={FONT.DETAIL_2}>{props.time_taken}</Time>
-        {props.required_ingredients &&
-          props?.required_ingredients.map((ing: string, i) => {
-            return <Ingredients key={i} css={FONT.DETAIL_2}></Ingredients>;
-          })}
+        <Time css={FONT.DETAIL_2}>
+          <Small>
+            <Timeicon />
+          </Small>
+          {props.time_taken}
+        </Time>
+        <Ingredients>
+          <Small>
+            <SaladIcon />
+          </Small>
+          {props.required_ingredients &&
+            props?.required_ingredients.map((ing: Ingredients, i: number) => {
+              if (i !== len - 1) {
+                return (
+                  <Ing key={i} css={FONT.DETAIL_2}>
+                    {ing.name}·
+                  </Ing>
+                );
+              } else {
+                return (
+                  <Ing key={i} css={FONT.DETAIL_2}>
+                    {ing.name}
+                  </Ing>
+                );
+              }
+            })}
+        </Ingredients>
       </Recipes>
     </>
   );
 }
+const Ing = styled.a`
+  vertical-align: top;
+`;
+const Small = styled.div`
+  padding-right: 4px;
+  display: inline;
+`;
+
 const Icon = styled.div`
   padding-top: 218px;
   padding-bottom: 12px;
@@ -85,13 +141,15 @@ const Recipes = styled.div`
   flex-direction: column;
   color: black;
 `;
-const ImgBox = styled.div`
+const ImgBox = styled.div<{ imgProps: string }>`
   margin-bottom: 4px;
-  border: 1px solid black;
+
   width: 158px;
   height: 264px;
   margin-right: 12px;
-  background-color: black;
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
+    url(${(props) => props.imgProps});
+  background-size: cover;
   border-radius: 20px;
 `;
 const RecipeTitle = styled.div`
@@ -100,8 +158,15 @@ const RecipeTitle = styled.div`
 const Time = styled.div`
   margin-bottom: 4px;
   font-size: 10px;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
 `;
 
 const Ingredients = styled.div`
-  font-size: 10px;
+  width: 100%;
+  display: inline;
+  justify-content: center;
+  align-content: center;
 `;

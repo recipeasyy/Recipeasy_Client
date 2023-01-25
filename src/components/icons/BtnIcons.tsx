@@ -106,8 +106,8 @@ export const SmallTextBack = () => {
 export const Down = () => {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_484_21836)">
-        <path d="M11 4L6 9L1 4" stroke="#B3B3B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      <g clipPath="url(#clip0_484_21836)">
+        <path d="M11 4L6 9L1 4" stroke="#B3B3B3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </g>
       <defs>
         <clipPath id="clip0_484_21836">

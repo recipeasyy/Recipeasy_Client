@@ -14,6 +14,9 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  landscape_image: string;
+  portrait_image: string;
+  save_count: number;
 }
 
 export default function Wide({ props }: { props: Themes }) {
@@ -50,10 +53,11 @@ export default function Wide({ props }: { props: Themes }) {
     setSelect((prev) => !prev);
   };
   const router = useRouter();
+  console.log(props.landscape_image);
   //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??
   return (
     <>
-      <Container>
+      <Container imgProps={props.landscape_image}>
         <Content>
           <Title
             css={FONT.FOODTITLE}
@@ -76,11 +80,13 @@ export default function Wide({ props }: { props: Themes }) {
     </>
   );
 }
-const Container = styled.div`
+const Container = styled.div<{ imgProps: string }>`
   margin-bottom: 14px;
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
-  background: ${COLOR.PRIMARY_BLACK};
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
+    url(${(props) => props.imgProps});
+  background-size: cover;
 `;
 
 const Content = styled.div`

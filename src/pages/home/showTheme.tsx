@@ -25,6 +25,8 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  landscape_image: string;
+  portrait_image: string;
   save_count: number;
 }
 

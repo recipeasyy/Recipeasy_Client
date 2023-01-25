@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
+import { Url } from 'url';
 import { accessApi } from '../../api/api';
 
 import GNB from '../../components/global/GNB';
@@ -17,6 +18,9 @@ interface Themes {
   tips: string;
   theme_type: number;
   recipes: [];
+  landscape_image: string;
+  portrait_image: string;
+  save_count: number;
 }
 
 const Home = () => {
