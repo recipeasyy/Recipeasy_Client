@@ -8,12 +8,12 @@ export default function GoBack({ color }: { color: string }) {
   return (
     <>
       <TopNav>
-        <IconWrapper color={color}>
+        <IconWrapper>
           <GoBackIcon
             onClick={() => {
               router.back();
             }}
-            color={COLOR.PRIMARY_WHITE}
+            color={color}
           />
         </IconWrapper>
       </TopNav>
@@ -36,7 +36,6 @@ const TopNav = styled.div`
   z-index: 2;
 `;
 
-const IconWrapper = styled.div<{ color: string }>`
+const IconWrapper = styled.div`
   width: 100%;
-  color: ${(props) => props.color};
 `;
