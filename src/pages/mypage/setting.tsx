@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
+import { Router, useRouter } from 'next/router';
 
 import GNB from '../../components/global/GNB';
-import { SettingIcon } from '../../components/icons/BtnIcons';
-import GoBack from '../../components/navigations/goBack';
+import { GoBackIcon, SettingIcon } from '../../components/icons/BtnIcons';
 
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
 const MyPage = () => {
+  const router = useRouter();
   return (
     <>
-      <GoBack />
+      <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
       <Content>
         <Text css={FONT.BODY_1}>버전정보</Text>
         <Text css={FONT.BODY_1}>탈퇴하기</Text>
