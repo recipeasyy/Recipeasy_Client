@@ -2,12 +2,13 @@ import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { api, accessApi } from '../../api/api';
 import { setCookie } from '../../util/cookie';
+import { AxiosHeaders, AxiosResponse } from 'axios';
 
 const LoginCallback = () => {
   const router = useRouter();
   const { code } = router.query;
 
-  const onLoginSuccess = (response: any) => {
+  const onLoginSuccess = (response: AxiosResponse) => {
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
     // accessToken 설정

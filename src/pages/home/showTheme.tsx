@@ -33,16 +33,13 @@ const themeData = [
   { id: '4', name: '같은 재료' },
 ];
 
-export default function showTheme(current: string) {
+export default function ShowTheme(current: string) {
   const getThemes = async () => {
     const res = await accessApi.get(`/theme/`);
     return res.data;
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [curState, setCur] = useState('초간단 식단');
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Themes', getThemes);
 
   if (error) return <div>Request Failed</div>;

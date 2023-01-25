@@ -12,8 +12,7 @@ import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
 import { GetServerSideProps } from 'next';
 
-export default function allTheme(props: string) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function AllTheme(props: string) {
   useEffect(() => {
     const listenScrollEvent = (e: any) => {
       e.srcElement.scrollTop > 10 ? setHead(true) : setHead(false);
@@ -27,24 +26,14 @@ export default function allTheme(props: string) {
     };
   }, []);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const router =
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useRouter();
+  const router = useRouter();
+  const { push } = useRouter();
+  const [head, setHead] = useState(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const getRecipes = async () => {
     const res = await accessApi.get(`/theme/${router.query.id}`);
     return res.data;
   };
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [head, setHead] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { push } = useRouter();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Recipes', getRecipes);
 
   if (error) return <div>Request Failed</div>;
