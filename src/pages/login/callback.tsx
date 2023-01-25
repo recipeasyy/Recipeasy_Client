@@ -1,38 +1,29 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { api, accessApi } from '../../api/api';
 import { setCookie } from '../../util/cookie';
 
 const LoginCallback = () => {
   const router = useRouter();
-  const { code, error } = router.query;
+  const { code } = router.query;
 
   const onLoginSuccess = (response: any) => {
-    console.log(response.data);
-
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
-    console.log(accessToken);
-    console.log(refreshToken);
     // accessToken 설정
     setCookie('accessToken', `${accessToken}`, {
       path: '/',
       sameSite: true,
-      // httpOnly: true,
-      // secure: true,
     });
 
     // refreshToken 설정
     setCookie('refreshToken', `${refreshToken}`, {
       path: '/',
       sameSite: true,
-      // httpOnly: true,
-      // secure: true,
     });
 
     accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
-    console.log(response.data.has_nickname);
     response.data.has_nickname
       ? router.push('/home').then(() => router.reload())
       : router.push('/login/nickname').then(() => router.reload());

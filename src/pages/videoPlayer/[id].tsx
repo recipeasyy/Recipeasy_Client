@@ -8,6 +8,7 @@ import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';
 import { accessApi } from '../../api/api';
 import { useQuery } from 'react-query';
+import { GetServerSideProps } from 'next';
 
 export default function VideoPlayer() {
   const [hasWindow, setHasWindow] = useState(false);
@@ -25,8 +26,6 @@ export default function VideoPlayer() {
   ];
   const getVideos = async () => {
     const res = await accessApi.get(`/recipes/${router.query.id}`);
-    console.log(router.query.id);
-    console.log(res);
     return res.data.data;
   };
 
@@ -41,28 +40,22 @@ export default function VideoPlayer() {
     video_id: string;
   }
   const { data } = useQuery('Videos', getVideos);
-  console.log(data);
+
   const recipeTitle = data && data.title;
-  console.log(recipeTitle);
-  const recipeId = data && data.id;
 
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-      console.log(response.data.data[0]);
+
       setUser(response.data.data[0]);
-      console.log(user.saved_recipes);
+
       response.data.data[0].saved_recipes.map((recipes: any) => {
-        console.log(recipes);
         const id = recipes.id;
         if (id == router.query.id) {
           setSelect((prev) => !prev);
-          console.log(id == router.query.id);
         }
       });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
@@ -74,7 +67,7 @@ export default function VideoPlayer() {
 
   const HandleClick = async () => {
     const res = await accessApi.post(`/mypages/recipes/${data && data.id}/`);
-    console.log(res.data.data.is_saved);
+
     setSelect((prev) => !prev);
   };
   const realThemeId = Themes.filter((a) => `${a.id}` === themeId);
@@ -125,11 +118,11 @@ export default function VideoPlayer() {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {}, // will be passed to the page component as props
   };
-}
+};
 
 const Container = styled.div`
   position: absolute;

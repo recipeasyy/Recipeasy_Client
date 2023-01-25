@@ -1,9 +1,6 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
 import { useQuery } from 'react-query';
-import { Url } from 'url';
 import { accessApi } from '../../api/api';
-
 import GNB from '../../components/global/GNB';
 import Wide from '../../components/imgProps/wide';
 import All_Theme from '../../components/navigations/All_Theme';
@@ -26,11 +23,10 @@ interface Themes {
 const Home = () => {
   const getThemes = async () => {
     const res = await accessApi.get('/theme/');
-    console.log(res.data);
     return res.data;
   };
 
-  const { isLoading, data } = useQuery('Themes', getThemes);
+  const { data } = useQuery('Themes', getThemes);
 
   return (
     <>
