@@ -1,4 +1,4 @@
-@import url('//cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 * {
@@ -10,7 +10,6 @@
   box-sizing: border-box;
 }
 
-html,
 body,
 div,
 span,
@@ -119,7 +118,6 @@ body {
   width: 100%;
   height: 100%;
   line-height: 1;
-  font-family: 'Open Sans', sans-serif;
   color: #444444;
 }
 ol,
