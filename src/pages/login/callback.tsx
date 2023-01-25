@@ -32,18 +32,19 @@ const LoginCallback = () => {
 
     accessApi.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
-
     console.log(response.data.has_nickname);
     response.data.has_nickname
       ? router.push('/home').then(() => router.reload())
       : router.push('/login/nickname').then(() => router.reload());
     return accessToken;
-
   };
 
   const loginHandler = useCallback(
     async (code: string | string[]) => {
-      const response = await api.get(`/auth/kakao?code=${code} `);
+      const response = await api.get(`/auth/kakao?code=${code}`, {
+        params: { redirect_uri: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI },
+      });
+
       if (response) {
         onLoginSuccess(response);
       } else {
