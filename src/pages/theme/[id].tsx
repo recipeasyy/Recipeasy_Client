@@ -16,7 +16,6 @@ export default function AllTheme(props: string) {
   useEffect(() => {
     const listenScrollEvent = (e: Event) => {
       (e.target as HTMLElement).scrollTop > 10 ? setHead(true) : setHead(false);
-      console.log(e);
     };
 
     document.body.addEventListener('scroll', listenScrollEvent, { capture: true });
