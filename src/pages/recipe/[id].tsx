@@ -93,7 +93,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     <Container>
       <TopBar>
         <IconWrapper>
-          <GoBackIcon onClick={() => router.back()} />
+          <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
           <SaveIcon selected={true} />
         </IconWrapper>
         <Title css={FONT.FOODTITLE}>{recipe.title}</Title>

@@ -15,6 +15,7 @@ export default function GoBack() {
             onClick={() => {
               push(PATH.HOME);
             }}
+            color={COLOR.TYPEFACE_BLACK}
           />
         </Column>
       </Top_Navigation>

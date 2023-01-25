@@ -29,7 +29,7 @@ export const InputSearchItem = (props: propsType) => {
   const router = useRouter();
   return (
     <>
-      <GoBackIcon onClick={() => router.back()} />
+      <GoBackIcon onClick={() => router.back()} color={COLOR.PRIMARY_BLACK} />
       <Input
         id="search"
         placeholder="검색어 입력"
