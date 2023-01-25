@@ -38,15 +38,18 @@ interface smImgCardProps {
   title: string;
   time_taken: number;
   required_ingredients: number;
+  image: string;
+
   handleToggleSave: any;
   handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardSmall = (props: smImgCardProps) => {
+  console.log(props);
   return (
     <div>
-      <SmallContainer onClick={props.handleClickDetail}>
+      <SmallContainer onClick={props.handleClickDetail} img={props.image}>
         <Content>
           <IconWrapper onClick={props.handleToggleSave}>
             <SaveIcon selected={props.selected} />
@@ -64,13 +67,15 @@ export const ImgCardSmall = (props: smImgCardProps) => {
   );
 };
 
-const SmallContainer = styled.div`
+const SmallContainer = styled.div<{ img: string }>`
   width: 100%;
   aspect-ratio: 158 / 264;
 
   padding: 230px 12px 12px 124px;
   border-radius: 1rem;
-  background: ${COLOR.PRIMARY_BLACK};
+  background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
+    url(${(props) => props.img});
+  background-size: cover;
 `;
 
 const MediumContainer = styled.div<{ img: string }>`
