@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
@@ -11,7 +12,7 @@ import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
-const Recipe = () => {
+const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const [recipe, setRecipe] = useState({
     id: 1,
@@ -68,7 +69,7 @@ const Recipe = () => {
 
   const fetchRecipe = useCallback(async () => {
     try {
-      const response = await accessApi.get(`/recipes/${router.query.id}/`);
+      const response = await accessApi.get(`/recipes/${id.params}/`);
       console.log(response.data.data);
       setRecipe(response.data.data);
     } catch (err) {
@@ -125,7 +126,10 @@ const Recipe = () => {
         <Content>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>
-              필수 재료 <TagIcon css={FONT.DETAIL_2}>계량하는 법 보기</TagIcon>
+              필수 재료{' '}
+              <TagIcon css={FONT.DETAIL_2} onClick={() => router.push(`/calcDetail`)}>
+                계량하는 법 보기
+              </TagIcon>
             </Title>
             {recipe.required_ingredients.map((ingredient, i) => (
               <Ingredient key={i}>
@@ -186,6 +190,13 @@ const Recipe = () => {
       </Contents>
     </Container>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const params = context.params!.id;
+  return {
+    props: { params },
+  };
 };
 
 const Container = styled.div`

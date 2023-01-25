@@ -9,6 +9,8 @@ interface midImgCardProps {
   title: string;
   duration: number;
   recipe_count: number;
+  landscape_image: string;
+
   handleToggleSave: any;
   handleClickDetail: any;
   selected: boolean;
@@ -17,7 +19,7 @@ interface midImgCardProps {
 export const ImgCardMedium = (props: midImgCardProps) => {
   return (
     <div>
-      <MediumContainer onClick={props.handleClickDetail}>
+      <MediumContainer onClick={props.handleClickDetail} img={props.landscape_image}>
         <Content>
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
@@ -36,15 +38,18 @@ interface smImgCardProps {
   title: string;
   time_taken: number;
   required_ingredients: number;
+  image: string;
+
   handleToggleSave: any;
   handleClickDetail: any;
   selected: boolean;
 }
 
 export const ImgCardSmall = (props: smImgCardProps) => {
+  console.log(props);
   return (
     <div>
-      <SmallContainer onClick={props.handleClickDetail}>
+      <SmallContainer onClick={props.handleClickDetail} img={props.image}>
         <Content>
           <IconWrapper onClick={props.handleToggleSave}>
             <SaveIcon selected={props.selected} />
@@ -62,22 +67,27 @@ export const ImgCardSmall = (props: smImgCardProps) => {
   );
 };
 
-const SmallContainer = styled.div`
+const SmallContainer = styled.div<{ img: string }>`
   width: 100%;
   aspect-ratio: 158 / 264;
 
   padding: 230px 12px 12px 124px;
   border-radius: 1rem;
-  background: ${COLOR.PRIMARY_BLACK};
+  background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
+    url(${(props) => props.img});
+  background-size: cover;
 `;
 
-const MediumContainer = styled.div`
+const MediumContainer = styled.div<{ img: string }>`
   width: 100%;
   aspect-ratio: 327 / 230;
 
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
-  background: ${COLOR.PRIMARY_BLACK};
+
+  cursor: pointer;
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%), url(${(props) => props.img});
+  background-size: cover;
 `;
 
 const Content = styled.div`

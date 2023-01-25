@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
 * {
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
     'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 }
 
@@ -185,4 +185,12 @@ input:focus {
   width: 100%;
   height: 100%;
   background: #f7f5f2;
+}
+
+#dmp_jsEnabled,
+iframe {
+  /* position: absolute;
+
+  top: 0;
+  left: 0; */
 }
