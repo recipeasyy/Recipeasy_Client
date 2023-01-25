@@ -78,8 +78,6 @@ const MediumContainer = styled.div`
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
   background: ${COLOR.PRIMARY_BLACK};
-
-  cursor: pointer;
 `;
 
 const Content = styled.div`
