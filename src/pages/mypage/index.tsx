@@ -123,6 +123,9 @@ const Content = styled.div`
   gap: 1.75rem;
 
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const TopInfo = styled.div`
