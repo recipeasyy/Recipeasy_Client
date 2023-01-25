@@ -19,7 +19,7 @@ const GNB = () => {
         onClick={() => {
           push(PATH.SEARCH);
         }}>
-        <SearchIcon selected={pathname === PATH.SEARCH} />
+        <SearchIcon selected={pathname === PATH.SEARCH || pathname == PATH.SEARCHING} />
       </Column>
       <Column
         onClick={() => {
