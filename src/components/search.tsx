@@ -63,9 +63,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
         const response = await accessApi.get(`/theme/search/?q=${props.value}`);
         setRecipes(response.data);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, [props.nav, props.value]);
 
   const fetchUser = useCallback(async () => {
@@ -74,9 +72,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
       const user = response.data.data[0];
       user.saved_recipes.map((recipe: any) => setSaveRecipe([recipe.id, ...saveRecipe]));
       user.saved_themes.map((theme: any) => setSaveTheme([theme.id, ...saveTheme]));
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
@@ -118,9 +114,6 @@ export const SearchItem = (props: { value: string; nav: string }) => {
   const handleClickDetail = (type: string, id: number) => {
     router.push(`/${type}/${id}`);
   };
-
-  recipes.map((recipe: any) => console.log(recipe.id));
-  console.log(saveTheme);
 
   return recipes ? (
     <Content type={props.nav}>

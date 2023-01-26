@@ -27,21 +27,14 @@ export default function Big(props: Themes) {
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-      console.log(response.data.data[0]);
       setUser(response.data.data[0]);
-      console.log(props.id);
-      console.log(user.saved_recipes);
       response.data.data[0].saved_themes.map((themes: any) => {
-        console.log(themes);
         const id = themes.id;
         if (id == props.id) {
           setSelect(true);
-          console.log(id == props.id);
         }
       });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {

@@ -46,7 +46,6 @@ interface smImgCardProps {
 }
 
 export const ImgCardSmall = (props: smImgCardProps) => {
-  console.log(props);
   return (
     <div>
       <SmallContainer onClick={props.handleClickDetail} img={props.image}>

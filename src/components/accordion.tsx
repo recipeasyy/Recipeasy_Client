@@ -18,7 +18,6 @@ interface Content {
 
 export default function Accordion(props: Content) {
   const [isOpen, setOpen] = useState(false);
-  console.log(props.icon_type);
   return (
     <>
       <Header onClick={() => setOpen((prev) => !prev)}>
