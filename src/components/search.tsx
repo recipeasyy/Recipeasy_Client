@@ -4,9 +4,6 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { MouseEvent } from 'react';
 
-import { useRecipeSaveMutation, useThemeSaveMutation } from '../hooks/useMutation';
-import { queryKeys } from '../types/commonType';
-
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 
@@ -76,7 +73,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
     <Content type={props.nav}>
       {recipes.map((recipe: any) =>
         props.nav == 'recipe' ? (
-          <ImgCardSmall key={recipe.id} {...recipe} />
+          <ImgCardSmall key={recipe.id} {...recipe} route={false} />
         ) : (
           <ImgCardMedium key={recipe.id} {...recipe} />
         ),

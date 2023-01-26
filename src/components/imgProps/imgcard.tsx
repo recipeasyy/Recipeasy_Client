@@ -62,7 +62,7 @@ export const ImgCardMedium = (props: Themes) => {
   );
 };
 
-export const ImgCardSmall = (props: Recipes) => {
+export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
   const router = useRouter();
   const [selected, setSelected] = useState(false);
 
@@ -111,12 +111,16 @@ export const ImgCardSmall = (props: Recipes) => {
           <ClockIcon />
           {props.time_taken}
         </Text>
-        <Text css={FONT.DETAIL_2}>
-          <IconFix>
-            <SaladIcon />
-          </IconFix>
-          {ing.join(' • ')}
-        </Text>
+        {route ? (
+          <Text css={FONT.DETAIL_2}>
+            <IconFix>
+              <SaladIcon />
+            </IconFix>
+            {ing.join(' • ')}
+          </Text>
+        ) : (
+          <></>
+        )}
       </Description>
     </div>
   );

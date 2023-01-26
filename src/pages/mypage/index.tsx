@@ -68,7 +68,7 @@ const MyPage = () => {
         </TagIcon>
         <CardWrapper nav={nav}>
           {nav === '개별'
-            ? recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} />)
+            ? recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} route={true} />)
             : themes.map((theme: any) => <ImgCardMedium key={theme.id} {...theme} />)}
         </CardWrapper>
       </Content>
