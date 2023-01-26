@@ -21,10 +21,7 @@ const MyPage = () => {
       setUser(response.data.data[0]);
       setRecipes(response.data.data[0].saved_recipes);
       setThemes(response.data.data[0].saved_themes);
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
@@ -35,14 +32,11 @@ const MyPage = () => {
 
   const [nav, setNav] = useState('개별');
 
-  const handleToggleSave = async (e: any, id: number) => {
+  const handleToggleSave = async (e: React.MouseEvent<HTMLElement>, id: number) => {
     e.stopPropagation();
     try {
       const response = await accessApi.post(`/mypages/recipes/${id}/`);
-      console.log(response.data.data);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   const handleClickDetail = (id: number) => {
@@ -87,7 +81,7 @@ const MyPage = () => {
                 <ImgCardSmall
                   key={recipe.id}
                   {...recipe}
-                  handleToggleSave={(e: any) => handleToggleSave(e, recipe.id)}
+                  handleToggleSave={(e: React.MouseEvent<HTMLElement>) => handleToggleSave(e, recipe.id)}
                   handleClickDetail={() => handleClickDetail(recipe.id)}
                   selected={true}
                 />
@@ -96,7 +90,7 @@ const MyPage = () => {
                 <ImgCardMedium
                   key={theme.id}
                   {...theme}
-                  handleToggleSave={(e: any) => handleToggleSave(e, theme.id)}
+                  handleToggleSave={(e: React.MouseEvent<HTMLElement>) => handleToggleSave(e, theme.id)}
                   handleClickDetail={() => handleClickDetail(theme.id)}
                   selected={true}
                 />

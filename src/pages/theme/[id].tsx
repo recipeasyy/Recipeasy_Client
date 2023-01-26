@@ -10,73 +10,48 @@ import { GoBackIcon } from '../../components/icons/BtnIcons';
 import PATH from '../../constants/path';
 import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
+import { GetServerSideProps } from 'next';
 
-export default function allTheme(props: string) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function AllTheme(props: string) {
   useEffect(() => {
-    const listenScrollEvent = (e: any) => {
-      console.log(e.srcElement.scrollTop);
-      console.log('e');
-
-      console.log(document.documentElement.scrollTop);
-      e.srcElement.scrollTop > 10 ? setHead(true) : setHead(false);
-      console.log(window.pageYOffset);
-      console.log(document.body.scrollTop);
+    const listenScrollEvent = (e: Event) => {
+      (e.target as HTMLElement).scrollTop > 10 ? setHead(true) : setHead(false);
     };
-
-    console.log(document.body);
 
     document.body.addEventListener('scroll', listenScrollEvent, { capture: true });
     return () => {
       if (typeof window !== 'undefined') {
         document.body.removeEventListener('scroll', listenScrollEvent);
-        console.log('a');
       }
     };
   }, []);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const router =
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useRouter();
+  const router = useRouter();
+  const { push } = useRouter();
+  const [head, setHead] = useState(false);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const getRecipes = async () => {
-    console.log(router.query.id);
     const res = await accessApi.get(`/theme/${router.query.id}`);
-    console.log(res);
     return res.data;
   };
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [head, setHead] = useState(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { push } = useRouter();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Recipes', getRecipes);
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
-  console.log(data);
 
-  interface Themes {
-    id: number;
-    title: string;
-    description: string;
-    recipe_count: number;
-    duration: number;
-    tips: string;
-    theme_type: number;
-    recipes: [];
-  }
-
-  console.log(data.theme);
   const curTheme = data.theme;
   const curRecipes = curTheme.recipes;
-  console.log(curRecipes);
-  console.log(curTheme.tips);
+
+  interface recipe {
+    id: number;
+    title: string;
+    required_ingredients: [];
+    save_count: number;
+    theme: number;
+    time_taken: string;
+    image: string;
+    video_id: string;
+  }
 
   return (
     <>
@@ -114,7 +89,7 @@ export default function allTheme(props: string) {
               <Small css={FONT.BODY_2_2}>{curTheme.duration}개 레시피</Small>
             </Emoticon>
             <AllRecipes>
-              {curRecipes.map((recipes: any) => {
+              {curRecipes.map((recipes: recipe) => {
                 return <Thin key={recipes.id} {...recipes}></Thin>;
               })}
             </AllRecipes>
@@ -126,11 +101,11 @@ export default function allTheme(props: string) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {}, // will be passed to the page component as props
   };
-}
+};
 
 const Small = styled.div`
   padding-left: 8px;
@@ -139,18 +114,13 @@ const Small = styled.div`
 const Save = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 100%;
   height: 43;
   justify-content: center;
   align-items: center;
-  //width: 100%;
   text-align: right;
-  //padding-right: 24px;
 `;
 const Num = styled.div``;
 const HeadText = styled.div`
-  //width: 100%;
-  //padding-left: 10px;
   margin-top: 2px;
   color: ${COLOR.TYPEFACE_BLACK};
 `;
@@ -175,11 +145,9 @@ const Column = styled.div`
   display: flex;
   padding-bottom: 21px;
   padding-top: 55px;
-  //padding-right: 24px;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  //position: fixed;
 `;
 
 const Text1 = styled.div`
