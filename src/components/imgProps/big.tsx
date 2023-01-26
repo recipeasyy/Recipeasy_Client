@@ -79,7 +79,6 @@ const Icon = styled.div`
 const Container = styled.div<{ imgProps: string }>`
   width: 100%;
   aspect-ratio: 327 / 424;
-  height: 424px;
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;
   margin-bottom: 14px;

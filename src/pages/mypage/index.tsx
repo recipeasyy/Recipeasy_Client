@@ -29,19 +29,7 @@ const MyPage = () => {
   }, [fetchUser]);
 
   const router = useRouter();
-
   const [nav, setNav] = useState('개별');
-
-  const handleToggleSave = async (e: React.MouseEvent<HTMLElement>, id: number) => {
-    e.stopPropagation();
-    try {
-      const response = await accessApi.post(`/mypages/recipes/${id}/`);
-    } catch (err) {}
-  };
-
-  const handleClickDetail = (id: number) => {
-    router.push(`/recipe/${id}`);
-  };
 
   return (
     <>
@@ -77,24 +65,8 @@ const MyPage = () => {
         </TagIcon>
         <CardWrapper nav={nav}>
           {nav === '개별'
-            ? recipes.map((recipe: any) => (
-                <ImgCardSmall
-                  key={recipe.id}
-                  {...recipe}
-                  handleToggleSave={(e: React.MouseEvent<HTMLElement>) => handleToggleSave(e, recipe.id)}
-                  handleClickDetail={() => handleClickDetail(recipe.id)}
-                  selected={true}
-                />
-              ))
-            : themes.map((theme: any) => (
-                <ImgCardMedium
-                  key={theme.id}
-                  {...theme}
-                  handleToggleSave={(e: React.MouseEvent<HTMLElement>) => handleToggleSave(e, theme.id)}
-                  handleClickDetail={() => handleClickDetail(theme.id)}
-                  selected={true}
-                />
-              ))}
+            ? recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} route={true} />)
+            : themes.map((theme: any) => <ImgCardMedium key={theme.id} {...theme} />)}
         </CardWrapper>
       </Content>
       <GNB />
@@ -158,6 +130,8 @@ const TagIcon = styled.div`
 `;
 
 const CardWrapper = styled.div<{ nav: string }>`
+  width: 100%;
+
   ${(props) =>
     props.nav == '개별'
       ? `display: grid;

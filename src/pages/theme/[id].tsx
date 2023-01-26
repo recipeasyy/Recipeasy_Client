@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import Thin from '../../components/imgProps/thin';
+
 import { useEffect, useState } from 'react';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
@@ -10,6 +10,7 @@ import { GoBackIcon } from '../../components/icons/BtnIcons';
 import PATH from '../../constants/path';
 import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
+import { ImgCardSmall } from '../../components/imgProps/imgcard';
 import { GetServerSideProps } from 'next';
 
 export default function AllTheme(props: string) {
@@ -90,12 +91,14 @@ export default function AllTheme(props: string) {
             </Emoticon>
             <AllRecipes>
               {curRecipes.map((recipes: recipe) => {
-                return <Thin key={recipes.id} {...recipes}></Thin>;
+                return <ImgCardSmall key={recipes.id} {...recipes} />;
               })}
             </AllRecipes>
           </>
         )}
-        <EasyTips easy={curTheme.tips}></EasyTips>
+        <EasyTips>
+          <Img src={curTheme.tips} alt="" />
+        </EasyTips>
       </Container>
     </>
   );
@@ -157,11 +160,16 @@ const Text1 = styled.div`
 const Text = styled.div`
   color: ${COLOR.TYPEFACE_BLACK};
 `;
-const EasyTips = styled.div<{ easy: string }>`
+
+const Img = styled.img`
   width: 100%;
-  height: 400px;
-  background-image: url(${(props) => props.easy});
-  background-size: contain;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const EasyTips = styled.div`
+  width: 100%;
+  max-height: 420px;
 `;
 const Container = styled.div`
   width: 100%;
@@ -178,7 +186,7 @@ const AllRecipes = styled.div`
     display: none;
   }
   display: flex;
-  flex-direction: row;
+  gap: 0.75rem;
   padding-bottom: 54px;
 `;
 
