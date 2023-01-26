@@ -5,7 +5,6 @@ import { Url } from 'url';
 import { accessApi } from '../../api/api';
 
 import GNB from '../../components/global/GNB';
-import Wide from '../../components/imgProps/wide';
 import All_Theme from '../../components/navigations/All_Theme';
 import FONT from '../../constants/fonts';
 
@@ -23,8 +22,8 @@ const Home = () => {
 
   return (
     <>
+      <All_Theme />
       <Box>
-        <All_Theme />
         <Title css={FONT.HEADING}>
           오늘의 레시피지
           <br /> 추천 테마는?
