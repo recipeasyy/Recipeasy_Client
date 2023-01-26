@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { MouseEvent } from 'react';
 
-import { useRecipeSaveMutation, useThemeSaveMutation } from '../hooks/useSaveMutation';
+import { useRecipeSaveMutation, useThemeSaveMutation } from '../hooks/useMutation';
 import { queryKeys } from '../types/commonType';
 
 import FONT from '../constants/fonts';
@@ -68,74 +68,17 @@ export const SearchItem = (props: { value: string; nav: string }) => {
     } catch (err) {}
   }, [props.nav, props.value]);
 
-  const fetchUser = useCallback(async () => {
-    try {
-      const response = await accessApi.get('/user');
-      const user = response.data.data[0];
-      user.saved_recipes.map((recipe: any) => setSaveRecipe([recipe.id, ...saveRecipe]));
-      user.saved_themes.map((theme: any) => setSaveTheme([theme.id, ...saveTheme]));
-    } catch (err) {}
-  }, []);
-
   useEffect(() => {
     fetchSearch();
-    fetchUser();
-  }, [fetchSearch, fetchUser]);
-
-  const { mutate: toggleRecipeSaveMutate } = useRecipeSaveMutation();
-  const { mutate: toggleThemeSaveMutate } = useThemeSaveMutation();
-
-  const handleToggleSave = useCallback(
-    (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, type: string, id: number) => {
-      e.stopPropagation();
-      if (type == 'recipe') {
-        toggleRecipeSaveMutate(
-          { id },
-          {
-            onSuccess: (data) => {
-              if (data) setSaveRecipe([id, ...saveRecipe]);
-              else setSaveRecipe(saveRecipe.filter((item: number) => item !== id));
-            },
-          },
-        );
-      } else {
-        toggleThemeSaveMutate(
-          { id },
-          {
-            onSuccess: (data) => {
-              if (data == 'Theme saved successfully') setSaveTheme([id, ...saveTheme]);
-              else setSaveTheme(saveTheme.filter((item: number) => item !== id));
-            },
-          },
-        );
-      }
-    },
-    [toggleRecipeSaveMutate, toggleThemeSaveMutate, saveRecipe, saveTheme],
-  );
-
-  const handleClickDetail = (type: string, id: number) => {
-    router.push(`/${type}/${id}`);
-  };
+  }, [fetchSearch]);
 
   return recipes ? (
     <Content type={props.nav}>
       {recipes.map((recipe: any) =>
         props.nav == 'recipe' ? (
-          <ImgCardSmall
-            key={recipe.id}
-            {...recipe}
-            handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
-            handleToggleSave={(e) => handleToggleSave(e, props.nav, recipe.id)}
-            selected={saveRecipe.includes(recipe.id) ? true : false}
-          />
+          <ImgCardSmall key={recipe.id} {...recipe} />
         ) : (
-          <ImgCardMedium
-            key={recipe.id}
-            {...recipe}
-            handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
-            handleToggleSave={(e) => handleToggleSave(e, props.nav, recipe.id)}
-            selected={saveTheme.includes(recipe.id) ? true : false}
-          />
+          <ImgCardMedium key={recipe.id} {...recipe} />
         ),
       )}
     </Content>

@@ -1,33 +1,59 @@
 import styled from '@emotion/styled';
-import { MouseEventHandler } from 'react';
+import { useRouter } from 'next/router';
+import { useState, useCallback } from 'react';
+import { useQuery } from 'react-query';
+import { MouseEvent } from 'react';
 
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
+import { queryKeys } from '../../types/commonType';
+import { accessApi } from '../../api/api';
 import { SaveIcon } from '../icons/GNBIcons';
 import { ClockIcon } from '../icons/BasicIcons';
+import { SaladIcon } from '../icons/FoodIcons';
+import { Themes, Recipes } from '../../interfaces/main';
 
-interface midImgCardProps {
-  title: string;
-  duration: number;
-  recipe_count: number;
-  landscape_image: string;
+const fetchUser = async () => {
+  try {
+    const response = await accessApi.get('/user');
+    console.log('fetch user!');
+    return response.data.data[0];
+  } catch (err) {}
+};
 
-  handleToggleSave: MouseEventHandler<HTMLDivElement>;
-  handleClickDetail: MouseEventHandler<HTMLDivElement>;
-  selected: boolean;
-}
+export const ImgCardMedium = (props: Themes) => {
+  const router = useRouter();
+  const [selected, setSelected] = useState(false);
+  const query_user = useQuery(queryKeys.user, fetchUser, {
+    onSuccess(data) {
+      data.saved_themes.map((theme: Themes) => {
+        if (theme.id == props.id) {
+          setSelected(true);
+        }
+      });
+    },
+  });
 
-export const ImgCardMedium = (props: midImgCardProps) => {
+  const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number) => {
+    e.stopPropagation();
+    const res = await accessApi.post(`/theme/${id}`);
+    setSelected((prev) => !prev);
+  };
+
   return (
     <div>
-      <MediumContainer onClick={props.handleClickDetail} img={props.landscape_image}>
+      <MediumContainer
+        onClick={() => {
+          router.push(`/theme/${props.id}`);
+        }}
+        img={props.landscape_image}>
         <Content>
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
-            <IconWrapper onClick={props.handleToggleSave}>
-              <SaveIcon selected={props.selected} />
+            <IconWrapper onClick={(e) => handleToggleSave(e, props.id)}>
+              <SaveIcon selected={selected} />
             </IconWrapper>
           </SubTitle>
         </Content>
@@ -36,24 +62,46 @@ export const ImgCardMedium = (props: midImgCardProps) => {
   );
 };
 
-interface smImgCardProps {
-  title: string;
-  time_taken: number;
-  required_ingredients: number;
-  image: string;
+export const ImgCardSmall = (props: Recipes) => {
+  const router = useRouter();
+  const [selected, setSelected] = useState(false);
 
-  handleToggleSave: MouseEventHandler<HTMLDivElement>;
-  handleClickDetail: MouseEventHandler<HTMLDivElement>;
-  selected: boolean;
-}
+  const query_user = useQuery(queryKeys.user, fetchUser, {
+    onSuccess(data) {
+      data.saved_recipes.map((recipe: Recipes) => {
+        if (recipe.id == props.id) {
+          setSelected(true);
+        }
+      });
+    },
+  });
 
-export const ImgCardSmall = (props: smImgCardProps) => {
+  const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number) => {
+    e.stopPropagation();
+    const res = await accessApi.post(`/mypages/recipes/${id}/`);
+    setSelected((prev) => !prev);
+  };
+
+  const ing: string[] = [];
+  props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
+
   return (
     <div>
-      <SmallContainer onClick={props.handleClickDetail} img={props.image}>
+      <SmallContainer
+        onClick={() => {
+          const themeId = props.theme;
+          router.push(
+            {
+              pathname: `/videoPlayer/${props.id}`,
+              query: { themeId },
+            },
+            `/videoPlayer/${props.id}`,
+          );
+        }}
+        img={props.image}>
         <Content>
-          <IconWrapper onClick={props.handleToggleSave}>
-            <SaveIcon selected={props.selected} />
+          <IconWrapper onClick={(e) => handleToggleSave(e, props.id)}>
+            <SaveIcon selected={selected} />
           </IconWrapper>
         </Content>
       </SmallContainer>
@@ -62,6 +110,12 @@ export const ImgCardSmall = (props: smImgCardProps) => {
         <Text css={FONT.DETAIL_2}>
           <ClockIcon />
           {props.time_taken}
+        </Text>
+        <Text css={FONT.DETAIL_2}>
+          <IconFix>
+            <SaladIcon />
+          </IconFix>
+          {ing.join(' • ')}
         </Text>
       </Description>
     </div>
@@ -128,6 +182,11 @@ const Description = styled.div`
 
 const Text = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.25rem;
+
+  word-wrap: break-word;
+  word-break: keep-all;
 `;
+
+const IconFix = styled.div``;
