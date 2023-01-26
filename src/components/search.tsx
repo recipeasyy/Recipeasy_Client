@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import { MouseEvent } from 'react';
+
 import { useRecipeSaveMutation, useThemeSaveMutation } from '../hooks/useSaveMutation';
 import { queryKeys } from '../types/commonType';
 
@@ -15,7 +17,7 @@ import { ImgCardMedium, ImgCardSmall } from './imgProps/imgcard';
 export const SearchNone = () => {
   const router = useRouter();
 
-  const handleClickSaveText = (e: any, type: string) => {
+  const handleClickSaveText = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, type: string) => {
     const searchText = e.currentTarget.innerText;
     router.push({
       pathname: '/search/search',
@@ -84,7 +86,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
   const { mutate: toggleThemeSaveMutate } = useThemeSaveMutation();
 
   const handleToggleSave = useCallback(
-    (e: any, type: string, id: number) => {
+    (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, type: string, id: number) => {
       e.stopPropagation();
       if (type == 'recipe') {
         toggleRecipeSaveMutate(
@@ -123,7 +125,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
             key={recipe.id}
             {...recipe}
             handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
-            handleToggleSave={(e: any) => handleToggleSave(e, props.nav, recipe.id)}
+            handleToggleSave={(e) => handleToggleSave(e, props.nav, recipe.id)}
             selected={saveRecipe.includes(recipe.id) ? true : false}
           />
         ) : (
@@ -131,7 +133,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
             key={recipe.id}
             {...recipe}
             handleClickDetail={() => handleClickDetail(props.nav, recipe.id)}
-            handleToggleSave={(e: any) => handleToggleSave(e, props.nav, recipe.id)}
+            handleToggleSave={(e) => handleToggleSave(e, props.nav, recipe.id)}
             selected={saveTheme.includes(recipe.id) ? true : false}
           />
         ),

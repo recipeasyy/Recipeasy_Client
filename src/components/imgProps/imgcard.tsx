@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { MouseEventHandler } from 'react';
+
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
@@ -11,8 +13,8 @@ interface midImgCardProps {
   recipe_count: number;
   landscape_image: string;
 
-  handleToggleSave: any;
-  handleClickDetail: any;
+  handleToggleSave: MouseEventHandler<HTMLDivElement>;
+  handleClickDetail: MouseEventHandler<HTMLDivElement>;
   selected: boolean;
 }
 
@@ -40,8 +42,8 @@ interface smImgCardProps {
   required_ingredients: number;
   image: string;
 
-  handleToggleSave: any;
-  handleClickDetail: any;
+  handleToggleSave: MouseEventHandler<HTMLDivElement>;
+  handleClickDetail: MouseEventHandler<HTMLDivElement>;
   selected: boolean;
 }
 

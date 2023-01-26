@@ -29,7 +29,7 @@ export default function Thin(props: Recipes) {
     try {
       const response = await accessApi.get('/user');
       setUser(response.data.data[0]);
-      response.data.data[0].saved_recipes.map((recipes: any) => {
+      response.data.data[0].saved_recipes.map((recipes: Recipes) => {
         const id = recipes.id;
         if (id == props.id) {
           setSelect((prev) => !prev);
@@ -49,7 +49,7 @@ export default function Thin(props: Recipes) {
   const router = useRouter();
   const len = props.required_ingredients.length;
 
-  const onClick = (id: any, themeId: any) => {
+  const onClick = (id: number, themeId: number) => {
     router.push(
       {
         pathname: `/videoPlayer/${id}`,

@@ -27,7 +27,7 @@ export default function Wide({ props }: { props: Themes }) {
     try {
       const response = await accessApi.get('/user');
       setUser(response.data.data[0]);
-      response.data.data[0].saved_themes.map((themes: any) => {
+      response.data.data[0].saved_themes.map((themes: Themes) => {
         const id = themes.id;
         if (id == props.id) {
           setSelect(true);

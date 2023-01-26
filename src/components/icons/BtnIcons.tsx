@@ -1,4 +1,5 @@
 import COLOR from '../../constants/theme';
+import { MouseEventHandler } from 'react';
 
 export const SettingIcon = (props: { onClick: any }) => {
   return (
@@ -23,7 +24,7 @@ export const SettingIcon = (props: { onClick: any }) => {
   );
 };
 
-export const GoBackIcon = (props: { onClick: any; color: string }) => {
+export const GoBackIcon = (props: { onClick: MouseEventHandler<SVGSVGElement> | undefined; color: string }) => {
   return (
     <svg
       onClick={props.onClick}
