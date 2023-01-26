@@ -38,8 +38,9 @@ export const SearchNone = () => {
       <TagBox>
         <Title css={FONT.BODY_2}>테마 추천 검색어</Title>
         <Tags css={FONT.BODY_1}>
-          <Tag onClick={(e) => handleClickSaveText(e, 'theme')}>자취생 식단</Tag>
-          <Tag onClick={(e) => handleClickSaveText(e, 'theme')}>같은 재료</Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, 'theme')}>자취생</Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, 'theme')}>3일</Tag>
+          <Tag onClick={(e) => handleClickSaveText(e, 'theme')}>5일</Tag>
         </Tags>
       </TagBox>
     </Content>
