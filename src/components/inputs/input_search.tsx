@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ChangeEventHandler, MouseEventHandler } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -9,11 +10,11 @@ import { GoBackIcon, DelIcon } from '../icons/BtnIcons';
 
 interface propsType {
   value: string;
-  onChange: any;
-  reset: any;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  reset: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-export const InputSearch = (props: { onClick: any }) => {
+export const InputSearch = (props: { onClick: MouseEventHandler<HTMLInputElement> | undefined }) => {
   return (
     <Input
       placeholder="재료 검색어를 입력해 주세요"

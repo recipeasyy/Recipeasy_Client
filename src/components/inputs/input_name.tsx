@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
+import { ChangeEventHandler } from 'react';
+
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
 interface propsType {
   value: string;
-  onChange: any;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const InputName = (props: propsType) => {

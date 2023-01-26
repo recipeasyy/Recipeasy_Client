@@ -21,7 +21,6 @@ interface Ingredients {
 }
 //Recipes누르면 해당 Recipes/id로 가는걸로 id필요할 것 같다!
 export default function Thin(props: Recipes) {
-  console.log(props.id);
   const [isSelect, setSelect] = useState(false);
 
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
@@ -29,38 +28,28 @@ export default function Thin(props: Recipes) {
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-      console.log(response.data.data[0]);
       setUser(response.data.data[0]);
-      console.log(props.id);
-      console.log(user.saved_recipes);
-      response.data.data[0].saved_recipes.map((recipes: any) => {
-        console.log(recipes);
+      response.data.data[0].saved_recipes.map((recipes: Recipes) => {
         const id = recipes.id;
         if (id == props.id) {
           setSelect((prev) => !prev);
-          console.log(id == props.id);
         }
       });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
-  console.log(isSelect);
   const HandleClick = async () => {
     const res = await accessApi.post(`/mypages/recipes/${props.id}/`);
-    console.log(res.data.data.is_saved);
     setSelect((prev) => !prev);
   };
-  console.log(props);
   const router = useRouter();
   const len = props.required_ingredients.length;
 
-  const onClick = (id: any, themeId: any) => {
+  const onClick = (id: number, themeId: number) => {
     router.push(
       {
         pathname: `/videoPlayer/${id}`,

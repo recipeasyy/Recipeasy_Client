@@ -20,28 +20,20 @@ interface Themes {
 }
 
 export default function Wide({ props }: { props: Themes }) {
-  console.log(props);
   const [isSelect, setSelect] = useState(false);
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
 
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-      console.log(response.data.data[0]);
       setUser(response.data.data[0]);
-      console.log(props.id);
-      console.log(user.saved_recipes);
-      response.data.data[0].saved_themes.map((themes: any) => {
-        console.log(themes);
+      response.data.data[0].saved_themes.map((themes: Themes) => {
         const id = themes.id;
         if (id == props.id) {
           setSelect(true);
-          console.log(id == props.id);
         }
       });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {
@@ -53,8 +45,6 @@ export default function Wide({ props }: { props: Themes }) {
     setSelect((prev) => !prev);
   };
   const router = useRouter();
-  console.log(props.landscape_image);
-  //container 누르면 해당 theme/id로 푸쉬하기, 저장 버튼 누르면 저장되는건 how??
   return (
     <>
       <Container imgProps={props.landscape_image}>

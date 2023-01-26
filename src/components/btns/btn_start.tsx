@@ -3,7 +3,7 @@ import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';
 
 interface propsType {
-  onClick: any;
+  onClick: () => Promise<void>;
   focused: boolean;
 }
 
