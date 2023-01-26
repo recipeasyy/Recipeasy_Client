@@ -21,10 +21,7 @@ const MyPage = () => {
       setUser(response.data.data[0]);
       setRecipes(response.data.data[0].saved_recipes);
       setThemes(response.data.data[0].saved_themes);
-      console.log(user);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, []);
 
   useEffect(() => {

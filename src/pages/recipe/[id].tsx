@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
@@ -11,67 +11,52 @@ import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../comp
 import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
+import { useQuery } from 'react-query';
+interface recipes {
+  id: number;
+  title: string;
+  required_ingredients: required;
+  description: string;
+  save_count: number;
+  additional_ingredients: additional;
+  difficulty: number;
+  equipment: equipment;
+  recipe_sequence: sequence;
+  time_taken: string;
+  video_id: string;
+}
+interface equipment {
+  name: string;
+}
+
+interface required {
+  name: string;
+  emoji: string;
+  quantity: string;
+  substitute: string;
+}
+
+interface additional {
+  name: string;
+  emoji: string;
+  quantity: string;
+  substitute: string;
+}
+
+interface sequence {
+  image: string;
+  long_desc: string;
+  order: number;
+  short_desc: string;
+}
 
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const [recipe, setRecipe] = useState({
-    id: 1,
-    title: '간장계란밥',
-    description: '설명설명',
-    difficulty: 3,
-    time_taken: '10분',
-    save_count: 46,
-    required_ingredients: [
-      {
-        name: '계란',
-        quantity: '2개',
-        substitute: '닭고기',
-        emoji: '계란.png',
-      },
-      {
-        name: '간장',
-        quantity: '2스푼',
-        substitute: 'none',
-        emoji: '간장.png',
-      },
-    ],
-    additional_ingredients: [
-      {
-        name: '대파',
-        quantity: '적당히',
-        substitute: '양파',
-        emoji: '대파.png',
-      },
-    ],
-    equipment: [
-      {
-        name: '칼',
-      },
-      {
-        name: '프라이팬',
-      },
-    ],
-    recipe_sequence: [
-      {
-        order: 1,
-        short_desc: '계란을 뭐뭐한다',
-        long_desc: '계란을 이렇게 해서 저렇게 한다.',
-        image: 'https://sdflkj.com',
-      },
-      {
-        order: 2,
-        short_desc: '프라이팬에 뭐뭐한다',
-        long_desc: '프라이팬이 이렇게해서 저렇게한다.',
-        image: 'https://sdflkj.com',
-      },
-    ],
-  });
 
   const fetchRecipe = useCallback(async () => {
     try {
       const response = await accessApi.get(`/recipes/${id.params}/`);
-      console.log(response.data.data);
-      setRecipe(response.data.data);
+      return response.data.data;
     } catch (err) {
       console.log(err);
     }
@@ -80,10 +65,13 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   useEffect(() => {
     fetchRecipe();
   }, [fetchRecipe]);
+  const { data } = useQuery('Recipe', fetchRecipe);
 
+  const curRecipe = data && data;
+  console.log(data);
   const stars = () => {
     let arr = [];
-    for (let i = 0; i < recipe.difficulty; i++) {
+    for (let i = 0; i < curRecipe?.difficulty; i++) {
       arr.push(i);
     }
     return arr;
@@ -96,8 +84,8 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
           <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
           <SaveIcon selected={true} />
         </IconWrapper>
-        <Title css={FONT.FOODTITLE}>{recipe.title}</Title>
-        <Subtitle css={FONT.BODY_2_3}>{recipe.description}</Subtitle>
+        <Title css={FONT.FOODTITLE}>{curRecipe?.title}</Title>
+        <Subtitle css={FONT.BODY_2_3}>{curRecipe?.description}</Subtitle>
         <Cards>
           <Card>
             <Text css={FONT.DETAIL_2}>난이도</Text>
@@ -116,7 +104,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Text css={FONT.DETAIL_2}>소요시간</Text>
             <Icons>
               <ClockIcon />
-              {recipe.time_taken}
+              {curRecipe?.time_taken}
             </Icons>
           </Card>
         </Cards>
@@ -131,33 +119,33 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
                 계량하는 법 보기
               </TagIcon>
             </Title>
-            {recipe.required_ingredients.map((ingredient, i) => (
+            {curRecipe?.required_ingredients.map((ingredient: required, i: number) => (
               <Ingredient key={i}>
                 <FoodName>
                   <FoodIconWrapper>
-                    <FoodIcon name={ingredient.name} />
+                    <FoodIcon name={ingredient?.name} />
                   </FoodIconWrapper>
-                  <Text css={FONT.BUTTON}>{ingredient.name}</Text>
+                  <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
                 </FoodName>
-                <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
+                <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
               </Ingredient>
             ))}
           </Ingredients>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>추가 재료</Title>
-            {recipe.additional_ingredients.map((ingredient, i) => (
+            {curRecipe?.additional_ingredients.map((ingredient: additional, i: number) => (
               <Ingredient key={i}>
-                <Text css={FONT.BUTTON}>{ingredient.name}</Text>
-                <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
+                <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
+                <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
               </Ingredient>
             ))}
           </Ingredients>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
             <Equipments>
-              {recipe.equipment.map((ingredient, i) => (
+              {curRecipe?.equipment.map((ingredient: equipment, i: number) => (
                 <Tag key={i} css={FONT.BODY_2_3}>
-                  {ingredient.name}
+                  {ingredient?.name}
                 </Tag>
               ))}
             </Equipments>
@@ -166,23 +154,23 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
         <Content>
           <Sequences>
             <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
-            {recipe.recipe_sequence.map((sequence) => (
+            {curRecipe?.recipe_sequence.map((sequence: sequence) => (
               <Sequence key={sequence.order}>
                 <NumberIcon num={sequence.order} />
-                <Text css={FONT.BODY_1}>{sequence.short_desc}</Text>
+                <Text css={FONT.BODY_1}>{sequence?.short_desc}</Text>
               </Sequence>
             ))}
           </Sequences>
           <Sequences>
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
-            {recipe.recipe_sequence.map((sequence) => (
-              <SequenceWrapper key={sequence.order}>
+            {curRecipe?.recipe_sequence.map((sequence: sequence) => (
+              <SequenceWrapper key={sequence?.order}>
                 <Sequence>
-                  <NumberIcon num={sequence.order} />
-                  <Text css={FONT.BODY_1}>{sequence.short_desc}</Text>
+                  <NumberIcon num={sequence?.order} />
+                  <Text css={FONT.BODY_1}>{sequence?.short_desc}</Text>
                 </Sequence>
                 {/* <Img src={sequence.image} /> */}
-                <Text css={FONT.BODY_1}>{sequence.long_desc}</Text>
+                <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
               </SequenceWrapper>
             ))}
           </Sequences>

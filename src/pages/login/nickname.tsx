@@ -12,13 +12,9 @@ export default function LoginNickName() {
   const { value, handleChangeInput, reset } = useInput('');
   const handleClickName = async () => {
     try {
-      console.log(value);
       const response = await accessApi.post('/user/nickname', { nickname: `${value}` });
-      console.log(response.data);
       router.push('/home');
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
     reset();
   };
 

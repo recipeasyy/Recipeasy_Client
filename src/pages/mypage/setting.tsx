@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 import { Router, useRouter } from 'next/router';
-
-import GNB from '../../components/global/GNB';
 import { GoBackIcon, SettingIcon } from '../../components/icons/BtnIcons';
 
 import FONT from '../../constants/fonts';

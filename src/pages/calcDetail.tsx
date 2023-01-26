@@ -18,13 +18,11 @@ interface Measure {
 export default function calcDetail() {
   const getMeasurements = async () => {
     const res = await accessApi.get(`/measurements/`);
-    console.log(res.data);
     return res.data.Measurements;
   };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data } = useQuery('Measurements', getMeasurements);
-  console.log(data);
   return (
     <>
       <Container>

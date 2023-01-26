@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import AllTheme from '../../components/navigations/All_Theme';
 import styled from '@emotion/styled';
 import GNB from '../../components/global/GNB';
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
@@ -35,17 +33,13 @@ const themeData = [
   { id: '4', name: '같은 재료' },
 ];
 
-export default function showTheme(current: string) {
+export default function ShowTheme(current: string) {
   const getThemes = async () => {
     const res = await accessApi.get(`/theme/`);
-    console.log(res);
     return res.data;
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [curState, setCur] = useState('초간단 식단');
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error, isLoading } = useQuery('Themes', getThemes);
 
   if (error) return <div>Request Failed</div>;
@@ -53,14 +47,9 @@ export default function showTheme(current: string) {
 
   const ChangeState = (e: any) => {
     setCur(e.target.value);
-    console.log(e.target.value);
-    console.log(curState);
   };
 
-  console.log(data);
-
   const curThemes = data['Theme Types'].filter((themes: Themes) => themes.title === curState);
-  console.log(curThemes);
   return (
     <>
       <AllTheme />
@@ -85,8 +74,6 @@ export default function showTheme(current: string) {
             return (
               <div key={themeTypes.id}>
                 {themeTypes.themes.map((theme: Themes) => {
-                  console.log(theme);
-                  console.log(theme.id);
                   return <Big key={theme.id} {...theme}></Big>;
                 })}
               </div>

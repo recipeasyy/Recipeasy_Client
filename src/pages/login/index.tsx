@@ -5,13 +5,12 @@ import COLOR from '../../constants/theme';
 const Login = () => {
   const router = useRouter();
 
-  const handleClickLogin = (e: any) => {
+  const handleClickLogin = (e: React.MouseEvent<HTMLElement>) => {
     if (
       process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID !== undefined &&
       process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI !== undefined
     )
-      console.log('redirect uri');
-    router.push(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code
+      router.push(`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code
     `);
   };
 
