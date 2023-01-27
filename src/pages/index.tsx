@@ -3,6 +3,8 @@ import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
 import { getCookie } from '../util/cookie';
 
+import { MainLogo } from '../components/icons/LogoIcons';
+
 const LandingPage = () => {
   const router = useRouter();
   const isUser = Boolean(getCookie('accessToken'));
@@ -11,7 +13,7 @@ const LandingPage = () => {
   return (
     <Container>
       <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
-      <MainTitle>Recipeasy!</MainTitle>
+      <MainLogo color={COLOR.PRIMARY_WHITE} />
     </Container>
   );
 };
