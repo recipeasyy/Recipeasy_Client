@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
 
+import TopNavBar from '../../components/navigations/navigation_top';
 import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
 import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
@@ -12,19 +13,7 @@ import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { useQuery } from 'react-query';
-interface recipes {
-  id: number;
-  title: string;
-  required_ingredients: required;
-  description: string;
-  save_count: number;
-  additional_ingredients: additional;
-  difficulty: number;
-  equipment: equipment;
-  recipe_sequence: sequence;
-  time_taken: string;
-  video_id: string;
-}
+
 interface equipment {
   name: string;
 }
