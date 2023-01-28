@@ -82,7 +82,7 @@ export default function VideoPlayer() {
         <ThemeBtn
           css={FONT.BODY_2_3}
           onClick={() => {
-            push(PATH.HOME);
+            router.back();
           }}>
           {realTheme}
           <GoForward />

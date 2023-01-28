@@ -15,14 +15,14 @@ interface Measure {
   half_image: string;
 }
 
-export default function calcDetail() {
+export default function CalcDetail() {
   const getMeasurements = async () => {
     const res = await accessApi.get(`/measurements/`);
     return res.data.Measurements;
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data } = useQuery('Measurements', getMeasurements);
+  console.log(data);
   return (
     <>
       <Container>
