@@ -32,13 +32,13 @@ export default function Accordion(props: Content) {
       {isOpen && (
         <Wrapper>
           <ImgWrapper>
-            <Img />
+            <Img img={props.full_image}></Img>
             <div css={FONT.BUTTON}>1큰술</div>
             <br />
             <div css={FONT.DETAIL_2}>{props.full}</div>
           </ImgWrapper>
           <ImgWrapper>
-            <Img />
+            <Img img={props.half_image}></Img>
             <div css={FONT.BUTTON}>1/2큰술</div>
             <br />
             <div css={FONT.DETAIL_2}>{props.half}</div>
@@ -63,12 +63,15 @@ const ImgWrapper = styled.div`
   flex-direction: column;
   //justify-content: center;
 `;
-const Img = styled.div`
+const Img = styled.div<{ img: string }>`
   width: 157px;
   height: 193px;
   margin-bottom: 8px;
   background-color: black;
   border-radius: 12px;
+  background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
+    url(${(props) => props.img});
+  background-size: cover;
 `;
 
 const Wrapper = styled.div`
