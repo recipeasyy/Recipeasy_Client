@@ -12,35 +12,19 @@ const LandingPage = () => {
   setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 2000);
   return (
     <Container>
-      <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
-      <MainLogo color={COLOR.PRIMARY_WHITE} />
+      <Img src="img/landing.png" alt="" />
     </Container>
   );
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100%;
   max-width: 450px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  background: ${COLOR.PRIMARY_ORANGE};
 `;
 
-const SubTitle = styled.div`
-  font-family: 'IBM Plex Sans KR';
-  font-weight: bold;
-  line-height: 145%;
-
-  text-align: center;
-  letter-spacing: -0.4px;
-
-  color: ${COLOR.TYPEFACE_WHITE};
+const Img = styled.img`
+  object-fit: cover;
 `;
 
 export default LandingPage;

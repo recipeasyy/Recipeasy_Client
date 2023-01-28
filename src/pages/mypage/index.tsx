@@ -81,7 +81,7 @@ const IconWrapper = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  padding: 6.75rem 0;
+  padding: 3.75rem 0 6.75rem 0;
 
   display: flex;
   flex-direction: column;
