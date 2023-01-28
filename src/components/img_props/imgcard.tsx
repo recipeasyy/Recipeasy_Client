@@ -13,33 +13,10 @@ import { SaveIcon } from '../icons/GNBIcons';
 import { ClockIcon } from '../icons/BasicIcons';
 import { SaladIcon } from '../icons/FoodIcons';
 import { Themes, Recipes } from '../../interfaces/main';
-
-const fetchUser = async () => {
-  try {
-    const response = await accessApi.get('/user');
-    console.log('fetch user!');
-    return response.data.data[0];
-  } catch (err) {}
-};
+import { UseSave } from '../../hooks/useSave';
 
 export const ImgCardMedium = (props: Themes) => {
   const router = useRouter();
-  const [selected, setSelected] = useState(false);
-  const query_user = useQuery(queryKeys.user, fetchUser, {
-    onSuccess(data) {
-      data.saved_themes.map((theme: Themes) => {
-        if (theme.id == props.id) {
-          setSelected(true);
-        }
-      });
-    },
-  });
-
-  const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number) => {
-    e.stopPropagation();
-    const res = await accessApi.post(`/theme/${id}`);
-    setSelected((prev) => !prev);
-  };
 
   return (
     <Container>
@@ -52,9 +29,7 @@ export const ImgCardMedium = (props: Themes) => {
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
             {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
-            <IconWrapper onClick={(e) => handleToggleSave(e, props.id)}>
-              <SaveIcon selected={selected} />
-            </IconWrapper>
+            <UseSave id={props.id} type={'Themes'} />
           </SubTitle>
         </Content>
       </MediumContainer>
@@ -64,23 +39,6 @@ export const ImgCardMedium = (props: Themes) => {
 
 export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
   const router = useRouter();
-  const [selected, setSelected] = useState(false);
-
-  const query_user = useQuery(queryKeys.user, fetchUser, {
-    onSuccess(data) {
-      data.saved_recipes.map((recipe: Recipes) => {
-        if (recipe.id == props.id) {
-          setSelected(true);
-        }
-      });
-    },
-  });
-
-  const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number) => {
-    e.stopPropagation();
-    const res = await accessApi.post(`/mypages/recipes/${id}/`);
-    setSelected((prev) => !prev);
-  };
 
   const ing: string[] = [];
   props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
@@ -100,9 +58,7 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
         }}
         img={props.image}>
         <Content>
-          <IconWrapper onClick={(e) => handleToggleSave(e, props.id)}>
-            <SaveIcon selected={selected} />
-          </IconWrapper>
+          <UseSave id={props.id} type={'Recipes'} />
         </Content>
       </SmallContainer>
       <Description>
