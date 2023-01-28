@@ -144,7 +144,7 @@ const SmallContainer = styled.div<{ img: string }>`
 
 const MediumContainer = styled.div<{ img: string }>`
   width: 100%;
-  height: 30vh;
+  height: 28vh;
 
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;

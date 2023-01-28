@@ -16,16 +16,7 @@ const client = new QueryClient({
   },
 });
 
-const logout = () => {
-  removeCookie('accessToken');
-  removeCookie('refreshToken');
-};
-
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    window.addEventListener('beforeunload', logout);
-  }, []);
-
   return (
     <QueryClientProvider client={client}>
       {process.env.NODE_ENV !== 'production' ? <ReactQueryDevtools initialIsOpen={false} /> : null}
