@@ -8,7 +8,7 @@ import TopNavBar from '../../components/navigations/navigation_top';
 import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
-import { ImgCardMedium, ImgCardSmall } from '../../components/imgProps/imgcard';
+import { ImgCardMedium, ImgCardSmall } from '../../components/img_props/imgcard';
 
 const MyPage = () => {
   const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
@@ -81,7 +81,6 @@ const IconWrapper = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  height: auto;
   padding: 6.75rem 0;
 
   display: flex;

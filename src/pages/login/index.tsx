@@ -44,7 +44,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  padding-bottom: 21rem;
+  padding-bottom: 22rem;
 
   display: flex;
   flex-direction: column;

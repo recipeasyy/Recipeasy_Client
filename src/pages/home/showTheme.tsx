@@ -4,7 +4,7 @@ import GNB from '../../components/global/GNB';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
-import Big from '../../components/imgProps/big';
+import Big from '../../components/img_props/big';
 import COLOR from '../../constants/theme';
 import { useState } from 'react';
 import { css } from '@emotion/react';

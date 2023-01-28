@@ -778,7 +778,7 @@ export const FoodIcon = ({ name }: { name: string }) => {
       return <ChickenIcon />;
     case '당근':
       return <CarrotIcon />;
-    case '다진마늘':
+    case '다진 마늘':
       return <GarlicIcon />;
     case '소면':
       return <NoodleIcon />;
@@ -786,6 +786,7 @@ export const FoodIcon = ({ name }: { name: string }) => {
       return <WaterIcon />;
     case '밥':
       return <RiceIcon />;
+    case '진간장':
     case '굴소스':
     case '간장':
       return <SauceBrownIcon />;

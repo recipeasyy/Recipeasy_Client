@@ -6,7 +6,7 @@ import All_Theme from '../../components/navigations/All_Theme';
 import FONT from '../../constants/fonts';
 
 import { Themes } from '../../interfaces/main';
-import { ImgCardMedium } from '../../components/imgProps/imgcard';
+import { ImgCardMedium } from '../../components/img_props/imgcard';
 
 const Home = () => {
   const getThemes = async () => {
