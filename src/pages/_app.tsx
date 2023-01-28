@@ -4,6 +4,9 @@ import '../../styles/globals.css';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { removeCookie } from '../util/cookie';
+import { useEffect } from 'react';
+
 const client = new QueryClient({
   defaultOptions: {
     queries: {

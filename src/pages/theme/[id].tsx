@@ -10,7 +10,7 @@ import { GoBackIcon } from '../../components/icons/BtnIcons';
 import PATH from '../../constants/path';
 import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
-import { ImgCardSmall } from '../../components/imgProps/imgcard';
+import { ImgCardSmall } from '../../components/img_props/imgcard';
 import { GetServerSideProps } from 'next';
 
 export default function AllTheme(props: string) {

@@ -3,6 +3,8 @@ import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
 import { getCookie } from '../util/cookie';
 
+import { MainLogo } from '../components/icons/LogoIcons';
+
 const LandingPage = () => {
   const router = useRouter();
   const isUser = Boolean(getCookie('accessToken'));
@@ -11,7 +13,7 @@ const LandingPage = () => {
   return (
     <Container>
       <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
-      <MainTitle>Recipeasy!</MainTitle>
+      <MainLogo color={COLOR.PRIMARY_WHITE} />
     </Container>
   );
 };
@@ -25,6 +27,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+
   background: ${COLOR.PRIMARY_ORANGE};
 `;
 
@@ -35,16 +39,6 @@ const SubTitle = styled.div`
 
   text-align: center;
   letter-spacing: -0.4px;
-
-  color: ${COLOR.TYPEFACE_WHITE};
-`;
-const MainTitle = styled.div`
-  font-family: 'Paytone One';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 150%;
-  letter-spacing: -0.022em;
 
   color: ${COLOR.TYPEFACE_WHITE};
 `;

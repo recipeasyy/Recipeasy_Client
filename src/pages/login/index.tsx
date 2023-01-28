@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+
 import COLOR from '../../constants/theme';
+import { MainLogo, KakaoLogo } from '../../components/icons/LogoIcons';
 
 const Login = () => {
   const router = useRouter();
@@ -16,9 +18,14 @@ const Login = () => {
 
   return (
     <Container>
-      <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
-      <MainTitle>Recipeasy!</MainTitle>
-      <Btn onClick={handleClickLogin}>카카오로 로그인하기</Btn>
+      <Title>
+        <SubTitle>방구석 셰프를 위한 1분 레시피</SubTitle>
+        <MainLogo color={COLOR.PRIMARY_ORANGE} />
+      </Title>
+      <Btn onClick={handleClickLogin}>
+        <KakaoLogo />
+        카카오 로그인
+      </Btn>
     </Container>
   );
 };
@@ -31,9 +38,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 
   background: ${COLOR.PRIMARY_WHITE};
+`;
+
+const Title = styled.div`
+  padding-bottom: 22rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const SubTitle = styled.div`
@@ -46,20 +61,19 @@ const SubTitle = styled.div`
 
   color: ${COLOR.PRIMARY_ORANGE};
 `;
-const MainTitle = styled.div`
-  font-family: 'Paytone One';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 150%;
-  letter-spacing: -0.022em;
-
-  color: ${COLOR.PRIMARY_ORANGE};
-`;
 
 const Btn = styled.div`
-  background: #fee500;
+  width: 80%;
+  padding: 1rem;
+  margin-bottom: 4rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  border-radius: 0.5rem;
+  background: #fee500;
   cursor: pointer;
 `;
 

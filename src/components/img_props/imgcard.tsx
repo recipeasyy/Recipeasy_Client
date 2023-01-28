@@ -42,7 +42,7 @@ export const ImgCardMedium = (props: Themes) => {
   };
 
   return (
-    <div>
+    <Container>
       <MediumContainer
         onClick={() => {
           router.push(`/theme/${props.id}`);
@@ -58,7 +58,7 @@ export const ImgCardMedium = (props: Themes) => {
           </SubTitle>
         </Content>
       </MediumContainer>
-    </div>
+    </Container>
   );
 };
 
@@ -86,7 +86,7 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
   props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
 
   return (
-    <div>
+    <Container>
       <SmallContainer
         onClick={() => {
           const themeId = props.theme;
@@ -122,13 +122,18 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
           <></>
         )}
       </Description>
-    </div>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const SmallContainer = styled.div<{ img: string }>`
   width: 100%;
-  aspect-ratio: 158 / 264;
+  height: 34vh;
 
   padding: 230px 12px 12px 124px;
   border-radius: 1rem;
@@ -139,7 +144,7 @@ const SmallContainer = styled.div<{ img: string }>`
 
 const MediumContainer = styled.div<{ img: string }>`
   width: 100%;
-  aspect-ratio: 327 / 230;
+  height: 30vh;
 
   padding: 130px 22px 22px 22px;
   border-radius: 1rem;

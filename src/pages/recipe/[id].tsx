@@ -1,10 +1,11 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
 
+import TopNavBar from '../../components/navigations/navigation_top';
 import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
 import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
@@ -12,19 +13,7 @@ import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { useQuery } from 'react-query';
-interface recipes {
-  id: number;
-  title: string;
-  required_ingredients: required;
-  description: string;
-  save_count: number;
-  additional_ingredients: additional;
-  difficulty: number;
-  equipment: equipment;
-  recipe_sequence: sequence;
-  time_taken: string;
-  video_id: string;
-}
+
 interface equipment {
   name: string;
 }
@@ -114,7 +103,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
         <Content>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>
-              필수 재료{' '}
+              필수 재료
               <TagIcon css={FONT.DETAIL_2} onClick={() => router.push(`/calcDetail`)}>
                 계량하는 법 보기
               </TagIcon>
@@ -157,7 +146,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             {curRecipe?.recipe_sequence.map((sequence: sequence) => (
               <Sequence key={sequence.order}>
                 <NumberIcon num={sequence.order} />
-                <Text css={FONT.BODY_1}>{sequence?.short_desc}</Text>
+                <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
               </Sequence>
             ))}
           </Sequences>
@@ -167,9 +156,9 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
               <SequenceWrapper key={sequence?.order}>
                 <Sequence>
                   <NumberIcon num={sequence?.order} />
-                  <Text css={FONT.BODY_1}>{sequence?.short_desc}</Text>
+                  <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                 </Sequence>
-                {/* <Img src={sequence.image} /> */}
+                <Img src={sequence.image} />
                 <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
               </SequenceWrapper>
             ))}
@@ -276,7 +265,16 @@ const Icons = styled.div`
   gap: 6px;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  word-break: keep-all;
+  word-wrap: break-word;
+`;
+
+const Description = styled.div`
+  max-width: 72vw;
+  word-break: keep-all;
+  word-wrap: break-word;
+`;
 
 const Content = styled.div`
   width: 100%;
@@ -329,13 +327,21 @@ const Sequence = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-basis: 24px;
 
   border-radius: 12px;
 
   background: ${COLOR.BG_GRAY1_85};
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+  width: 100%;
+  aspect-ratio: 327/226;
+
+  border-radius: 12px;
+
+  object-fit: cover;
+`;
 
 const Ingredients = styled.div`
   display: flex;
