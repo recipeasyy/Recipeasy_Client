@@ -91,7 +91,7 @@ export default function ShowTheme(current: string) {
                 <Category
                   key={theme.id}
                   value={theme.name}
-                  css={FONT.DETAIL_2}
+                  css={FONT.BODY_2_2}
                   onClick={ChangeState}
                   current={curState}>
                   {theme.name}
