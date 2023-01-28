@@ -49,6 +49,10 @@ const Container = styled.div`
   z-index: 2;
 `;
 
-const Column = styled.div``;
+const Column = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 
 export default GNB;
