@@ -52,7 +52,7 @@ const Search = () => {
 const Content = styled.div`
   width: 100%;
   height: auto;
-  padding: 6.75rem 0;
+  padding: 5rem 0;
 
   display: flex;
   flex-direction: column;

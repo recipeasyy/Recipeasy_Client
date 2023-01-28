@@ -49,7 +49,6 @@ export const InputSearchItem = (props: propsType) => {
 
 const Input = styled.input<{ isSearching: boolean }>`
   width: 100%;
-  height: 42px;
   padding: 10px 10px 10px 16px;
   margin-left: ${(props) => props.isSearching && '0.75rem'};
 

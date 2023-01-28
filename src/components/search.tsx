@@ -51,8 +51,6 @@ export const SearchItem = (props: { value: string; nav: string }) => {
   const router = useRouter();
 
   const [recipes, setRecipes] = useState<any>([]);
-  const [saveRecipe, setSaveRecipe] = useState<any>([]);
-  const [saveTheme, setSaveTheme] = useState<any>([]);
 
   const fetchSearch = useCallback(async () => {
     try {
