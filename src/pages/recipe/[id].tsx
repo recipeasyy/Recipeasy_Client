@@ -46,6 +46,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const fetchRecipe = useCallback(async () => {
     try {
       const response = await accessApi.get(`/recipes/${id.params}/`);
+      console.log(response.data.data);
       return response.data.data;
     } catch (err) {
       console.log(err);
@@ -55,9 +56,12 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   useEffect(() => {
     fetchRecipe();
   }, [fetchRecipe]);
-  const { data } = useQuery('Recipe', fetchRecipe);
+  const { data, isLoading, error } = useQuery(['Recipe', id.params], fetchRecipe);
 
-  const curRecipe = data && data;
+  if (error) return <div>Request Failed</div>;
+  if (isLoading) return <div>Loading....</div>;
+
+  const curRecipe = data;
   console.log(data);
   const stars = () => {
     let arr = [];

@@ -27,6 +27,7 @@ export const UseSave = (props: any) => {
         data.saved_themes.map((theme: Themes) => {
           if (theme.id == props.id) {
             setSelected(true);
+            console.log('work');
           }
         });
       },
@@ -39,6 +40,8 @@ export const UseSave = (props: any) => {
         data.saved_recipes.map((recipe: Recipes) => {
           if (recipe.id == props.id) {
             setSelected(true);
+            console.log(selected);
+            console.log('work');
           }
         });
       },
