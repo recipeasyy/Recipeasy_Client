@@ -12,6 +12,7 @@ import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
 import { ImgCardSmall } from '../../components/img_props/imgcard';
 import { GetServerSideProps } from 'next';
+import { UseSave } from '../../hooks/useSave';
 
 export default function AllTheme(props: string) {
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function AllTheme(props: string) {
     const res = await accessApi.get(`/theme/${router.query.id}`);
     return res.data;
   };
-  const { data, error, isLoading } = useQuery('Recipes', getRecipes);
+  const { data, error, isLoading } = useQuery(['Recipes', router.query.id], getRecipes);
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
@@ -67,8 +68,9 @@ export default function AllTheme(props: string) {
             />
             {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
             <Save>
-              <ShowCount></ShowCount>
-              <Num>{curTheme.save_count}</Num>
+              <UseSave id={curTheme.id} type="Themes" />
+
+              <Num css={FONT.DETAIL_1}>{curTheme.save_count}</Num>
             </Save>
           </Column>
         </Top_Navigation>
@@ -109,6 +111,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {}, // will be passed to the page component as props
   };
 };
+const Wrap = styled.div``;
 
 const Small = styled.div`
   padding-left: 8px;
@@ -117,7 +120,6 @@ const Small = styled.div`
 const Save = styled.div`
   display: flex;
   flex-direction: column;
-  height: 43;
   justify-content: center;
   align-items: center;
   text-align: right;
