@@ -17,7 +17,7 @@ const fetchUser = async () => {
 
 export const UseSave = (props: any) => {
   const [selected, setSelected] = useState(false);
-
+  console.log(props.type);
   if (props.type == 'Themes') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const query_user = useQuery(queryKeys.user, fetchUser, {
@@ -31,10 +31,11 @@ export const UseSave = (props: any) => {
         });
       },
     });
-  } else {
+  } else if (props.type == 'Recipes') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const query_user = useQuery(queryKeys.user, fetchUser, {
       onSuccess(data) {
+        console.log(data.saved_recipes);
         data.saved_recipes.map((recipe: Recipes) => {
           if (recipe.id == props.id) {
             setSelected(true);
