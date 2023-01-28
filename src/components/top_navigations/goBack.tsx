@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import PATH from '../../constants/path';
 import COLOR from '../../constants/theme';
 import { GoBackIcon } from '../icons/BtnIcons';
@@ -13,7 +13,7 @@ export default function GoBack() {
         <Column>
           <GoBackIcon
             onClick={() => {
-              push(PATH.HOME);
+              router.back();
             }}
             color={COLOR.TYPEFACE_BLACK}
           />

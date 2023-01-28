@@ -62,7 +62,7 @@ export default function AllTheme(props: string) {
             <GoBackIcon
               color={COLOR.TYPEFACE_BLACK}
               onClick={() => {
-                push(PATH.HOME);
+                router.back();
               }}
             />
             {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
