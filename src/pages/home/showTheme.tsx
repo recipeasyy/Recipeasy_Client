@@ -6,7 +6,7 @@ import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
 import Big from '../../components/img_props/big';
 import COLOR from '../../constants/theme';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 interface BigThemes {
@@ -29,8 +29,8 @@ interface Themes {
 }
 
 const themeData = [
-  { id: '5', name: '초간단 식단' },
-  { id: '4', name: '같은 재료' },
+  { id: '5', name: '초간단 식단', title1: '방구석 셰프를 위한', title2: '초간단 레시피!' },
+  { id: '4', name: '같은 재료', title1: '재료 걱정은 그만!', title2: '한 재료로 만든 N가지 레시피' },
 ];
 
 export default function ShowTheme(current: string) {
@@ -39,33 +39,64 @@ export default function ShowTheme(current: string) {
     return res.data;
   };
 
+  useEffect(() => {
+    if (curState == '초간단 식단') {
+      setTitle1(`${themeData[0].title1}`);
+      setTitle2(`${themeData[0].title2}`);
+    } else {
+      setTitle1(`${themeData[1].title1}`);
+      setTitle2(`${themeData[1].title2}`);
+    }
+  }, []);
+
   const [curState, setCur] = useState('초간단 식단');
   const { data, error, isLoading } = useQuery('Themes', getThemes);
+  const [title1, setTitle1] = useState('방구석 셰프를 위한');
+  const [title2, setTitle2] = useState('초간단 레시피!');
+
+  const changeText = (e: any) => {
+    if (e.target.value == '초간단 식단') {
+      setTitle1(`${themeData[0].title1}`);
+      setTitle2(`${themeData[0].title2}`);
+    } else {
+      setTitle1(`${themeData[1].title1}`);
+      setTitle2(`${themeData[1].title2}`);
+    }
+  };
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
 
   const ChangeState = (e: any) => {
     setCur(e.target.value);
+    changeText(e);
   };
 
   const curThemes = data['Theme Types'].filter((themes: Themes) => themes.title === curState);
+
   return (
     <>
       <AllTheme />
 
       <Container>
         <Text css={FONT.HEADING}>
-          오늘의 레시피지
-          <div></div>
-          추천 테마는?
+          {title1}
+          <br />
+          {title2}
         </Text>
         <ThemeWrapper>
           {themeData.map((theme) => {
             return (
-              <Category key={theme.id} value={theme.name} css={FONT.DETAIL_2} onClick={ChangeState} current={curState}>
-                {theme.name}
-              </Category>
+              <Wrap key={theme.id}>
+                <Category
+                  key={theme.id}
+                  value={theme.name}
+                  css={FONT.DETAIL_2}
+                  onClick={ChangeState}
+                  current={curState}>
+                  {theme.name}
+                </Category>
+              </Wrap>
             );
           })}
         </ThemeWrapper>
@@ -84,7 +115,10 @@ export default function ShowTheme(current: string) {
     </>
   );
 }
-
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const Category = styled.button<{ current: string }>`
   border-radius: 10px;
   width: 106px;

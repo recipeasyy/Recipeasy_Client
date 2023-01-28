@@ -67,7 +67,6 @@ const Img = styled.div<{ img: string }>`
   width: 157px;
   height: 193px;
   margin-bottom: 8px;
-  background-color: black;
   border-radius: 12px;
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
