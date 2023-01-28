@@ -37,8 +37,11 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 83px;
+
+  padding-top: 1.25rem;
+
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   border-radius: 1.5rem 1.5rem 0 0;
   background-color: ${COLOR.BG_GRAY1};
