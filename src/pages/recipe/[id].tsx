@@ -13,6 +13,7 @@ import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { useQuery } from 'react-query';
+import { UseSave } from '../../hooks/useSave';
 
 interface equipment {
   name: string;
@@ -71,7 +72,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
       <TopBar>
         <IconWrapper>
           <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
-          <SaveIcon selected={true} />
+          <UseSave id={curRecipe?.id} type="Recipes" />
         </IconWrapper>
         <Title css={FONT.FOODTITLE}>{curRecipe?.title}</Title>
         <Subtitle css={FONT.BODY_2_3}>{curRecipe?.description}</Subtitle>
