@@ -10,21 +10,17 @@ const LandingPage = () => {
   const isUser = Boolean(getCookie('accessToken'));
 
   setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 2000);
-  return (
-    <Container>
-      <Img src="img/landing.png" alt="" />
-    </Container>
-  );
+  return <Container></Container>;
 };
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   max-width: 450px;
+  background-image: url(img/landing.png);
+  background-size: cover;
 `;
 
-const Img = styled.img`
-  object-fit: cover;
-`;
+const Img = styled.img``;
 
 export default LandingPage;
