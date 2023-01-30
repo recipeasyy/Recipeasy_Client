@@ -6,6 +6,7 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/img/icon-192x192.png"></link>
+        <link rel="shortcut icon" href="http://recipeasy.co.kr/favicon.ico" type="image/x-icon" />
       </Head>
       <body>
         <Main />
