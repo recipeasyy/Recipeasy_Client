@@ -6,6 +6,8 @@ import { SaveIcon } from '../components/icons/GNBIcons';
 import { Recipes, Themes } from '../interfaces/main';
 import { queryKeys } from '../types/commonType';
 import { MouseEvent } from 'react';
+import { useRouter } from 'next/router';
+import { useMutation } from '@tanstack/react-query/build/lib/useMutation';
 
 const fetchUser = async () => {
   try {
@@ -16,6 +18,7 @@ const fetchUser = async () => {
 };
 
 export const UseSave = (props: any) => {
+  const router = useRouter();
   const [selected, setSelected] = useState(false);
 
   console.log(props.type);
@@ -61,6 +64,7 @@ export const UseSave = (props: any) => {
       setSelected((prev) => !prev);
     }
     queryClient.invalidateQueries(queryKeys.user);
+    queryClient.invalidateQueries(['Recipes', router.query.id]);
   };
 
   return (

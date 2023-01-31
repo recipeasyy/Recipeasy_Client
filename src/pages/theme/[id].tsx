@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider, useMutation, useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -13,6 +13,7 @@ import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
 import { ImgCardSmall } from '../../components/img_props/imgcard';
 import { GetServerSideProps } from 'next';
 import { UseSave } from '../../hooks/useSave';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function AllTheme(props: string) {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function AllTheme(props: string) {
   }, []);
 
   const router = useRouter();
+
   const { push } = useRouter();
   const [head, setHead] = useState(false);
 
@@ -36,6 +38,7 @@ export default function AllTheme(props: string) {
     const res = await accessApi.get(`/theme/${router.query.id}`);
     return res.data;
   };
+
   const { data, error, isLoading } = useQuery(['Recipes', router.query.id], getRecipes);
 
   if (error) return <div>Request Failed</div>;
@@ -69,7 +72,6 @@ export default function AllTheme(props: string) {
             {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
             <Save>
               <UseSave id={curTheme.id} type="Themes" />
-
               <Num css={FONT.DETAIL_1}>{curTheme.save_count}</Num>
             </Save>
           </Column>
