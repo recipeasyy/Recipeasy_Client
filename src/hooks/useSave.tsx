@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { accessApi } from '../api/api';
 import { SaveIcon } from '../components/icons/GNBIcons';
 import { Recipes, Themes } from '../interfaces/main';
 import { queryKeys } from '../types/commonType';
 import { MouseEvent } from 'react';
+import { useQueryClient } from 'react-query';
+import { useRouter } from 'next/router';
+import { useMutation } from '@tanstack/react-query/build/lib/useMutation';
 
 const fetchUser = async () => {
   try {
@@ -16,6 +19,7 @@ const fetchUser = async () => {
 };
 
 export const UseSave = (props: any) => {
+  const router = useRouter();
   const [selected, setSelected] = useState(false);
   console.log(props.type);
   if (props.type == 'Themes') {
@@ -47,6 +51,8 @@ export const UseSave = (props: any) => {
       },
     });
   }
+  //useMutation쓰면 할 수 있지않을까?
+  const queryClient = useQueryClient();
 
   const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number, type: string) => {
     e.stopPropagation();
@@ -57,7 +63,10 @@ export const UseSave = (props: any) => {
       const res = await accessApi.post(`/mypages/recipes/${id}/`);
       setSelected((prev) => !prev);
     }
+    queryClient.invalidateQueries(['Recipes', router.query.id]);
+    queryClient.invalidateQueries(queryKeys.user);
   };
+
   return (
     <>
       <IconWrapper onClick={(e) => handleToggleSave(e, props.id, props.type)}>

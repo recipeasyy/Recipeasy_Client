@@ -9,6 +9,7 @@ import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { ImgCardMedium, ImgCardSmall } from '../../components/img_props/imgcard';
+import { useQueryClient } from 'react-query';
 
 const MyPage = () => {
   const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
