@@ -77,15 +77,16 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
 };
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
 
 const SmallContainer = styled.div<{ img: string }>`
   width: 100%;
-  height: 34vh;
+  height: 32vh;
 
-  padding: 230px 12px 12px 124px;
+  padding: 220px 12px 12px 120px;
   border-radius: 1rem;
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
