@@ -84,9 +84,9 @@ const Container = styled.div`
 
 const SmallContainer = styled.div<{ img: string }>`
   width: 100%;
-  height: 32vh;
+  min-width: 150px;
 
-  padding: 220px 12px 12px 120px;
+  padding: calc(230 / 158 * 100%) 12px 12px 0;
   border-radius: 1rem;
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
@@ -95,9 +95,8 @@ const SmallContainer = styled.div<{ img: string }>`
 
 const MediumContainer = styled.div<{ img: string }>`
   width: 100%;
-  height: 30vh;
 
-  padding: 130px 22px 22px 22px;
+  padding: calc(156 / 327 * 100%) 22px 22px 22px;
   border-radius: 1rem;
 
   cursor: pointer;
