@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { useQuery, useQueryClient } from 'react-query';
 
+import { queryKeys } from '../../types/commonType';
 import { accessApi } from '../../api/api';
 import GNB from '../../components/global/GNB';
 import TopNavBar from '../../components/navigations/navigation_top';
@@ -9,28 +11,20 @@ import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { ImgCardMedium, ImgCardSmall } from '../../components/img_props/imgcard';
-import { useQueryClient } from 'react-query';
 
 const MyPage = () => {
-  const [user, setUser] = useState({ nickname: '레시피지', saved_recipes: [], saved_themes: [] });
-  const [recipes, setRecipes] = useState([]);
-  const [themes, setThemes] = useState([]);
-
-  const fetchUser = useCallback(async () => {
-    try {
-      const response = await accessApi.get('/user');
-      setUser(response.data.data[0]);
-      setRecipes(response.data.data[0].saved_recipes);
-      setThemes(response.data.data[0].saved_themes);
-    } catch (err) {}
-  }, []);
-
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
-
   const router = useRouter();
   const [nav, setNav] = useState('개별');
+
+  const fetchUser = async () => {
+    const res = await accessApi.get('/user');
+    return res.data.data[0];
+  };
+
+  const { isLoading, error, data } = useQuery(queryKeys.user, fetchUser);
+  if (error) return <div>Request Failed</div>;
+  if (isLoading) return <div>Loading....</div>;
+  const user = data;
 
   return (
     <>
@@ -39,6 +33,7 @@ const MyPage = () => {
           <SettingIcon onClick={() => router.push('/mypage/setting')} />
         </IconWrapper>
       </TopNavBar>
+
       <Content>
         <TopInfo>
           <Title css={FONT.HEADING}>{user.nickname ? user.nickname : '레시피지'}님</Title>
@@ -66,8 +61,8 @@ const MyPage = () => {
         </TagIcon>
         <CardWrapper nav={nav}>
           {nav === '개별'
-            ? recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} route={true} />)
-            : themes.map((theme: any) => <ImgCardMedium key={theme.id} {...theme} />)}
+            ? user.saved_recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} route={true} />)
+            : user.saved_themes.map((theme: any) => <ImgCardMedium key={theme.id} {...theme} />)}
         </CardWrapper>
       </Content>
       <GNB />

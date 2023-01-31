@@ -1,15 +1,9 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import { useState, useCallback } from 'react';
-import { useQuery } from 'react-query';
-import { MouseEvent } from 'react';
 
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 
-import { queryKeys } from '../../types/commonType';
-import { accessApi } from '../../api/api';
-import { SaveIcon } from '../icons/GNBIcons';
 import { ClockIcon } from '../icons/BasicIcons';
 import { SaladIcon } from '../icons/FoodIcons';
 import { Themes, Recipes } from '../../interfaces/main';

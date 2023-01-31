@@ -84,15 +84,17 @@ export const SearchItem = (props: { value: string; nav: string }) => {
 };
 
 const Content = styled.div<{ type: string }>`
-  width: 100%;
-
   ${(props) =>
     props.type == 'recipe'
-      ? `display: grid; 
+      ? `
+      width: 100%;
+      display: grid; 
       grid-template-columns: 1fr 1fr;
       row-gap: 1.75rem;
       column-gap: 0.75rem;`
-      : `  display: flex;
+      : `
+      width: 100%;  
+      display: flex;
   flex-direction: column;
   gap: 1rem;`};
 
