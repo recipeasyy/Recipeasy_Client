@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { accessApi } from '../api/api';
 import { SaveIcon } from '../components/icons/GNBIcons';
 import { Recipes, Themes } from '../interfaces/main';
@@ -17,7 +17,9 @@ const fetchUser = async () => {
 
 export const UseSave = (props: any) => {
   const [selected, setSelected] = useState(false);
+
   console.log(props.type);
+
   if (props.type == 'Themes') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const query_user = useQuery(queryKeys.user, fetchUser, {
@@ -47,9 +49,10 @@ export const UseSave = (props: any) => {
       },
     });
   }
-
+  const queryClient = useQueryClient();
   const handleToggleSave = async (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, id: number, type: string) => {
     e.stopPropagation();
+
     if (props.type == 'Themes') {
       const res = await accessApi.post(`/theme/${id}`);
       setSelected((prev) => !prev);
@@ -57,7 +60,9 @@ export const UseSave = (props: any) => {
       const res = await accessApi.post(`/mypages/recipes/${id}/`);
       setSelected((prev) => !prev);
     }
+    queryClient.invalidateQueries(queryKeys.user);
   };
+
   return (
     <>
       <IconWrapper onClick={(e) => handleToggleSave(e, props.id, props.type)}>
