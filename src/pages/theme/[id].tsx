@@ -135,7 +135,7 @@ const HeadText = styled.div`
 
 const Top_Navigation = styled.div`
   width: 100%;
-  height: 100px;
+  // height: 100px;
   transition: 'all 1s';
   position: sticky;
   top: 0px;
@@ -151,8 +151,8 @@ const Top_Navigation = styled.div`
 const Column = styled.div`
   width: 100%;
   display: flex;
-  padding-bottom: 21px;
-  padding-top: 55px;
+  //padding-bottom: 21px;
+  padding-top: 25px;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
