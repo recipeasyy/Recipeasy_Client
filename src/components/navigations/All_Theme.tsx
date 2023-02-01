@@ -53,7 +53,7 @@ const Top_Navigation = styled.div`
   top: 0px;
   z-index: 1;
   transition: 'all 1s';
-
+  backdrop-filter: saturate(180%) blur(20px);
   background: ${COLOR.PRIMARY_WHITE_85};
 `;
 const Header = styled.div`
