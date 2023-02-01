@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import PATH from '../../constants/path';
+import COLOR from '../../constants/theme';
 
 const menuData = [
   { id: 'menu01', name: '전체보기', path: PATH.HOME },
@@ -47,7 +48,13 @@ const LinkText = styled.div<Container>`
 const Top_Navigation = styled.div`
   width: 100%;
   height: 100px;
-  margin-bottom: 36px;
+  //margin-bottom: 10px;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  transition: 'all 1s';
+
+  background: ${COLOR.PRIMARY_WHITE_85};
 `;
 const Header = styled.div`
   display: flex;

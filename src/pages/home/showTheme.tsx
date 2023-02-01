@@ -76,9 +76,8 @@ export default function ShowTheme(current: string) {
 
   return (
     <>
-      <AllTheme />
-
       <Container>
+        <AllTheme />
         <Text css={FONT.HEADING}>
           {title1}
           <br />

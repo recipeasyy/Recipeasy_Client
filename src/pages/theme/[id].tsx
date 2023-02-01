@@ -116,6 +116,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Wrap = styled.div``;
 
 const Small = styled.div`
+  padding-top: 3px;
   padding-left: 8px;
   padding-right: 12px;
 `;
