@@ -146,6 +146,7 @@ const Top_Navigation = styled.div`
   align-content: center;
   align-items: center;
   flex-direction: row;
+  backdrop-filter: blur(20px);
 `;
 
 const Column = styled.div`
