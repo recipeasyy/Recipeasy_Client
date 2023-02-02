@@ -26,7 +26,7 @@ const TopNav = styled.div`
 
   width: 100%;
   max-width: 450px;
-  padding: 3.75rem 1.5rem 1rem;
+  padding: 1rem 1.5rem 1rem;
 
   display: flex;
   justify-content: center;
