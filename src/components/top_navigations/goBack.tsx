@@ -25,7 +25,7 @@ export default function GoBack() {
 
 const Top_Navigation = styled.div`
   width: auto;
-  height: 100px;
+  //height: 100px;
   transition: 'all 1s';
   position: sticky;
   top: 0px;
@@ -37,8 +37,8 @@ const Top_Navigation = styled.div`
 
 const Column = styled.div`
   display: flex;
-  padding-bottom: 21px;
-  padding-top: 55px;
+  margin-bottom: 21px;
+  margin-top: 25px;
   //flex-direction: row;
   //justify-content: flex-start;
   //position: fixed;

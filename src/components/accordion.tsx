@@ -24,7 +24,7 @@ export default function Accordion(props: Content) {
         <Box>
           <FlexBox css={FONT.BODY_1}>
             <FoodIcon name={props.icon_type}></FoodIcon>
-            <Text>{props.title}</Text>
+            <Text css={FONT.BODY_1}>{props.title}</Text>
           </FlexBox>
           <IconWrapper>{isOpen ? <Up /> : <Down />}</IconWrapper>
         </Box>
@@ -34,13 +34,13 @@ export default function Accordion(props: Content) {
           <ImgWrapper>
             <Img img={props.full_image}></Img>
             <div css={FONT.BUTTON}>1큰술</div>
-            <br />
+
             <div css={FONT.DETAIL_2}>{props.full}</div>
           </ImgWrapper>
           <ImgWrapper>
             <Img img={props.half_image}></Img>
             <div css={FONT.BUTTON}>1/2큰술</div>
-            <br />
+
             <div css={FONT.DETAIL_2}>{props.half}</div>
           </ImgWrapper>
         </Wrapper>
@@ -50,6 +50,7 @@ export default function Accordion(props: Content) {
 }
 const Text = styled.div`
   padding-left: 10px;
+  color: ${COLOR.TYPEFACE_BLACK};
 `;
 const FlexBox = styled.div`
   display: flex;
@@ -68,8 +69,7 @@ const Img = styled.div<{ img: string }>`
   height: 193px;
   margin-bottom: 8px;
   border-radius: 12px;
-  background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
-    url(${(props) => props.img});
+  background-image: url(${(props) => props.img});
   background-size: cover;
 `;
 

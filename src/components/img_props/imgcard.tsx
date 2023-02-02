@@ -36,6 +36,7 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
 
   const ing: string[] = [];
   props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
+  console.log(ing);
 
   return (
     <Container>
@@ -61,7 +62,7 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
           <ClockIcon />
           {props.time_taken}
         </Text>
-        {route ? (
+        {ing ? (
           <Text css={FONT.DETAIL_2}>
             <IconFix>
               <SaladIcon />
