@@ -87,17 +87,16 @@ const Content = styled.div<{ type: string }>`
   ${(props) =>
     props.type == 'recipe'
       ? `
-      width: 100%;
       display: grid; 
       grid-template-columns: 1fr 1fr;
       row-gap: 1.75rem;
       column-gap: 0.75rem;`
       : `
-      width: 100%;  
       display: flex;
   flex-direction: column;
   gap: 1rem;`};
 
+  width: 100%;
   overscroll: auto;
 `;
 
