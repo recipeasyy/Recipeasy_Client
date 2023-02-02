@@ -72,7 +72,7 @@ export const SearchItem = (props: { value: string; nav: string }) => {
     <Content type={props.nav}>
       {recipes.map((recipe: any) =>
         props.nav == 'recipe' ? (
-          <ImgCardSmall key={recipe.id} {...recipe} route={false} />
+          <ImgCardSmall key={recipe.id} recipe={recipe} route={true} />
         ) : (
           <ImgCardMedium key={recipe.id} {...recipe} />
         ),

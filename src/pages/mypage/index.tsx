@@ -61,7 +61,7 @@ const MyPage = () => {
         </TagIcon>
         <CardWrapper nav={nav}>
           {nav === '개별'
-            ? user.saved_recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} {...recipe} route={true} />)
+            ? user.saved_recipes.map((recipe: any) => <ImgCardSmall key={recipe.id} recipe={recipe} route={false} />)
             : user.saved_themes.map((theme: any) => <ImgCardMedium key={theme.id} {...theme} />)}
         </CardWrapper>
       </Content>

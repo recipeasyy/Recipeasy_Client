@@ -31,38 +31,37 @@ export const ImgCardMedium = (props: Themes) => {
   );
 };
 
-export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
+export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolean }) => {
   const router = useRouter();
 
   const ing: string[] = [];
-  props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
-  console.log(ing);
+  recipe.required_ingredients && recipe.required_ingredients.map((i: { name: string }) => ing.push(i.name));
 
   return (
     <Container>
       <SmallContainer
         onClick={() => {
-          const themeId = props.theme;
+          const themeId = recipe.theme;
           router.push(
             {
-              pathname: `/videoPlayer/${props.id}`,
+              pathname: `/videoPlayer/${recipe.id}`,
               query: { themeId },
             },
-            `/videoPlayer/${props.id}`,
+            `/videoPlayer/${recipe.id}`,
           );
         }}
-        img={props.image}>
+        img={recipe.image}>
         <Content>
-          <UseSave id={props.id} type={'Recipes'} />
+          <UseSave id={recipe.id} type={'Recipes'} />
         </Content>
       </SmallContainer>
       <Description>
-        <Title css={FONT.BODY_2}>{props.title}</Title>
+        <Title css={FONT.BODY_2}>{recipe.title}</Title>
         <Text css={FONT.DETAIL_2}>
           <ClockIcon />
-          {props.time_taken}
+          {recipe.time_taken}
         </Text>
-        {ing ? (
+        {route ? (
           <Text css={FONT.DETAIL_2}>
             <IconFix>
               <SaladIcon />
