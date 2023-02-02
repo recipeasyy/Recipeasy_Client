@@ -28,17 +28,6 @@ export default function VideoPlayer() {
     const res = await accessApi.get(`/recipes/${router.query.id}`);
     return res.data.data;
   };
-
-  interface recipe {
-    id: number;
-    title: string;
-    required_ingredients: [];
-    save_count: number;
-    theme: number;
-    time_taken: string;
-    image: string;
-    video_id: string;
-  }
   const { data } = useQuery('Videos', getVideos);
 
   const recipeTitle = data && data.title;

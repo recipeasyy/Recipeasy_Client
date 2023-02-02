@@ -12,6 +12,12 @@ export interface Themes {
   save_count: number;
 }
 
+export interface BigThemes {
+  id: number;
+  title: string;
+  themes: [];
+}
+
 export interface Recipes {
   id: number;
   video_id: string;
@@ -21,4 +27,39 @@ export interface Recipes {
   required_ingredients: [];
   theme: number;
   image: string;
+}
+
+export interface equipment {
+  name: string;
+}
+
+export interface required {
+  name: string;
+  emoji: string;
+  quantity: string;
+  substitute: string;
+}
+
+export interface additional {
+  name: string;
+  emoji: string;
+  quantity: string;
+  substitute: string;
+}
+
+export interface sequence {
+  image: string;
+  long_desc: string;
+  order: number;
+  short_desc: string;
+}
+
+export interface Measure {
+  id: number;
+  title: string;
+  icon_type: string;
+  full: string;
+  full_image: string;
+  half: string;
+  half_image: string;
 }
