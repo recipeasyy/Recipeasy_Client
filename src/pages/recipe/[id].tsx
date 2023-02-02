@@ -5,10 +5,8 @@ import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
 
-import TopNavBar from '../../components/navigations/navigation_top';
-import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
-import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
+import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon, ArrowIcon } from '../../components/icons/BasicIcons';
 import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
@@ -67,6 +65,8 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return arr;
   };
 
+  console.log(curRecipe);
+
   return (
     <Container>
       <TopBar>
@@ -116,11 +116,19 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
               <Ingredient key={i}>
                 <FoodName>
                   <FoodIconWrapper>
-                    <FoodIcon name={ingredient?.name} />
+                    <FoodIcon name={ingredient.name} />
                   </FoodIconWrapper>
-                  <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
+                  <Text css={FONT.BUTTON}>{ingredient.name}</Text>
+                  {ingredient.substitute ? (
+                    <Substitute css={FONT.BODY_2_3}>
+                      <ArrowIcon />
+                      {ingredient.substitute}
+                    </Substitute>
+                  ) : (
+                    <></>
+                  )}
                 </FoodName>
-                <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
+                <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
               </Ingredient>
             ))}
           </Ingredients>
@@ -274,6 +282,17 @@ const Icons = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+`;
+
+const Substitute = styled.div`
+  padding: 0.25rem 0.5rem;
+
+  border-radius: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: ${COLOR.BG_GRAY1};
 `;
 
 const Text = styled.div`
