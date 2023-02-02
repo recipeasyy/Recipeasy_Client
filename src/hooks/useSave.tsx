@@ -76,6 +76,4 @@ export const UseSave = (props: any) => {
   );
 };
 
-const IconWrapper = styled.div`
-  z-index: 1;
-`;
+const IconWrapper = styled.div``;
