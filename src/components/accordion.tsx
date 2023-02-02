@@ -86,7 +86,7 @@ const Header = styled.button`
   width: 100%;
   height: 58px;
   background-color: ${COLOR.BG_GRAY1};
-  border-radius: 12%;
+  border-radius: 12px;
   margin-bottom: 12px;
 `;
 const Box = styled.div`
