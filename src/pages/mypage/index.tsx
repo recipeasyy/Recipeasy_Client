@@ -114,8 +114,7 @@ const SortTitle = styled.div<{ isSeleted: boolean }>`
 `;
 
 const TagIcon = styled.div`
-  width: 118px;
-  height: 28px;
+  width: max-content;
   padding: 4px 12px;
 
   color: ${COLOR.PRIMARY_ORANGE};

@@ -5,10 +5,8 @@ import styled from '@emotion/styled';
 
 import { accessApi } from '../../api/api';
 
-import TopNavBar from '../../components/navigations/navigation_top';
-import { SaveIcon } from '../../components/icons/GNBIcons';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
-import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon } from '../../components/icons/BasicIcons';
+import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon, ArrowIcon } from '../../components/icons/BasicIcons';
 import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
@@ -43,26 +41,22 @@ interface sequence {
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
 
-  const fetchRecipe = useCallback(async () => {
+  const fetchRecipe = async () => {
     try {
       const response = await accessApi.get(`/recipes/${id.params}/`);
-      console.log(response.data.data);
       return response.data.data;
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    fetchRecipe();
-  }, [fetchRecipe]);
-  const { data, isLoading, error } = useQuery(['Recipe', id.params], fetchRecipe);
+  const { data, isLoading, error } = useQuery(['Recipes', id.params], fetchRecipe);
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
 
   const curRecipe = data;
-  console.log(data);
+
   const stars = () => {
     let arr = [];
     for (let i = 0; i < curRecipe?.difficulty; i++) {
@@ -71,12 +65,17 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     return arr;
   };
 
+  console.log(curRecipe);
+
   return (
     <Container>
       <TopBar>
         <IconWrapper>
           <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
-          <UseSave id={curRecipe?.id} type="Recipes" />
+          <Save>
+            <UseSave id={curRecipe?.id} type="Recipes" />
+            <div css={FONT.DETAIL_1}>{curRecipe.save_count}</div>
+          </Save>
         </IconWrapper>
         <Title css={FONT.FOODTITLE}>{curRecipe?.title}</Title>
         <Subtitle css={FONT.BODY_2_3}>{curRecipe?.description}</Subtitle>
@@ -117,11 +116,19 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
               <Ingredient key={i}>
                 <FoodName>
                   <FoodIconWrapper>
-                    <FoodIcon name={ingredient?.name} />
+                    <FoodIcon name={ingredient.name} />
                   </FoodIconWrapper>
-                  <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
+                  <Text css={FONT.BUTTON}>{ingredient.name}</Text>
+                  {ingredient.substitute ? (
+                    <Substitute css={FONT.BODY_2_3}>
+                      <ArrowIcon />
+                      {ingredient.substitute}
+                    </Substitute>
+                  ) : (
+                    <></>
+                  )}
                 </FoodName>
-                <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
+                <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
               </Ingredient>
             ))}
           </Ingredients>
@@ -212,6 +219,13 @@ const TopBar = styled.div`
   background: ${COLOR.BG_GRAY1_85};
 `;
 
+const Save = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const IconWrapper = styled.div`
   width: 100%;
   height: 100px;
@@ -268,6 +282,17 @@ const Icons = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+`;
+
+const Substitute = styled.div`
+  padding: 0.25rem 0.5rem;
+
+  border-radius: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: ${COLOR.BG_GRAY1};
 `;
 
 const Text = styled.div`
