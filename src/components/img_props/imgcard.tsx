@@ -112,6 +112,7 @@ const BigContainer = styled.div<{ imgProps: string }>`
   background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
     url(${(props) => props.imgProps});
   background-size: cover;
+  background-position: center;
 `;
 
 const SmallContainer = styled.div<{ img: string }>`
@@ -123,7 +124,6 @@ const SmallContainer = styled.div<{ img: string }>`
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
   background-size: cover;
-  background-position: center;
 `;
 
 const MediumContainer = styled.div<{ img: string }>`
