@@ -143,7 +143,7 @@ const TopInfo = styled.div`
   width: 100vw;
   max-width: 450px;
 
-  padding: 100px 24px 48px 24px;
+  padding: 55px 24px 48px 24px;
 
   display: flex;
   flex-direction: column;
