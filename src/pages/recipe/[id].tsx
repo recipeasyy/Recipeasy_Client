@@ -43,26 +43,22 @@ interface sequence {
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
 
-  const fetchRecipe = useCallback(async () => {
+  const fetchRecipe = async () => {
     try {
       const response = await accessApi.get(`/recipes/${id.params}/`);
-      console.log(response.data.data);
       return response.data.data;
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    fetchRecipe();
-  }, [fetchRecipe]);
-  const { data, isLoading, error } = useQuery(['Recipe', id.params], fetchRecipe);
+  const { data, isLoading, error } = useQuery(['Recipes', id.params], fetchRecipe);
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
 
   const curRecipe = data;
-  console.log(data);
+
   const stars = () => {
     let arr = [];
     for (let i = 0; i < curRecipe?.difficulty; i++) {
@@ -76,7 +72,10 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
       <TopBar>
         <IconWrapper>
           <GoBackIcon onClick={() => router.back()} color={COLOR.TYPEFACE_BLACK} />
-          <UseSave id={curRecipe?.id} type="Recipes" />
+          <Save>
+            <UseSave id={curRecipe?.id} type="Recipes" />
+            <div css={FONT.DETAIL_1}>{curRecipe.save_count}</div>
+          </Save>
         </IconWrapper>
         <Title css={FONT.FOODTITLE}>{curRecipe?.title}</Title>
         <Subtitle css={FONT.BODY_2_3}>{curRecipe?.description}</Subtitle>
@@ -210,6 +209,13 @@ const TopBar = styled.div`
   justify-content: center;
 
   background: ${COLOR.BG_GRAY1_85};
+`;
+
+const Save = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const IconWrapper = styled.div`
