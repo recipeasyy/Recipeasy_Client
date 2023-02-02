@@ -830,11 +830,12 @@ export const FoodIcon = ({ name }: { name: string }) => {
       return <PumpkinIcon />;
     case '양파':
       return <OnionIcon />;
-    case '모짜렐라치즈':
+    case '모짜렐라 치즈':
       return <CheeseIcon />;
     case '참치캔':
       return <CanGreenIcon />;
     case '스팸':
+    case '햄':
       return <CanOrangeIcon />;
     case '고추장':
     case '된장':
