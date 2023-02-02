@@ -27,11 +27,9 @@ const Home = () => {
         {data &&
           data.Themes.map((theme: Themes) => {
             return (
-              <>
-                <Wrap>
-                  <ImgCardMedium key={theme.id} {...theme}></ImgCardMedium>
-                </Wrap>
-              </>
+              <Wrap key={theme.id}>
+                <ImgCardMedium {...theme}></ImgCardMedium>
+              </Wrap>
             );
           })}
       </Box>

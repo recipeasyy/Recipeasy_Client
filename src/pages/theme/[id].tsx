@@ -45,7 +45,7 @@ export default function AllTheme(props: string) {
   if (isLoading) return <div>Loading....</div>;
 
   const curTheme = data.theme;
-  const curRecipes = curTheme.recipes;
+  const curRecipes = curTheme?.recipes;
 
   interface recipe {
     id: number;
@@ -71,8 +71,8 @@ export default function AllTheme(props: string) {
             />
             {head && <HeadText css={FONT.BUTTON}>{head === true ? curTheme.title : null}</HeadText>}
             <Save>
-              <UseSave id={curTheme.id} type="Themes" />
-              <Num css={FONT.DETAIL_1}>{curTheme.save_count}</Num>
+              <UseSave id={curTheme?.id} type="Themes" />
+              <Num css={FONT.DETAIL_1}>{curTheme?.save_count}</Num>
             </Save>
           </Column>
         </Top_Navigation>
@@ -81,27 +81,27 @@ export default function AllTheme(props: string) {
           <>
             <Heading>
               <Text1 css={FONT.DETAIL_2}>
-                {data.theme_type_name}
+                {data?.theme_type_name}
                 <br />
               </Text1>
-              <Text css={FONT.HEADING}>{curTheme.title}</Text>
+              <Text css={FONT.HEADING}>{curTheme?.title}</Text>
             </Heading>
-            <Description css={FONT.BODY_2_3}>{curTheme.description}</Description>
+            <Description css={FONT.BODY_2_3}>{curTheme?.description}</Description>
             <Emoticon>
               <Calender />
-              <Small css={FONT.BODY_2_2}>{curTheme.recipe_count}일 식단</Small>
+              <Small css={FONT.BODY_2_2}>{curTheme?.recipe_count}일 식단</Small>
               <Rice />
-              <Small css={FONT.BODY_2_2}>{curTheme.duration}개 레시피</Small>
+              <Small css={FONT.BODY_2_2}>{curTheme?.duration}개 레시피</Small>
             </Emoticon>
             <AllRecipes>
-              {curRecipes.map((recipes: recipe) => {
+              {curRecipes?.map((recipes: recipe) => {
                 return <ImgCardSmall key={recipes.id} recipe={recipes} route={true} />;
               })}
             </AllRecipes>
           </>
         )}
         <EasyTips>
-          <Img src={curTheme.tips} alt="" />
+          <Img src={curTheme?.tips} alt="" />
         </EasyTips>
       </Container>
     </>

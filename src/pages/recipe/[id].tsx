@@ -112,17 +112,17 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
                 계량하는 법 보기
               </TagIcon>
             </Title>
-            {curRecipe?.required_ingredients.map((ingredient: required, i: number) => (
+            {curRecipe?.required_ingredients?.map((ingredient: required, i: number) => (
               <Ingredient key={i}>
                 <FoodName>
                   <FoodIconWrapper>
-                    <FoodIcon name={ingredient.name} />
+                    <FoodIcon name={ingredient?.name} />
                   </FoodIconWrapper>
-                  <Text css={FONT.BUTTON}>{ingredient.name}</Text>
-                  {ingredient.substitute ? (
+                  <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
+                  {ingredient?.substitute ? (
                     <Substitute css={FONT.BODY_2_3}>
                       <ArrowIcon />
-                      {ingredient.substitute}
+                      {ingredient?.substitute}
                     </Substitute>
                   ) : (
                     <></>
@@ -134,7 +134,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
           </Ingredients>
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>추가 재료</Title>
-            {curRecipe?.additional_ingredients.map((ingredient: additional, i: number) => (
+            {curRecipe?.additional_ingredients?.map((ingredient: additional, i: number) => (
               <Ingredient key={i}>
                 <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
                 <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
@@ -144,7 +144,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
           <Ingredients>
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
             <Equipments>
-              {curRecipe?.equipment.map((ingredient: equipment, i: number) => (
+              {curRecipe?.equipment?.map((ingredient: equipment, i: number) => (
                 <Tag key={i} css={FONT.BODY_2_3}>
                   {ingredient?.name}
                 </Tag>
@@ -155,22 +155,22 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
         <Content>
           <Sequences>
             <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
-            {curRecipe?.recipe_sequence.map((sequence: sequence) => (
-              <Sequence key={sequence.order}>
-                <NumberIcon num={sequence.order} />
+            {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
+              <Sequence key={sequence?.order}>
+                <NumberIcon num={sequence?.order} />
                 <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
               </Sequence>
             ))}
           </Sequences>
           <Sequences>
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
-            {curRecipe?.recipe_sequence.map((sequence: sequence) => (
+            {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
               <SequenceWrapper key={sequence?.order}>
                 <Sequence>
                   <NumberIcon num={sequence?.order} />
                   <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                 </Sequence>
-                <Img src={sequence.image} />
+                <Img src={sequence?.image} />
                 <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
               </SequenceWrapper>
             ))}
