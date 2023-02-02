@@ -147,6 +147,8 @@ const Top_Navigation = styled.div`
   align-items: center;
   flex-direction: row;
   backdrop-filter: blur(10px);
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 
 const Column = styled.div`
@@ -178,7 +180,8 @@ const EasyTips = styled.div`
   max-height: 420px;
 `;
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
+  max-width: 450px;
   height: 100%;
   overflow-x: scroll;
   &::-webkit-scrollbar {
@@ -194,18 +197,25 @@ const AllRecipes = styled.div`
   display: flex;
   gap: 0.75rem;
   padding-bottom: 54px;
+  padding-left: 24px;
 `;
 
 const Heading = styled.div`
   margin-bottom: 8px;
   color: ${COLOR.TYPEFACE_BLACK};
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 const Description = styled.div`
   margin-bottom: 40px;
   color: ${COLOR.TYPEFACE_GRAY1};
+  padding-left: 24px;
+  padding-right: 24px;
 `;
 const Emoticon = styled.div`
   margin-bottom: 8px;
+  padding-left: 24px;
+  padding-right: 24px;
   color: black;
   display: flex;
   flex-direction: row;
