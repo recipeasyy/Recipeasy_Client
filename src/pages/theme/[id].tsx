@@ -95,7 +95,7 @@ export default function AllTheme(props: string) {
             </Emoticon>
             <AllRecipes>
               {curRecipes.map((recipes: recipe) => {
-                return <ImgCardSmall key={recipes.id} {...recipes} />;
+                return <ImgCardSmall key={recipes.id} recipe={recipes} route={true} />;
               })}
             </AllRecipes>
           </>

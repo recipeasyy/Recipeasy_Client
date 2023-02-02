@@ -4,7 +4,7 @@ import GNB from '../../components/global/GNB';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
-import Big from '../../components/img_props/big';
+import { ImgCardBig } from '../../components/img_props/imgcard';
 import COLOR from '../../constants/theme';
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
@@ -99,14 +99,15 @@ export default function ShowTheme(current: string) {
             );
           })}
         </ThemeWrapper>
+
         {data &&
           curThemes.map((themeTypes: BigThemes) => {
             return (
-              <div key={themeTypes.id}>
+              <Theme key={themeTypes.id}>
                 {themeTypes.themes.map((theme: Themes) => {
-                  return <Big key={theme.id} {...theme}></Big>;
+                  return <ImgCardBig key={theme.id} {...theme}></ImgCardBig>;
                 })}
-              </div>
+              </Theme>
             );
           })}
       </Container>
@@ -152,6 +153,12 @@ const ThemeWrapper = styled.div`
   padding-bottom: 16px;
   display: flex;
   flex-direction: row;
+`;
+
+const Theme = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Text = styled.div`

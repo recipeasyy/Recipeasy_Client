@@ -31,38 +31,37 @@ export const ImgCardMedium = (props: Themes) => {
   );
 };
 
-export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
+export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolean }) => {
   const router = useRouter();
 
   const ing: string[] = [];
-  props.required_ingredients && props.required_ingredients.map((i: { name: string }) => ing.push(i.name));
-  console.log(ing);
+  recipe.required_ingredients && recipe.required_ingredients.map((i: { name: string }) => ing.push(i.name));
 
   return (
     <Container>
       <SmallContainer
         onClick={() => {
-          const themeId = props.theme;
+          const themeId = recipe.theme;
           router.push(
             {
-              pathname: `/videoPlayer/${props.id}`,
+              pathname: `/videoPlayer/${recipe.id}`,
               query: { themeId },
             },
-            `/videoPlayer/${props.id}`,
+            `/videoPlayer/${recipe.id}`,
           );
         }}
-        img={props.image}>
+        img={recipe.image}>
         <Content>
-          <UseSave id={props.id} type={'Recipes'} />
+          <UseSave id={recipe.id} type={'Recipes'} />
         </Content>
       </SmallContainer>
       <Description>
-        <Title css={FONT.BODY_2}>{props.title}</Title>
+        <Title css={FONT.BODY_2}>{recipe.title}</Title>
         <Text css={FONT.DETAIL_2}>
           <ClockIcon />
-          {props.time_taken}
+          {recipe.time_taken}
         </Text>
-        {ing ? (
+        {route ? (
           <Text css={FONT.DETAIL_2}>
             <IconFix>
               <SaladIcon />
@@ -77,10 +76,42 @@ export const ImgCardSmall = (props: Recipes, { route }: { route: boolean }) => {
   );
 };
 
+export const ImgCardBig = (props: Themes) => {
+  const router = useRouter();
+  return (
+    <Container>
+      <BigContainer
+        imgProps={props.portrait_image}
+        onClick={() => {
+          router.push(`/theme/${props.id}`);
+        }}>
+        <Content>
+          <Title css={FONT.FOODTITLE}>{props.title}</Title>
+          <SubTitle css={FONT.DETAIL_2}>
+            {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
+            <UseSave id={props.id} type={'Themes'} />
+          </SubTitle>
+        </Content>
+      </BigContainer>
+    </Container>
+  );
+};
+
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const BigContainer = styled.div<{ imgProps: string }>`
+  width: 100%;
+  padding: calc(424 / 327 * 100%) 22px 22px 22px;
+
+  border-radius: 1rem;
+
+  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
+    url(${(props) => props.imgProps});
+  background-size: cover;
 `;
 
 const SmallContainer = styled.div<{ img: string }>`
@@ -92,6 +123,7 @@ const SmallContainer = styled.div<{ img: string }>`
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
   background-size: cover;
+  background-position: center;
 `;
 
 const MediumContainer = styled.div<{ img: string }>`
