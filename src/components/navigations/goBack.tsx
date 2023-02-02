@@ -6,23 +6,22 @@ import { GoBackIcon } from '../icons/BtnIcons';
 export default function GoBack({ color }: { color: string }) {
   const router = useRouter();
   return (
-    <>
-      <TopNav>
-        <IconWrapper>
-          <GoBackIcon
-            onClick={() => {
-              router.back();
-            }}
-            color={color}
-          />
-        </IconWrapper>
-      </TopNav>
-    </>
+    <TopNav>
+      <IconWrapper>
+        <GoBackIcon
+          onClick={() => {
+            router.back();
+          }}
+          color={color}
+        />
+      </IconWrapper>
+    </TopNav>
   );
 }
 
 const TopNav = styled.div`
   position: fixed;
+  top: 0;
 
   width: 100%;
   max-width: 450px;
