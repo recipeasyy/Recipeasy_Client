@@ -61,7 +61,6 @@ export default function VideoPlayer() {
   };
   const realThemeId = Themes.filter((a) => `${a.id}` === themeId);
   const realTheme = realThemeId[0]?.name;
-  console.log(realTheme);
 
   return (
     <Container>

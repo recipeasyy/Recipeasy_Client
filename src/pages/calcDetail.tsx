@@ -14,7 +14,6 @@ export default function CalcDetail() {
   };
 
   const { data } = useQuery('Measurements', getMeasurements);
-  console.log(data);
   return (
     <Container>
       <GoBack color={COLOR.TYPEFACE_BLACK} />

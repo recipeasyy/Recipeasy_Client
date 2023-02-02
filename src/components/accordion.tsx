@@ -1,23 +1,27 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 import { Down, Up } from './icons/BtnIcons';
 import { FoodIcon } from './icons/FoodIcons';
+import tw from 'tailwind-styled-components';
+import { Content } from '../interfaces/main';
 
-interface Content {
-  full: string;
-  full_image: string;
-  half: string;
-  half_image: string;
-  icon_type: string;
-  id: number;
-  title: string;
+const customAnimation = keyframes`
+0% {
+  opacity: 0;
 }
-
+50% {
+  opacity: 1;
+}
+100% {
+  opacity: 1;
+}
+`;
 export default function Accordion(props: Content) {
   const [isOpen, setOpen] = useState(false);
+
   return (
     <>
       <Header onClick={() => setOpen((prev) => !prev)}>
@@ -30,7 +34,7 @@ export default function Accordion(props: Content) {
         </Box>
       </Header>
       {isOpen && (
-        <Wrapper>
+        <Wrapper isOpen={isOpen}>
           <ImgWrapper>
             <Img img={props.full_image}></Img>
             <div css={FONT.BUTTON}>1큰술</div>
@@ -73,7 +77,7 @@ const Img = styled.div<{ img: string }>`
   background-size: cover;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isOpen: boolean }>`
   width: 100%;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -81,6 +85,11 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  ${(props) =>
+    props.isOpen &&
+    css`
+      animation: ${customAnimation} 3s linear alternate;
+    `}
 `;
 const Header = styled.button`
   width: 100%;

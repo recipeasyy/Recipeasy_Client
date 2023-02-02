@@ -1,3 +1,14 @@
+import { ChangeEventHandler } from 'react';
+
+export interface Content {
+  full: string;
+  full_image: string;
+  half: string;
+  half_image: string;
+  icon_type: string;
+  id: number;
+  title: string;
+}
 export interface Themes {
   id: number;
   title: string;
