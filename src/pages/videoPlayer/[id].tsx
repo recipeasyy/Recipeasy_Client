@@ -17,8 +17,9 @@ export default function VideoPlayer() {
   const { push } = useRouter();
   const [isSelect, setSelect] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
-  const { themeId } = router.query;
+  const themeId = router.query.themeId;
+
+  console.log(router.query);
 
   const Themes = [
     { id: 1, name: '계란으로 5일 버티기' },
@@ -26,16 +27,13 @@ export default function VideoPlayer() {
     { id: 3, name: '감자로 3일 버티기' },
   ];
 
-  const { data } = useQuery(['Recipes', themeId], () => recipeAPI.getRecipe(Number(router.query.id)));
+  const { data } = useQuery(['Recipes', router.query.id], () => recipeAPI.getRecipe(Number(router.query.id)));
 
   const recipeTitle = data && data.title;
 
   const fetchUser = useCallback(async () => {
     try {
       const response = await accessApi.get('/user');
-
-      setUser(response.data.data[0]);
-
       response.data.data[0].saved_recipes.map((recipes: any) => {
         const id = recipes.id;
         if (id == router.query.id) {
