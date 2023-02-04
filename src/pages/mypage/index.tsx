@@ -6,13 +6,14 @@ import { useQuery, useQueryClient } from 'react-query';
 import { queryKeys } from '../../types/commonType';
 import { accessApi } from '../../api/api';
 import GNB from '../../components/global/GNB';
-import TopNavBar from '../../components/navigations/navigation_top';
+import TopNavBar from '../../components/common/navigations/navigation_top';
 import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
-import { ImgCardMedium, ImgCardSmall } from '../../components/img_props/imgcard';
+import { ImgCardMedium, ImgCardSmall } from '../../components/common/img_props/imgcard';
 
 import { userAPI } from '../../api/userAPI';
+import Loading from '../../components/loading';
 
 const MyPage = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const MyPage = () => {
 
   const { isLoading, error, data } = useQuery(queryKeys.user, () => userAPI.getUser());
   if (error) return <div>Request Failed</div>;
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading) return <Loading />;
   const user = data;
 
   return (

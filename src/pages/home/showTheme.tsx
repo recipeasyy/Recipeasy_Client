@@ -1,16 +1,17 @@
-import AllTheme from '../../components/navigations/All_Theme';
+import AllTheme from '../../components/common/navigations/All_Theme';
 import styled from '@emotion/styled';
 import GNB from '../../components/global/GNB';
 import { useQuery } from 'react-query';
 import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
-import { ImgCardBig } from '../../components/img_props/imgcard';
+import { ImgCardBig } from '../../components/common/img_props/imgcard';
 import COLOR from '../../constants/theme';
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { BigThemes, Themes } from '../../interfaces/main';
 
 import { themeAPI } from '../../api/themeAPI';
+import Loading from '../../components/loading';
 
 const themeData = [
   { id: '5', name: '초간단 식단', title1: '방구석 셰프를 위한', title2: '초간단 레시피!' },
@@ -44,7 +45,7 @@ export default function ShowTheme(current: string) {
   };
 
   if (error) return <div>Request Failed</div>;
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading) return <Loading />;
 
   const ChangeState = (e: any) => {
     setCur(e.target.value);

@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
 import GNB from '../../components/global/GNB';
-import { InputSearch } from '../../components/inputs/input_search';
-import TopNavBar from '../../components/navigations/navigation_top';
+import { InputSearch } from '../../components/common/inputs/input_search';
+import TopNavBar from '../../components/common/navigations/navigation_top';
 import { SearchNone } from '../../components/search';
 
 const Search = () => {

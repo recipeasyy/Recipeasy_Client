@@ -15,6 +15,7 @@ import { UseSave } from '../../hooks/useSave';
 import { equipment, required, additional, sequence } from '../../interfaces/main';
 
 import { recipeAPI } from '../../api/recipeAPI';
+import Loading from '../../components/loading';
 
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data, isLoading, error } = useQuery(['Recipes', id.params], () => recipeAPI.getRecipe(id.params));
 
   if (error) return <div>Request Failed</div>;
-  if (isLoading) return <div>Loading....</div>;
+  if (isLoading) return <Loading />;
 
   const curRecipe = data;
 

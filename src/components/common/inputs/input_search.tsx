@@ -3,10 +3,10 @@ import { ChangeEventHandler, MouseEventHandler } from 'react';
 
 import { useRouter } from 'next/router';
 
-import COLOR from '../../constants/theme';
-import FONT from '../../constants/fonts';
+import COLOR from '../../../constants/theme';
+import FONT from '../../../constants/fonts';
 
-import { GoBackIcon, DelIcon } from '../icons/BtnIcons';
+import { GoBackIcon, DelIcon } from '../../icons/BtnIcons';
 
 interface propsType {
   value: string;

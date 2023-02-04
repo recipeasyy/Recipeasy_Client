@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import COLOR from '../../constants/theme';
+import COLOR from '../../../constants/theme';
 
 const TopNavBar = ({ children }: { children: React.ReactNode }) => {
   return <TopNav>{children}</TopNav>;

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { ChangeEventHandler } from 'react';
 
-import FONT from '../../constants/fonts';
-import COLOR from '../../constants/theme';
+import FONT from '../../../constants/fonts';
+import COLOR from '../../../constants/theme';
 
 interface propsType {
   value: string;
