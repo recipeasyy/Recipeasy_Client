@@ -12,16 +12,13 @@ import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { ImgCardMedium, ImgCardSmall } from '../../components/img_props/imgcard';
 
+import { userAPI } from '../../api/userAPI';
+
 const MyPage = () => {
   const router = useRouter();
   const [nav, setNav] = useState('개별');
 
-  const fetchUser = async () => {
-    const res = await accessApi.get('/user');
-    return res.data.data[0];
-  };
-
-  const { isLoading, error, data } = useQuery(queryKeys.user, fetchUser);
+  const { isLoading, error, data } = useQuery(queryKeys.user, () => userAPI.getUser());
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
   const user = data;

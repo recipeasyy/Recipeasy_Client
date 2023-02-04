@@ -10,6 +10,8 @@ import { accessApi } from '../../api/api';
 import { useQuery } from 'react-query';
 import { GetServerSideProps } from 'next';
 
+import { recipeAPI } from '../../api/recipeAPI';
+
 export default function VideoPlayer() {
   const [hasWindow, setHasWindow] = useState(false);
   const { push } = useRouter();
@@ -17,18 +19,14 @@ export default function VideoPlayer() {
   const router = useRouter();
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
   const { themeId } = router.query;
-  console.log(themeId);
 
   const Themes = [
     { id: 1, name: '계란으로 5일 버티기' },
     { id: 2, name: '자취생 3일 아침 레시피' },
     { id: 3, name: '감자로 3일 버티기' },
   ];
-  const getVideos = async () => {
-    const res = await accessApi.get(`/recipes/${router.query.id}`);
-    return res.data.data;
-  };
-  const { data } = useQuery('Videos', getVideos);
+
+  const { data } = useQuery(['Recipes', themeId], () => recipeAPI.getRecipe(Number(router.query.id)));
 
   const recipeTitle = data && data.title;
 

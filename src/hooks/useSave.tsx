@@ -9,44 +9,30 @@ import { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query/build/lib/useMutation';
 
-const fetchUser = async () => {
-  try {
-    const response = await accessApi.get('/user');
-    console.log('fetch user!');
-    return response.data.data[0];
-  } catch (err) {}
-};
+import { userAPI } from '../api/userAPI';
 
 export const UseSave = (props: any) => {
   const router = useRouter();
   const [selected, setSelected] = useState(false);
 
-  console.log(props.type);
-
   if (props.type == 'Themes') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const query_user = useQuery(queryKeys.user, fetchUser, {
+    const query_user = useQuery(queryKeys.user, () => userAPI.getUser(), {
       onSuccess(data) {
-        console.log(data);
-        console.log(props.id);
         data.saved_themes.map((theme: Themes) => {
           if (theme.id == props.id) {
             setSelected(true);
-            console.log('work');
           }
         });
       },
     });
   } else if (props.type == 'Recipes') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const query_user = useQuery(queryKeys.user, fetchUser, {
+    const query_user = useQuery(queryKeys.user, () => userAPI.getUser(), {
       onSuccess(data) {
-        console.log(data.saved_recipes);
         data.saved_recipes.map((recipe: Recipes) => {
           if (recipe.id == props.id) {
             setSelected(true);
-            console.log(selected);
-            console.log('work');
           }
         });
       },
