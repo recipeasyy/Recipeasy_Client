@@ -5,16 +5,7 @@ import Accordion from '../components/accordion';
 import { accessApi } from '../api/api';
 import { useQuery } from 'react-query';
 import COLOR from '../constants/theme';
-
-interface Measure {
-  id: number;
-  title: string;
-  icon_type: string;
-  full: string;
-  full_image: string;
-  half: string;
-  half_image: string;
-}
+import { Measure } from '../interfaces/main';
 
 export default function CalcDetail() {
   const getMeasurements = async () => {
@@ -23,7 +14,6 @@ export default function CalcDetail() {
   };
 
   const { data } = useQuery('Measurements', getMeasurements);
-  console.log(data);
   return (
     <Container>
       <GoBack color={COLOR.TYPEFACE_BLACK} />

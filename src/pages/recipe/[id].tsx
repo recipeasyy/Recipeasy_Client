@@ -12,31 +12,7 @@ import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { useQuery } from 'react-query';
 import { UseSave } from '../../hooks/useSave';
-
-interface equipment {
-  name: string;
-}
-
-interface required {
-  name: string;
-  emoji: string;
-  quantity: string;
-  substitute: string;
-}
-
-interface additional {
-  name: string;
-  emoji: string;
-  quantity: string;
-  substitute: string;
-}
-
-interface sequence {
-  image: string;
-  long_desc: string;
-  order: number;
-  short_desc: string;
-}
+import { equipment, required, additional, sequence } from '../../interfaces/main';
 
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();

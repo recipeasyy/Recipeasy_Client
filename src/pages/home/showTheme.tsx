@@ -8,25 +8,7 @@ import { ImgCardBig } from '../../components/img_props/imgcard';
 import COLOR from '../../constants/theme';
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-
-interface BigThemes {
-  id: number;
-  title: string;
-  themes: [];
-}
-interface Themes {
-  id: number;
-  title: string;
-  description: string;
-  recipe_count: number;
-  duration: number;
-  tips: string;
-  theme_type: number;
-  recipes: [];
-  landscape_image: string;
-  portrait_image: string;
-  save_count: number;
-}
+import { BigThemes, Themes } from '../../interfaces/main';
 
 const themeData = [
   { id: '5', name: '초간단 식단', title1: '방구석 셰프를 위한', title2: '초간단 레시피!' },
