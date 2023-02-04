@@ -15,6 +15,8 @@ import { GetServerSideProps } from 'next';
 import { UseSave } from '../../hooks/useSave';
 import { useQueryClient } from '@tanstack/react-query';
 
+import { themeAPI } from '../../api/themeAPI';
+
 export default function AllTheme(props: string) {
   useEffect(() => {
     const listenScrollEvent = (e: Event) => {
@@ -30,16 +32,11 @@ export default function AllTheme(props: string) {
   }, []);
 
   const router = useRouter();
-
-  const { push } = useRouter();
   const [head, setHead] = useState(false);
 
-  const getRecipes = async () => {
-    const res = await accessApi.get(`/theme/${router.query.id}`);
-    return res.data;
-  };
-
-  const { data, error, isLoading } = useQuery(['Recipes', router.query.id], getRecipes);
+  const { data, error, isLoading } = useQuery(['Recipes', router.query.id], () =>
+    themeAPI.getTheme(Number(router.query.id)),
+  );
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;

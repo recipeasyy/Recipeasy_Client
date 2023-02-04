@@ -10,17 +10,14 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { BigThemes, Themes } from '../../interfaces/main';
 
+import { themeAPI } from '../../api/themeAPI';
+
 const themeData = [
   { id: '5', name: '초간단 식단', title1: '방구석 셰프를 위한', title2: '초간단 레시피!' },
   { id: '4', name: '같은 재료', title1: '재료 걱정은 그만!', title2: '한 재료로 만든 N가지 레시피' },
 ];
 
 export default function ShowTheme(current: string) {
-  const getThemes = async () => {
-    const res = await accessApi.get(`/theme/`);
-    return res.data;
-  };
-
   useEffect(() => {
     if (curState == '초간단 식단') {
       setTitle1(`${themeData[0].title1}`);
@@ -32,7 +29,7 @@ export default function ShowTheme(current: string) {
   }, []);
 
   const [curState, setCur] = useState('초간단 식단');
-  const { data, error, isLoading } = useQuery('Themes', getThemes);
+  const { data, error, isLoading } = useQuery('Themes', () => themeAPI.getThemes());
   const [title1, setTitle1] = useState('방구석 셰프를 위한');
   const [title2, setTitle2] = useState('초간단 레시피!');
 

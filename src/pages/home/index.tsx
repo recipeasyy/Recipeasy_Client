@@ -7,14 +7,10 @@ import FONT from '../../constants/fonts';
 
 import { Themes } from '../../interfaces/main';
 import { ImgCardMedium } from '../../components/img_props/imgcard';
+import { themeAPI } from '../../api/themeAPI';
 
 const Home = () => {
-  const getThemes = async () => {
-    const res = await accessApi.get('/theme/');
-    return res.data;
-  };
-
-  const { data } = useQuery('Themes', getThemes);
+  const { data } = useQuery('Themes', () => themeAPI.getThemes());
 
   return (
     <>

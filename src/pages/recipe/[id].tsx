@@ -14,19 +14,12 @@ import { useQuery } from 'react-query';
 import { UseSave } from '../../hooks/useSave';
 import { equipment, required, additional, sequence } from '../../interfaces/main';
 
+import { recipeAPI } from '../../api/recipeAPI';
+
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
 
-  const fetchRecipe = async () => {
-    try {
-      const response = await accessApi.get(`/recipes/${id.params}/`);
-      return response.data.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const { data, isLoading, error } = useQuery(['Recipes', id.params], fetchRecipe);
+  const { data, isLoading, error } = useQuery(['Recipes', id.params], () => recipeAPI.getRecipe(id.params));
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <div>Loading....</div>;
@@ -40,8 +33,6 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     }
     return arr;
   };
-
-  console.log(curRecipe);
 
   return (
     <Container>
