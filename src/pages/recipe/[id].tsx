@@ -26,6 +26,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (isLoading) return <Loading />;
 
   const curRecipe = data;
+  console.log(curRecipe);
 
   const stars = () => {
     let arr = [];
@@ -99,50 +100,58 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
                 <Text css={FONT.BODY_1}>{ingredient.quantity}</Text>
               </Ingredient>
             ))}
+            <Line />
+            <Ingredients>
+              <Title css={FONT.SUBTITLE_1}>추가 재료</Title>
+              {curRecipe?.additional_ingredients?.map((ingredient: additional, i: number) => (
+                <Ingredient key={i}>
+                  <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
+                  <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
+                </Ingredient>
+              ))}
+            </Ingredients>
           </Ingredients>
-          <Ingredients>
-            <Title css={FONT.SUBTITLE_1}>추가 재료</Title>
-            {curRecipe?.additional_ingredients?.map((ingredient: additional, i: number) => (
-              <Ingredient key={i}>
-                <Text css={FONT.BUTTON}>{ingredient?.name}</Text>
-                <Text css={FONT.BODY_1}>{ingredient?.quantity}</Text>
-              </Ingredient>
-            ))}
-          </Ingredients>
-          <Ingredients>
+
+          <Equipments>
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
-            <Equipments>
+            <Equipment>
               {curRecipe?.equipment?.map((ingredient: equipment, i: number) => (
                 <Tag key={i} css={FONT.BODY_2_3}>
                   {ingredient?.name}
                 </Tag>
               ))}
-            </Equipments>
-          </Ingredients>
+            </Equipment>
+            <Bar />
+          </Equipments>
         </Content>
+
         <Content>
-          <Sequences>
+          <Recipes>
             <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
-            {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-              <Sequence key={sequence?.order}>
-                <NumberIcon num={sequence?.order} />
-                <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
-              </Sequence>
-            ))}
-          </Sequences>
-          <Sequences>
-            <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
-            {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-              <SequenceWrapper key={sequence?.order}>
-                <Sequence>
+            <Sequences>
+              {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
+                <Sequence key={sequence?.order}>
                   <NumberIcon num={sequence?.order} />
                   <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                 </Sequence>
-                <Img src={sequence?.image} />
-                <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
-              </SequenceWrapper>
-            ))}
-          </Sequences>
+              ))}
+            </Sequences>
+          </Recipes>
+          <Recipes>
+            <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
+            <Sequences>
+              {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
+                <SequenceWrapper key={sequence?.order}>
+                  <Sequence>
+                    <NumberIcon num={sequence?.order} />
+                    <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
+                  </Sequence>
+                  <Img src={sequence?.image} />
+                  <Text css={FONT.BODY_1}>{sequence?.long_desc}</Text>
+                </SequenceWrapper>
+              ))}
+            </Sequences>
+          </Recipes>
         </Content>
       </Contents>
     </Container>
@@ -206,7 +215,6 @@ const IconWrapper = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
 `;
 
 const Subtitle = styled.div`
@@ -269,14 +277,14 @@ const Text = styled.div`
 `;
 
 const Description = styled.div`
-  max-width: 72vw;
+  max-width: 70vw;
   word-break: keep-all;
   word-wrap: break-word;
 `;
 
 const Content = styled.div`
   width: 100%;
-  padding: 24px;
+  padding: 20px 24px 0;
 
   display: flex;
   flex-direction: column;
@@ -285,7 +293,7 @@ const Content = styled.div`
 `;
 
 const TagIcon = styled.div`
-  padding: 6px 12px 4px 12px;
+  padding: 0.5rem 0.8rem 0.4rem 0.8rem;
 
   color: ${COLOR.TYPEFACE_WHITE};
   background: ${COLOR.PRIMARY_ORANGE};
@@ -294,6 +302,12 @@ const TagIcon = styled.div`
 `;
 
 const Equipments = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const Equipment = styled.div`
   display: flex;
   gap: 6px;
 `;
@@ -305,6 +319,14 @@ const Tag = styled.div`
   border-radius: 8px;
 `;
 
+const Recipes = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+
+  gap: 12px;
+`;
+
 const Sequences = styled.div`
   display: flex;
   flex-direction: column;
@@ -312,7 +334,7 @@ const Sequences = styled.div`
 `;
 
 const SequenceWrapper = styled.div`
-  padding-bottom: 2rem;
+  padding-bottom: 2.25rem;
 
   display: flex;
   flex-direction: column;
@@ -345,6 +367,28 @@ const Ingredients = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  margin: 4px 0;
+
+  background: #e6e6e6;
+  border-radius: 1px;
+`;
+
+const Bar = styled.div`
+  width: 100vw;
+  max-width: 450px;
+  height: 14px;
+
+  margin-top: 12px;
+  margin-bottom: 4px;
+
+  align-self: center;
+
+  background: ${COLOR.BG_GRAY1};
 `;
 
 const Ingredient = styled.div`
