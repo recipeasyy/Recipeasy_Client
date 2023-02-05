@@ -26,6 +26,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const five = useRef<HTMLDivElement>(null);
 
   const refArr = [one, two, three, four, five];
+  const topRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, error } = useQuery(['Recipes', id.params], () => recipeAPI.getRecipe(id.params));
 
@@ -140,7 +141,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <Sequence key={sequence?.order} onClick={() => handleClickScroll(sequence?.order - 1)}>
+                <Sequence key={sequence?.order} ref={topRef} onClick={() => handleClickScroll(sequence?.order - 1)}>
                   <NumberIcon num={sequence?.order} />
                   <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                 </Sequence>
@@ -151,7 +152,10 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <SequenceWrapper key={sequence?.order} ref={refArr[sequence?.order - 1]}>
+                <SequenceWrapper
+                  key={sequence?.order}
+                  ref={refArr[sequence?.order - 1]}
+                  onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
                   <Sequence>
                     <NumberIcon num={sequence?.order} />
                     <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
