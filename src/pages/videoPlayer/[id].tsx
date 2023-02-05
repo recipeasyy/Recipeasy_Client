@@ -18,7 +18,7 @@ export default function VideoPlayer() {
   const [isSelect, setSelect] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState({ nickname: null, saved_recipes: [], saved_themes: [] });
-  const { themeId } = router.query;
+  const themeId = router.query.id;
 
   const Themes = [
     { id: 1, name: '계란으로 5일 버티기' },
