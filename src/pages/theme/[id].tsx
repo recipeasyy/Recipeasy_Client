@@ -17,6 +17,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { themeAPI } from '../../api/themeAPI';
 import Loading from '../../components/loading';
+import { Recipes } from '../../interfaces/main';
 
 export default function AllTheme(props: string) {
   useEffect(() => {
@@ -44,17 +45,6 @@ export default function AllTheme(props: string) {
 
   const curTheme = data.theme;
   const curRecipes = curTheme?.recipes;
-
-  interface recipe {
-    id: number;
-    title: string;
-    required_ingredients: [];
-    save_count: number;
-    theme: number;
-    time_taken: string;
-    image: string;
-    video_id: string;
-  }
 
   return (
     <>
@@ -92,7 +82,7 @@ export default function AllTheme(props: string) {
               <Small css={FONT.BODY_2_2}>{curTheme?.duration}개 레시피</Small>
             </Emoticon>
             <AllRecipes>
-              {curRecipes?.map((recipes: recipe) => {
+              {curRecipes?.map((recipes: Recipes) => {
                 return <ImgCardSmall key={recipes.id} recipe={recipes} route={true} />;
               })}
             </AllRecipes>

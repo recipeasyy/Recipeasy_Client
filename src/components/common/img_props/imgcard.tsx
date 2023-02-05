@@ -50,10 +50,10 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
           const themeId = recipe.theme;
           router.push(
             {
-              pathname: `/videoPlayer/${recipe.id}`,
+              pathname: `/videoPlayer/${recipe.id}/${themeId}`,
               query: { themeId },
             },
-            `/videoPlayer/${recipe.id}`,
+            `/videoPlayer/${recipe.id}/${themeId}`,
           );
         }}
         img={loaded}>
