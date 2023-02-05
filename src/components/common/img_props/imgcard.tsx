@@ -38,7 +38,10 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
   const loaded = useImage(recipe.image);
 
   const ing: string[] = [];
-  recipe.required_ingredients && recipe.required_ingredients.map((i: { name: string }) => ing.push(i.name));
+  recipe.required_ingredients &&
+    recipe.required_ingredients.map((i: { name: string }) => {
+      if (ing.length < 3) ing.push(i.name);
+    });
 
   return (
     <Container>
