@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import GoBack from '../../components/navigations/goBack';
+import GoBack from '../../components/common/navigations/goBack';
 
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';

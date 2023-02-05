@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 
 import styled from '@emotion/styled';
 import FONT from '../../constants/fonts';
-import BtnStart from '../../components/btns/btn_start';
-import InputName from '../../components/inputs/input_name';
+import BtnStart from '../../components/common/btns/btn_start';
+import InputName from '../../components/common/inputs/input_name';
 
 export default function LoginNickName() {
   const router = useRouter();

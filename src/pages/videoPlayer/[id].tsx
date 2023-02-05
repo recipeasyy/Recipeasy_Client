@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { RoundSave, ShowMore, GoForward } from '../../components/icons/BtnIcons';
-import GoBack from '../../components/navigations/goBack';
+import GoBack from '../../components/common/navigations/goBack';
 import PATH from '../../constants/path';
 import COLOR from '../../constants/theme';
 import FONT from '../../constants/fonts';

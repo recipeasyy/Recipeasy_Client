@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
-import PATH from '../../constants/path';
-import COLOR from '../../constants/theme';
+import PATH from '../../../constants/path';
+import COLOR from '../../../constants/theme';
 
 const menuData = [
   { id: 'menu01', name: '전체보기', path: PATH.HOME },

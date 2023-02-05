@@ -9,7 +9,7 @@ import COLOR from '../constants/theme';
 
 import { api, accessApi } from '../api/api';
 import { PotatoIcon, EggIcon } from './icons/FoodIcons';
-import { ImgCardMedium, ImgCardSmall } from './img_props/imgcard';
+import { ImgCardMedium, ImgCardSmall } from './common/img_props/imgcard';
 
 export const SearchNone = () => {
   const router = useRouter();

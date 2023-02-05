@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 
-import FONT from '../../constants/fonts';
-import COLOR from '../../constants/theme';
+import FONT from '../../../constants/fonts';
+import COLOR from '../../../constants/theme';
 
-import { ClockIcon } from '../icons/BasicIcons';
-import { SaladIcon } from '../icons/FoodIcons';
-import { Themes, Recipes } from '../../interfaces/main';
-import { UseSave } from '../../hooks/useSave';
+import { ClockIcon } from '../../icons/BasicIcons';
+import { SaladIcon } from '../../icons/FoodIcons';
+import { Themes, Recipes } from '../../../interfaces/main';
+import { UseSave } from '../../../hooks/useSave';
+import { useImage } from '../../../hooks/useImage';
 
 export const ImgCardMedium = (props: Themes) => {
   const router = useRouter();
+  const loaded = useImage(props.landscape_image);
 
   return (
     <Container>
@@ -18,7 +20,7 @@ export const ImgCardMedium = (props: Themes) => {
         onClick={() => {
           router.push(`/theme/${props.id}`);
         }}
-        img={props.landscape_image}>
+        img={loaded}>
         <Content>
           <Title css={FONT.FOODTITLE}>{props.title}</Title>
           <SubTitle css={FONT.DETAIL_2}>
@@ -33,6 +35,7 @@ export const ImgCardMedium = (props: Themes) => {
 
 export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolean }) => {
   const router = useRouter();
+  const loaded = useImage(recipe.image);
 
   const ing: string[] = [];
   recipe.required_ingredients && recipe.required_ingredients.map((i: { name: string }) => ing.push(i.name));
@@ -50,7 +53,7 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
             `/videoPlayer/${recipe.id}`,
           );
         }}
-        img={recipe.image}>
+        img={loaded}>
         <Content>
           <UseSave id={recipe.id} type={'Recipes'} />
         </Content>
@@ -78,10 +81,12 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
 
 export const ImgCardBig = (props: Themes) => {
   const router = useRouter();
+  const loaded = useImage(props.portrait_image);
+
   return (
     <Container>
       <BigContainer
-        imgProps={props.portrait_image}
+        imgProps={loaded}
         onClick={() => {
           router.push(`/theme/${props.id}`);
         }}>
