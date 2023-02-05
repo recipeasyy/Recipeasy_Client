@@ -1,15 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
-
-import { accessApi } from '../../api/api';
 
 import { GoBackIcon } from '../../components/icons/BtnIcons';
 import { ClockIcon, FilledStarIcon, EmptyStarIcon, NumberIcon, ArrowIcon } from '../../components/icons/BasicIcons';
 import { FoodIcon } from '../../components/icons/FoodIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
+
 import { useQuery } from 'react-query';
 import { UseSave } from '../../hooks/useSave';
 import { equipment, required, additional, sequence } from '../../interfaces/main';
@@ -20,13 +19,20 @@ import Loading from '../../components/loading';
 const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
 
+  const one = useRef<HTMLDivElement>(null);
+  const two = useRef<HTMLDivElement>(null);
+  const three = useRef<HTMLDivElement>(null);
+  const four = useRef<HTMLDivElement>(null);
+  const five = useRef<HTMLDivElement>(null);
+
+  const refArr = [one, two, three, four, five];
+
   const { data, isLoading, error } = useQuery(['Recipes', id.params], () => recipeAPI.getRecipe(id.params));
 
   if (error) return <div>Request Failed</div>;
   if (isLoading) return <Loading />;
 
   const curRecipe = data;
-  console.log(curRecipe);
 
   const stars = () => {
     let arr = [];
@@ -34,6 +40,10 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
       arr.push(i);
     }
     return arr;
+  };
+
+  const handleClickScroll = (index: number) => {
+    refArr[index].current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
@@ -116,7 +126,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>필요 도구</Title>
             <Equipment>
               {curRecipe?.equipment?.map((ingredient: equipment, i: number) => (
-                <Tag key={i} css={FONT.BODY_2_3}>
+                <Tag key={i + 1} css={FONT.BODY_2_3}>
                   {ingredient?.name}
                 </Tag>
               ))}
@@ -130,7 +140,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 요약</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <Sequence key={sequence?.order}>
+                <Sequence key={sequence?.order} onClick={() => handleClickScroll(sequence?.order - 1)}>
                   <NumberIcon num={sequence?.order} />
                   <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                 </Sequence>
@@ -141,7 +151,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <SequenceWrapper key={sequence?.order}>
+                <SequenceWrapper key={sequence?.order} ref={refArr[sequence?.order - 1]}>
                   <Sequence>
                     <NumberIcon num={sequence?.order} />
                     <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
