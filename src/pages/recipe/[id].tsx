@@ -228,6 +228,7 @@ const IconWrapper = styled.div`
 
 const Title = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 
@@ -307,7 +308,7 @@ const Content = styled.div`
 `;
 
 const TagIcon = styled.div`
-  padding: 0.5rem 0.8rem 0.4rem 0.8rem;
+  padding: 0.4rem 0.8rem;
 
   color: ${COLOR.TYPEFACE_WHITE};
   background: ${COLOR.PRIMARY_ORANGE};
