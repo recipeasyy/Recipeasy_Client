@@ -7,7 +7,7 @@ export const pwaAssetGenerator = require('pwa-asset-generator');
     './temp',
     {
       scrape: false,
-      background: 'linear-gradient(to right, #FE8C46)',
+      background: '#FE8C46',
       splashOnly: true,
       portraitOnly: true,
       log: false,
@@ -18,4 +18,4 @@ export const pwaAssetGenerator = require('pwa-asset-generator');
 })();
 
 // Access to static data for Apple Device specs that are used for generating launch images
-const appleDeviceSpecsForLaunchImages = pwaAssetGenerator.appleDeviceSpecsForLaunchImages;
+export const appleDeviceSpecsForLaunchImages = pwaAssetGenerator.appleDeviceSpecsForLaunchImages;

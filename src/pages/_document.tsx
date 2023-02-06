@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { appleDeviceSpecsForLaunchImages } from 'pwa-asset-generator';
+import { Fragment } from 'react';
+import { appleDeviceSpecsForLaunchImages } from '../api/pwaApi';
 
 export default function Document() {
   return (
@@ -11,9 +12,9 @@ export default function Document() {
         <link rel="shortcut icon" href="https://recipeasy.co.kr/favicon.ico" type="image/x-icon" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        {appleDeviceSpecsForLaunchImages.map((spec) => {
+        {appleDeviceSpecsForLaunchImages.map((spec: any, i: number) => {
           return (
-            <>
+            <Fragment key={i}>
               <link
                 key={`apple-splash-${spec.portrait.width}-${spec.portrait.height}`}
                 rel="apple-touch-startup-image"
@@ -30,7 +31,7 @@ export default function Document() {
                   spec.portrait.width / spec.scaleFactor
                 }px) and (-webkit-device-pixel-ratio: ${spec.scaleFactor}) and (orientation: landscape)`}
               />
-            </>
+            </Fragment>
           );
         })}
         <meta name="mobile-web-app-capable" content="yes"></meta>
