@@ -152,11 +152,8 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
             <Title css={FONT.SUBTITLE_1}>레시피 더 자세히 보기</Title>
             <Sequences>
               {curRecipe?.recipe_sequence?.map((sequence: sequence) => (
-                <SequenceWrapper
-                  key={sequence?.order}
-                  ref={refArr[sequence?.order - 1]}
-                  onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
-                  <Sequence>
+                <SequenceWrapper key={sequence?.order} ref={refArr[sequence?.order - 1]}>
+                  <Sequence onClick={() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}>
                     <NumberIcon num={sequence?.order} />
                     <Description css={FONT.BODY_1}>{sequence?.short_desc}</Description>
                   </Sequence>
