@@ -63,6 +63,7 @@ export interface sequence {
   long_desc: string;
   order: number;
   short_desc: string;
+  time: string;
 }
 
 export interface Measure {
