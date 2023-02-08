@@ -1,20 +1,14 @@
-import { QueryClient, QueryClientProvider, useMutation, useQuery } from 'react-query';
-import { accessApi } from '../../api/api';
+import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-
 import { useEffect, useState } from 'react';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 import { GoBackIcon } from '../../components/icons/BtnIcons';
-import PATH from '../../constants/path';
-import { ShowCount } from '../../components/icons/ShowCount';
 import { Calender, Rice, Time } from '../../components/icons/ThemeIcons';
 import { ImgCardSmall } from '../../components/common/img_props/imgcard';
 import { GetServerSideProps } from 'next';
 import { UseSave } from '../../hooks/useSave';
-import { useQueryClient } from '@tanstack/react-query';
-
 import { themeAPI } from '../../api/themeAPI';
 import Loading from '../../components/loading';
 import { Recipes } from '../../interfaces/main';
@@ -77,9 +71,15 @@ export default function AllTheme(props: string) {
             <Description css={FONT.BODY_2_3}>{curTheme?.description}</Description>
             <Emoticon>
               <Calender />
-              <Small css={FONT.BODY_2_2}>{curTheme?.recipe_count}일 식단</Small>
+              <Small css={FONT.BODY_2_2}>
+                {curTheme?.recipe_count}
+                <Inner css={FONT.BODY_2_2}>일 식단</Inner>
+              </Small>
               <Rice />
-              <Small css={FONT.BODY_2_2}>{curTheme?.duration}개 레시피</Small>
+              <Small css={FONT.BODY_2_2}>
+                {curTheme?.duration}
+                <Inner css={FONT.BODY_2_2}>개 레시피</Inner>
+              </Small>
             </Emoticon>
             <AllRecipes>
               {curRecipes?.map((recipes: Recipes) => {
@@ -102,11 +102,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 const Wrap = styled.div``;
+const Inner = styled.div`
+  margin-top: 0.5px;
 
+  padding-right: 12px;
+`;
 const Small = styled.div`
   padding-top: 3px;
   padding-left: 8px;
   padding-right: 12px;
+  display: flex;
+  flex-direction: row;
 `;
 const Save = styled.div`
   display: flex;
