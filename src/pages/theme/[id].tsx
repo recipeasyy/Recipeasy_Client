@@ -205,6 +205,7 @@ const Description = styled.div`
   color: ${COLOR.TYPEFACE_GRAY1};
   padding-left: 24px;
   padding-right: 24px;
+  white-space: pre-wrap;
 `;
 const Emoticon = styled.div`
   margin-bottom: 8px;
