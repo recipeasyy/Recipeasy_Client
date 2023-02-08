@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1, width=device-width" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/img/icon-192x192.png"></link>
+        <link rel="apple-touch-icon" href="/icon-192x192.png"></link>
         <link rel="shortcut icon" href="https://recipeasy.co.kr/favicon.ico" type="image/x-icon" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </Head>
