@@ -8,8 +8,8 @@ import { MainLogo } from '../components/icons/LogoIcons';
 const LandingPage = () => {
   const router = useRouter();
   const isUser = Boolean(getCookie('accessToken'));
-  setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 0);
-  return <></>;
+  setTimeout(() => (isUser ? router.push('/home') : router.push('/login')), 2000);
+  return <Container></Container>;
 };
 
 const Container = styled.div`
