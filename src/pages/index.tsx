@@ -18,6 +18,7 @@ const Container = styled.div`
   max-width: 450px;
   background-image: url(img/landing.png);
   background-size: cover;
+  background-position: center;
 `;
 
 const Img = styled.img``;
