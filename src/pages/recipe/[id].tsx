@@ -34,6 +34,7 @@ const Recipe = (id: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   if (isLoading) return <Loading />;
 
   const curRecipe = data;
+  console.log(curRecipe?.description);
 
   const stars = () => {
     let arr = [];
