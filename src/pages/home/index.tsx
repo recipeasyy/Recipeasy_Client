@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 import { useQuery } from 'react-query';
-import { accessApi } from '../../api/api';
 import GNB from '../../components/global/GNB';
-import All_Theme from '../../components/common/navigations/All_Theme';
+import All_Theme from '../../components/common/navigations/navigation_theme';
 import FONT from '../../constants/fonts';
 
 import { Themes } from '../../interfaces/main';
-import { ImgCardMedium } from '../../components/common/img_props/imgcard';
+import { ImgCardMedium } from '../../components/common/cards/card_img_medium';
 import { themeAPI } from '../../api/themeAPI';
 
 const Home = () => {

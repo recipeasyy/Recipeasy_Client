@@ -1,9 +1,6 @@
 import styled from '@emotion/styled';
-import COLOR from '../constants/theme';
 import { useRouter } from 'next/router';
 import { getCookie } from '../util/cookie';
-
-import { MainLogo } from '../components/icons/LogoIcons';
 
 const LandingPage = () => {
   const router = useRouter();

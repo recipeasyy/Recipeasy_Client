@@ -1,4 +1,4 @@
-import GoBack from '../components/common/navigations/goBack';
+import GoBack from '../components/common/navigations/navigation_goback';
 import styled from '@emotion/styled';
 import FONT from '../constants/fonts';
 import Accordion from '../components/accordion';

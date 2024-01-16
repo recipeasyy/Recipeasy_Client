@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { api, accessApi } from '../../api/api';
 import { setCookie } from '../../util/cookie';
-import { AxiosHeaders, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 const LoginCallback = () => {
   const router = useRouter();

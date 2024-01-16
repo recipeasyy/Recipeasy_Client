@@ -1,11 +1,8 @@
-import type { AppProps, AppContext } from 'next/app';
+import type { AppProps } from 'next/app';
 import Layout from '../components/global/Layout';
 import '../../styles/globals.css';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
-import { removeCookie } from '../util/cookie';
-import { useEffect } from 'react';
 
 const client = new QueryClient({
   defaultOptions: {

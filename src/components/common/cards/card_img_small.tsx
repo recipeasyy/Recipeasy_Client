@@ -10,32 +10,7 @@ import { Themes, Recipes } from '../../../interfaces/main';
 import { UseSave } from '../../../hooks/useSave';
 import { useImage } from '../../../hooks/useImage';
 
-import { SkeletonBig, SkeletonMedium, SkeletonSmall } from '../skeletons/card';
-
-export const ImgCardMedium = (props: Themes) => {
-  const router = useRouter();
-  const loaded = useImage(props.landscape_image);
-
-  return loaded ? (
-    <Container>
-      <MediumContainer
-        onClick={() => {
-          router.push(`/theme/${props.id}`);
-        }}
-        img={loaded}>
-        <Content>
-          <Title css={FONT.FOODTITLE}>{props.title}</Title>
-          <SubTitle css={FONT.DETAIL_2}>
-            {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
-            <UseSave id={props.id} type={'Themes'} />
-          </SubTitle>
-        </Content>
-      </MediumContainer>
-    </Container>
-  ) : (
-    <SkeletonMedium />
-  );
-};
+import { SkeletonSmall } from '../skeletons/card_skeleton';
 
 export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolean }) => {
   const router = useRouter();
@@ -88,47 +63,10 @@ export const ImgCardSmall = ({ recipe, route }: { recipe: Recipes; route: boolea
   );
 };
 
-export const ImgCardBig = (props: Themes) => {
-  const router = useRouter();
-  const loaded = useImage(props.portrait_image);
-
-  return loaded ? (
-    <Container>
-      <BigContainer
-        imgProps={loaded}
-        onClick={() => {
-          router.push(`/theme/${props.id}`);
-        }}>
-        <Content>
-          <Title css={FONT.FOODTITLE}>{props.title}</Title>
-          <SubTitle css={FONT.DETAIL_2}>
-            {props.duration}일 식단 ∙ {props.recipe_count}개의 레시피
-            <UseSave id={props.id} type={'Themes'} />
-          </SubTitle>
-        </Content>
-      </BigContainer>
-    </Container>
-  ) : (
-    <SkeletonBig />
-  );
-};
-
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
-
-const BigContainer = styled.div<{ imgProps: string }>`
-  width: 100%;
-  padding: calc(424 / 327 * 100%) 22px 22px 22px;
-
-  border-radius: 1rem;
-
-  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%),
-    url(${(props) => props.imgProps});
-  background-size: cover;
-  background-position: center;
 `;
 
 const SmallContainer = styled.div<{ img: string }>`
@@ -139,17 +77,6 @@ const SmallContainer = styled.div<{ img: string }>`
   border-radius: 1rem;
   background-image: linear-gradient(to top, rgba(36, 36, 36, 0.4) 0%, rgba(36, 36, 36, 0) 52.08%),
     url(${(props) => props.img});
-  background-size: cover;
-`;
-
-const MediumContainer = styled.div<{ img: string }>`
-  width: 100%;
-
-  padding: calc(156 / 327 * 100%) 22px 22px 22px;
-  border-radius: 1rem;
-
-  cursor: pointer;
-  background-image: linear-gradient(to top, #1c1c1c 1.09%, rgba(18, 18, 18, 0) 65.65%), url(${(props) => props.img});
   background-size: cover;
 `;
 
@@ -166,17 +93,6 @@ const Content = styled.div`
 
 const Title = styled.div`
   width: 100%;
-`;
-
-const SubTitle = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const IconWrapper = styled.div`
-  z-index: 1;
 `;
 
 const Description = styled.div`

@@ -1,10 +1,9 @@
-import AllTheme from '../../components/common/navigations/All_Theme';
+import AllTheme from '../../components/common/navigations/navigation_theme';
 import styled from '@emotion/styled';
 import GNB from '../../components/global/GNB';
 import { useQuery } from 'react-query';
-import { accessApi } from '../../api/api';
 import FONT from '../../constants/fonts';
-import { ImgCardBig } from '../../components/common/img_props/imgcard';
+import { ImgCardBig } from '../../components/common/cards/card_img_big';
 import COLOR from '../../constants/theme';
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';

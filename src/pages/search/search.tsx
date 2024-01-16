@@ -6,7 +6,7 @@ import { useInput } from '../../hooks/useInput';
 import GNB from '../../components/global/GNB';
 import { InputSearchItem } from '../../components/common/inputs/input_search';
 import TopNavBar from '../../components/common/navigations/navigation_top';
-import { SearchNone, SearchItem } from '../../components/search';
+import { SearchItem } from '../../components/search';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
 

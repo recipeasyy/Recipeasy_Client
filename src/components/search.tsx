@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
 import { MouseEvent } from 'react';
 
 import FONT from '../constants/fonts';
@@ -9,7 +8,8 @@ import COLOR from '../constants/theme';
 
 import { api, accessApi } from '../api/api';
 import { PotatoIcon, EggIcon } from './icons/FoodIcons';
-import { ImgCardMedium, ImgCardSmall } from './common/img_props/imgcard';
+import { ImgCardSmall } from './common/cards/card_img_small';
+import { ImgCardMedium } from './common/cards/card_img_medium';
 
 export const SearchNone = () => {
   const router = useRouter();

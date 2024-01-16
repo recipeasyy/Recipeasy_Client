@@ -10,7 +10,8 @@ import TopNavBar from '../../components/common/navigations/navigation_top';
 import { SettingIcon } from '../../components/icons/BtnIcons';
 import FONT from '../../constants/fonts';
 import COLOR from '../../constants/theme';
-import { ImgCardMedium, ImgCardSmall } from '../../components/common/img_props/imgcard';
+import { ImgCardSmall } from '../../components/common/cards/card_img_small';
+import { ImgCardMedium } from '../../components/common/cards/card_img_medium';
 
 import { userAPI } from '../../api/userAPI';
 import Loading from '../../components/loading';

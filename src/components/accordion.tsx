@@ -1,11 +1,10 @@
 import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import FONT from '../constants/fonts';
 import COLOR from '../constants/theme';
 import { Down, Up } from './icons/BtnIcons';
 import { FoodIcon } from './icons/FoodIcons';
-import tw from 'tailwind-styled-components';
 import { Content } from '../interfaces/main';
 
 const customAnimation = keyframes`
